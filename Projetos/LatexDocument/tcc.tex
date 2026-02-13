@@ -1,0 +1,92 @@
+\documentclass[
+	12pt,				% Tamanho da fonte
+	openright,			% Capítulos começam em pág ímpar
+	oneside,			% Para impressão em apenas um lado. Use 'twoside' para frente e verso
+	a4paper,			% Tamanho do papel
+	portuguese,			% Idioma adicional para hifenização
+	brazil				% O idioma principal do documento
+	]{abntex2}
+
+% --- PACOTES BÁSICOS ---
+\usepackage[utf8]{inputenc}		% Codificação do documento
+\usepackage[T1]{fontenc}		% Seleção de códigos de fonte
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção
+\usepackage{color}				% Controle de cores
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% Para melhorias na justificação
+
+% --- CONFIGURAÇÕES DE PACOTES ---
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT (Autor-data)
+
+% --- INFORMAÇÕES DO TCC ---
+\titulo{Pseudo Aleatoriedade e Segurança Criptográfica: Uma Análise da Transição para Algoritmos Pós-Quânticos}
+\autor{Jean Victor Borges de Abreu}
+\local{Petrópolis - Rio de Janeiro}
+\data{2026}
+\orientador{Nome do Orientador}
+\instituicao{FACULDADE DE EDUCAÇÃO TECNOLÓGICA DO ESTADO DO RIO DE JANEIRO FAETERJ/PETRÓPOLIS}
+\preambulo{Trabalho de Conclusão de Curso apresentado à...}
+
+% --- INÍCIO DO DOCUMENTO ---
+\begin{document}
+
+\imprimircapa
+\imprimirfolhaderosto
+
+\chapter{Resumo}
+
+\chapter{Abstract}
+
+\chapter{Lista de Figuras}
+
+\chapter{Lista de Abreviaturas}
+
+\boldmath FAETERJ: Faculdade de Educação Tecnológica do Estado do Rio de Janeiro 
+
+% --- SUMÁRIO ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% --- ELEMENTOS TEXTUAIS ---
+\textual
+\chapter{Introdução}
+A infraestrutura de segurança digital de grandes corporações, em sua maioria sustentada por ecossistemas como o Java, vivencia um momento de transição crítica. 
+Visto que computadores operam sob lógica determinística e não podem gerar o 'acaso puro' sem fontes externas de entropia, a criptografia contemporânea torna-se dependente da robustez matemática dos Geradores de Números Pseudo Aleatórios (PRNGs). 
+
+Durante décadas, bibliotecas de segurança confiaram em implementações consolidadas, como a classe java.security.SecureRandom, para garantir a integridade de chaves e certificados. 
+Contudo, o setor presencia o ocaso da criptografia clássica: a padronização recente liderada pelo NIST indica que as fontes de entropia e os algoritmos de pseudo aleatoriedade tradicionais não são mais suficientes contra ataques baseados em vetores quânticos. 
+Nesse cenário, se o gerador de números responsável pela criação de chaves for previsível para um sistema quântico, a estrutura de segurança da informação como um todo torna-se obsoleta. 
+
+O presente artigo explora esse panorama de mudança, avaliando como a transição para a Criptografia Pós-Quântica (PQC) altera as práticas de desenvolvimento e investigando novos padrões de redes de pontos (lattices), 
+bem como a adaptação da plataforma Java para assegurar a soberania dos dados em um futuro pós-quântico.
+\section{Contextualização do Tema}
+
+Com o avanço da tecnologia e o uso crescente de ferramentas e hardwares quanticos. 
+A utilização de meios pesudoaleatorios tem sidos colocados em risco. 
+E sua utilização em alguns anos podem se tornar obsoletos e inseguros para utilização. 
+Como já é o caso de grandes empresas e organizações governamentais. 
+Das quais já fazem uso de  outros meios para criptografar suas informações. 
+
+\section{Justificativa}
+
+Muitos Textos
+
+\section{Motivação}
+
+Muitos textos
+
+\section{Objetivo}
+
+Muitos Textos
+
+\chapter{Desenvolvimento}
+Conteúdo principal do artigo.
+
+\chapter{Conclusão}
+Considerações finais.
+
+% --- ELEMENTOS PÓS-TEXTUAIS ---
+\postextual
+\bibliography{referencias} % Arquivo .bib com suas fontes
+
+\end{document}
