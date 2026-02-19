@@ -22,6 +22,12 @@
 % --- CONFIGURAÇÕES DE PACOTES ---
 \usepackage[alf]{abntex2cite}	% Citações padrão ABNT (Autor-data)
 
+\hypersetup{
+    colorlinks=false,
+    hidelinks=true,      % Remove bordas, cores e sublinhados
+    pdfborder={0 0 0}
+}
+
 % --- INFORMAÇÕES DO TCC ---
 \titulo{Pseudo Aleatoriedade e Segurança Criptográfica: Uma Análise da Transição para Algoritmos Pós-Quânticos}
 \autor{Jean Victor Borges de Abreu}
@@ -47,6 +53,8 @@
 
 \boldmath FAETERJ: Faculdade de Educação Tecnológica do Estado do Rio de Janeiro 
 
+\boldmath{TRNG: True Random Number Generator}
+
 % --- SUMÁRIO ---
 \pdfbookmark[0]{\contentsname}{toc}
 \tableofcontents*
@@ -54,6 +62,9 @@
 % --- ELEMENTOS TEXTUAIS ---
 \textual
 \chapter{Introdução}
+
+A onipresença da criptografia na infraestrutura digital moderna (internet, sistemas bancários, IoT e comunicações seguras).
+
 A infraestrutura de segurança digital de grandes corporações, em sua maioria sustentada por ecossistemas como o Java, vivencia um momento de transição crítica. 
 Visto que computadores operam sob lógica determinística e não podem gerar o 'acaso puro' sem fontes externas de entropia, a criptografia contemporânea torna-se dependente da robustez matemática dos Geradores de Números Pseudo Aleatórios (PRNGs). 
 
@@ -63,6 +74,7 @@ Nesse cenário, se o gerador de números responsável pela criação de chaves f
 
 O presente artigo explora esse panorama de mudança, avaliando como a transição para a Criptografia Pós-Quântica (PQC) altera as práticas de desenvolvimento e investigando novos padrões de redes de pontos (lattices), 
 bem como a adaptação da plataforma Java para assegurar a soberania dos dados em um futuro pós-quântico.
+
 \section{Contextualização do Tema}
 
 Com o avanço da tecnologia e o uso crescente de ferramentas e hardwares quanticos. 
@@ -73,153 +85,272 @@ Das quais já fazem uso de  outros meios para criptografar suas informações.
 
 \section{Justificativa/Problema de Pesquisa}
 
-Muitos Textos
+O conflito entre o determinismo computacional e a necessidade de aleatoriedade em sistemas criptográficos.
 
 \section{Motivação/Hipotese e Ameaca Tecnológica}
 
-Muitos textos
+O impacto da computação quântica — especialmente por meio do Algoritmo de Shor — sobre os modelos atuais de segurança e pseudoaleatoriedade.
 
 \section{Objetivos}
 
-Muitos textos
+Objetivo Geral: Analisar a evolução dos geradores pseudoaleatórios criptograficamente seguros frente à transição para a criptografia pós-quântica.
+Objetivos Específicos:
+Estudar PRNGs e CSPRNGs clássicos
+Analisar o impacto dos algoritmos quânticos
+Investigar os novos paradigmas de pseudoaleatoriedade baseados em reticulados
+Avaliar a adoção desses conceitos no ecossistema Java
+
 
 \section{Metodologia}
 
-Muitos textos
+Pesquisa bibliográfica, análise documental de padrões criptográficos e estudo prático no ecossistema Java.
 
 \chapter{FUNDAMENTOS DA ALEATORIEDADE EM COMPUTAÇÃO} % Capitulo 2
 
 \section{Aleatoriedade Verdadeira vs. Pseudoaleatoriedade}
 
-Muitos textos
+Definições de  e PRNG (Pseudo-Random Number Generator).
+
+TRNG é um dispositivo que gera números aleatórios a partir
+de um processo físico, e não por meio de um algoritmo. Tais dispositivos são
+frequentemente baseados em fenômenos microscópicos que geram sinais de "ruído"
+estatisticamente aleatórios de baixo nível, como ruído térmico, efeito fotoelétrico, ou
+fenômenos quânticos. Esses processos estocásticos são, em teoria, completamente
+imprevisíveis enquanto uma equação que governa tais fenômenos for desconhecida
+ou incomputável. Isso contrasta com o paradigma de geração de números pseudo-
+aleatórios comumente implementado através de algoritmos.\cite{6.1DefinicaoTRNG}
+
+PRNG refere-se a uma sequência de números ou dados que aparenta ser aleatória, 
+mas é gerada por um algoritmo determinístico.
+E é gerada por algoritmos que utilizam fórmulas matemáticas para produzir resultados aparentemente aleatórios. 
+Embora sequências pseudoaleatórias possam imitar a aleatoriedade até certo ponto, elas são, 
+em última análise, determinísticas e repetíveis.
+Esses algoritmos recebem um valor inicial, chamado semente, 
+e o utilizam para produzir uma sequência de números. 
+Ao aplicar operações matemáticas ao valor da semente, 
+o PRNG produz uma série de números aparentemente aleatórios. 
+O valor da semente pode ser escolhido arbitrariamente, 
+mas afeta significativamente a sequência resultante de números pseudoaleatórios.\cite{6.1DefinicaoPRNG}
+
 
 \section{Entropia e Fontes de Incerteza}
 
-Muitos textos
+Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
+
+Entropia é uma medida da aleatoriedade ou imprevisibilidade dos dados. 
+No contexto da criptografia, a entropia é usada para gerar 
+números aleatórios ou chaves que são essenciais para a comunicação segura e a criptografia. 
+Sem uma boa fonte de entropia, os protocolos criptográficos podem se tornar vulneráveis a ataques 
+que exploram a previsibilidade das chaves geradas.
+
+Na maioria dos sistemas operacionais, 
+a entropia é gerada pela coleta de eventos aleatórios de diversas fontes, 
+como interrupções de hardware, movimentos do mouse, 
+pressionamentos de teclas e atividade do disco. 
+Esses eventos são inseridos em um conjunto de entropia, 
+que é então usado para gerar números aleatórios quando necessário.
+
+Protocolos criptográficos, como SSL/TLS, SSH e IPsec, 
+dependem fortemente da entropia para gerar números aleatórios e chaves para criptografia, 
+autenticação e proteção de integridade.
+A aleatoriedade desses números é crucial para a segurança da comunicação. 
+Se um atacante conseguir prever os números aleatórios usados em um protocolo criptográfico, 
+ele poderá comprometer a confidencialidade, a integridade ou a autenticidade da comunicação.
+Se a chave mestra prévia for previsível ou tendenciosa, 
+um atacante poderá interceptar a mensagem criptografada, 
+descriptografá-la e obter acesso às chaves de sessão. 
+Isso permitiria ao atacante espionar a comunicação, 
+modificar os dados ou se passar pelo servidor.\cite{6.2Entropia}
 
 \section{A Semente (Seed) como Elemento Crítico}
 
-Muitos textos
+O papel do valor inicial na previsibilidade e segurança de sequências pseudoaleatórias.
 
 \section{Avaliação Estatística da Aleatoriedade}
 
-Muitos textos
+Bateria de testes SP 800-22 do NIST e o conceito de indistinguibilidade estatística.
 
 \chapter{Geradores Criptograficamente Seguros} % Capitulo 3
 
-\section{RNGs vs. CSPRNGs}
+\section{PRNGs vs. CSPRNGs}
 
-Muitos textos
+Diferenças arquiteturais e requisitos de segurança.
 
 \section{O Ataque do Próximo Bit}
 
-Muitos textos
+Por que geradores comuns falham em contextos criptográficos.
 
 \subsection{Implementação Prática (Demonstração)}
 
-Muitos textos
+Demonstração do ataque contra java.util.Random, mostrando previsão de saídas futuras com base em observações anteriores — contrasta diretamente com o CSPRNG.
 
 \section{Implementação de CSPRNGs em Java}
 
-Muitos textos
+Análise da classe java.security.SecureRandom e seus provedores (SHA1PRNG, NativePRNG).
 
 \section{Falhas Históricas de Aleatoriedade}
 
-Muitos textos
+Casos emblemáticos como o Debian OpenSSL e problemas recorrentes em dispositivos IoT.
 
 \chapter{COMPUTAÇÃO QUÂNTICA E A QUEBRA DO PARADIGMA ATUAL} % Capitulo 4
 
 \section{Conceitos Fundamentais de Computação Quântica}
 
-Muitos textos
+Diferença entre bits clássicos e qubits.
 
 \section{Algoritmo de Shor}
 
-Muitos textos
+Fatoração eficiente e o colapso dos sistemas baseados em RSA e ECC.
 
 \section{Algoritmo de Grover}
 
-Muitos textos
+Impacto sobre criptografia simétrica e necessidade de aumento no tamanho das chaves.
 
 \section{Harvest Now, Decrypt Later}
 
-Muitos textos
+A urgência da migração para algoritmos resistentes a ataques quânticos.
 
 \chapter{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)} % Capitulo 5
 
 \section{Definição e Objetivos da PQC}
 
-Muitos textos
+Algoritmos clássicos projetados para resistir a ataques quânticos.
 
 \section{Paradigmas Matemáticos da PQC}
 
-Muitos textos
+Reticulados, códigos corretores de erro, funções hash e isogenias.
 
 \section{Criptografia Baseada em Reticulados}
 
-Muitos textos
+Introdução ao conceito de Lattices como base da nova segurança criptográfica.
 
 \section{Learning With Errors (LWE)}
 
-Muitos textos
+Fundamento matemático da pseudoaleatoriedade pós-quântica.
 
 \subsection{Implementação Didática em Java (Demonstração)}
 
-Muitos textos
+Implementação simplificada do LWE do zero em Java para fins didáticos, mostrando como o erro intencional funciona matematicamente antes de utilizar a biblioteca pronta.
 
 \section{Padronização Pós-Quântica}
 
-Muitos textos
+O papel do ML-KEM (Kyber) e o processo de padronização conduzido pelo NIST.
 
 \chapter{A TRANSIÇÃO PARA PQC NO ECOSSISTEMA JAVA} % Capitulo 6
 
 \section{Suporte à Criptografia Pós-Quântica no Java}
 
-Muitos textos
+Evolução do JDK e integração de algoritmos pós-quânticos em versões modernas (Java 21+).
 
 \section{Crypto-Agility}
 
-Muitos textos
+Boas práticas para desenvolvimento de sistemas criptográficos flexíveis e preparados para mudanças de algoritmo.
 
 \subsection{Implementação Prática: Demo de Crypto-Agility}
 
-Muitos textos
+Criação de uma interface Java que abstrai o algoritmo de geração de chaves, permitindo trocar de RSA para Kyber alterando apenas a configuração — sem reescrever o código da aplicação.
 
 \section{Comparativo de Modelos}
 
-Muitos textos
+Geração de chaves e aleatoriedade no modelo clássico versus modelo baseado em reticulados (Module-Lattice).
 
 \subsection{Implementação Prática: Benchmark Clássico vs. Kyber}
 
-Muitos textos
+Benchmark comparativo entre java.security.SecureRandom clássico e ML-KEM (Kyber) via Bouncy Castle, medindo tempo de geração de chaves, uso de memória e throughput. 
+Inclui comparativo de tamanho de chaves entre RSA-2048 e Kyber.
+Nota: Confirmar com o orientador o uso da biblioteca Bouncy Castle como dependência, por ser a opção mais acessível para PQC em Java atualmente.
 
 \chapter{DISCUSSÃO E ANÁLISE CRÍTICA} % Capitulo 7
 
 \section{Impacto em Desempenho}
 
-Muitos textos
+Custos computacionais, consumo de memória e latência — baseados nos resultados do benchmark da seção 6.3.1.
 
 \section{Barreiras de Adoção}
 
-Muitos textos
+Sistemas legados, limitações de hardware e resistência organizacional.
 
 \section{Implicações Sociais e Éticas}
 
-Muitos textos
+Soberania de dados, privacidade, vigilância e assimetria tecnológica.
 
 \chapter{DISCUSSÃO E ANÁLISE CRÍTICA} % Capitulo 8 - Conclusao
 
 \section{Síntese dos Resultados}
 
-Muitos textos
+A inevitabilidade da transição criptográfica.
 
 \section{Resposta ao Problema de Pesquisa}
 
-Muitos textos
+A evolução da pseudoaleatoriedade como pilar da segurança pós-quântica.
 
 \section{Trabalhos Futuros}
 
-Muitos textos
+Geradores Quânticos de Números Aleatórios (QRNG) e integração híbrida TRNG + PQC.
+
+\chapter{Bibliografias Uteis}
+
+1. Fundamentos e Estado da Arte (Capítulos 2 e 3)
+
+Para falar de aleatoriedade, sementes e o funcionamento dos CSPRNGs atuais:
+
+Livro: The Art of Computer Programming, Vol 2: Seminumerical Algorithms (Donald Knuth).
+
+Onde usar: Capítulos 2.1 e 3.1. É a base matemática para entender geradores lineares e por que eles são previsíveis.
+
+Livro: Handbook of Applied Cryptography (Menezes, van Oorschot e Vanstone).
+
+Onde usar: Capítulo 3.2 e 4.1. Consulte o Capítulo 5 (Pseudorandom Bits and Sequences). Ele define formalmente o "Next Bit Test".
+
+Norma Técnica: NIST SP 800-22 Rev 1a: A Statistical Test Suite for Random and Pseudorandom Number Generators.
+
+Onde usar: Capítulo 2.4. É o documento que dita como o mundo testa se um PRNG é bom.
+
+2. A Ameaça Quântica (Capítulo 4)
+
+Aqui você precisa citar os fundamentos da física quântica aplicados à quebra de códigos:
+
+Livro: Quantum Computation and Quantum Information (Michael Nielsen e Isaac Chuang).
+
+        Onde usar: Capítulo 4.1 e 4.2. É a "bíblia" da computação quântica. Essencial para explicar Qubits e o Algoritmo de Shor.
+
+    Artigo Seminal: Algorithms for quantum computation: discrete logarithms and factoring (Peter Shor, 1994).
+
+        Onde usar: Capítulo 4.2. O artigo que mudou a história da criptografia.
+
+    Relatório: NIST IR 8105: Report on Post-Quantum Cryptography.
+
+        Onde usar: Capítulo 4.4. Explica o conceito de "Harvest Now, Decrypt Later".
+
+3. Criptografia Pós-Quântica e Reticulados (Capítulo 5)
+
+Esta é a parte mais densa e moderna do seu trabalho:
+
+    Artigo de Revisão: A Decade of Lattice Cryptography (Chris Peikert).
+
+        Onde usar: Capítulo 5.3 e 5.4. Peikert é um dos maiores nomes da área. Este artigo resume como a matemática de reticulados (Lattices) se tornou segura.
+
+    Artigo Técnico: The Learning with Errors Problem (Oded Regev).
+
+        Onde usar: Capítulo 5.4. Oded Regev criou o conceito de LWE. Este artigo é a fonte primária para a sua fundamentação matemática.
+
+    Documento Oficial (FIPS): FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard.
+
+        Onde usar: Capítulo 5.5. Este é o padrão final do ML-KEM (Kyber). É a referência mais importante para o seu futuro capítulo 6.
+
+4. Transição e Ecossistema Java (Capítulo 6)
+
+Para a parte teórica sobre Java e Agilidade Criptográfica:
+
+    Documentação JEP (JDK Enhancement Proposals):
+
+        JEP 466 (Class-File API) e documentos relacionados à implementação do ML-KEM no provedor SunJCE.
+
+        Onde usar: Capítulo 6.1.
+
+    Artigo sobre Crypto-Agility: A Taxonomy of Crypto-Agility (S. Ott et al.).
+
+        Onde usar: Capítulo 6.2. Ajuda a definir por que sistemas modernos não podem ficar "presos" a um único algoritmo.
 
 \chapter{Coisas possivelmente Uteis em algum momento}
 
@@ -275,8 +406,19 @@ Esse método  não é seguro para aplicações de alto risco.
 \chapter{Conclusão}
 Considerações finais.
 
+\chapter{Exemplos para uso da bibliográfia}
+
+para livros \cite{book}
+
+para artigos \cite{artigos}
+
+para sites e outras fontes \cite{sites}
+
+para outros TCC e afins \cite{outrosTcc}
+
+para fichas tecnicas e documentacao \cite{fichaTecnica}
 % --- ELEMENTOS PÓS-TEXTUAIS ---
 \postextual
-\bibliography{referencias} % Arquivo .bib com suas fontes
+\bibliography{referencias.bib} % Arquivo .bib com suas fontes
 
 \end{document}
