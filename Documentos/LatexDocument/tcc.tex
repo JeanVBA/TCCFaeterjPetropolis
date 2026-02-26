@@ -10,7 +10,7 @@
 % --- PACOTES BÁSICOS ---
 \usepackage[utf8]{inputenc}		% Codificação do documento
 \usepackage[T1]{fontenc}		% Seleção de códigos de fonte
-\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção
+\usepackage{indentfirst}		% Indentaćao o primeiro parágrafo de cada seção
 \usepackage{color}				% Controle de cores
 \usepackage{graphicx}			% Inclusão de gráficos
 \usepackage{microtype} 			% Para melhorias na justificação
@@ -65,23 +65,9 @@
 
 A onipresença da criptografia na infraestrutura digital moderna (internet, sistemas bancários, IoT e comunicações seguras).
 
-A infraestrutura de segurança digital de grandes corporações, em sua maioria sustentada por ecossistemas como o Java, vivencia um momento de transição crítica. 
-Visto que computadores operam sob lógica determinística e não podem gerar o 'acaso puro' sem fontes externas de entropia, a criptografia contemporânea torna-se dependente da robustez matemática dos Geradores de Números Pseudo Aleatórios (PRNGs). 
-
-Durante décadas, bibliotecas de segurança confiaram em implementações consolidadas, como a classe java.security.SecureRandom, para garantir a integridade de chaves e certificados. 
-Contudo, o setor presencia o ocaso da criptografia clássica: a padronização recente liderada pelo NIST indica que as fontes de entropia e os algoritmos de pseudo aleatoriedade tradicionais não são mais suficientes contra ataques baseados em vetores quânticos. 
-Nesse cenário, se o gerador de números responsável pela criação de chaves for previsível para um sistema quântico, a estrutura de segurança da informação como um todo torna-se obsoleta. 
-
-O presente artigo explora esse panorama de mudança, avaliando como a transição para a Criptografia Pós-Quântica (PQC) altera as práticas de desenvolvimento e investigando novos padrões de redes de pontos (lattices), 
-bem como a adaptação da plataforma Java para assegurar a soberania dos dados em um futuro pós-quântico.
-
 \section{Contextualização do Tema}
 
-Com o avanço da tecnologia e o uso crescente de ferramentas e hardwares quanticos. 
-A utilização de meios pesudoaleatorios tem sidos colocados em risco. 
-E sua utilização em alguns anos podem se tornar obsoletos e inseguros para utilização. 
-Como já é o caso de grandes empresas e organizações governamentais. 
-Das quais já fazem uso de  outros meios para criptografar suas informações. 
+Textos 
 
 \section{Justificativa/Problema de Pesquisa}
 
@@ -132,7 +118,6 @@ o PRNG produz uma série de números aparentemente aleatórios.
 O valor da semente pode ser escolhido arbitrariamente, 
 mas afeta significativamente a sequência resultante de números pseudoaleatórios.\cite{6.1DefinicaoPRNG}
 
-
 \section{Entropia e Fontes de Incerteza}
 
 Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
@@ -161,6 +146,32 @@ um atacante poderá interceptar a mensagem criptografada,
 descriptografá-la e obter acesso às chaves de sessão. 
 Isso permitiria ao atacante espionar a comunicação, 
 modificar os dados ou se passar pelo servidor.\cite{6.2Entropia}
+
+Um tipo de entropia. É a entropia de Shannon. Que utiliza umm tratamento probabilístico
+de uma função logarítmica.\cite{6.2shannonEntropia} Sendo sua formula:
+
+\begin{equation}
+    H(X) = - \sum_{i=1}^{n} P(x_i) \log_b P(x_i)
+    \label{eq:shannon_entropy}
+\end{equation}
+
+Em que:
+\begin{itemize}
+    \item $H(X)$ é a entropia em bits;
+    \item $p_i$ é a probabilidade de ocorrência do resultado $i$;
+    \item $n$ é o número total de resultados possíveis.
+\end{itemize}
+
+Uma limitação determinística é em cima de um processador de maquina de estados finitos.
+Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado. Onde se um invasor 
+tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
+se faz necessário que o software faça a captação da incerteza do mundo físico.
+
+\subitem[Criptografia Simétrica]
+
+Se trata da utilização da mesma chave para o processo de encriptação e desencriptacao. Apesar da primitiva de chave simétrica embarcar
+não só encriptadores, como também funções hash de tamanho arbitrário como os MACs (Message Authentication Codex), sistemas de assinatura, sequencias pseudoaleatórias
+e primitivas de identificação.
 
 \section{A Semente (Seed) como Elemento Crítico}
 
@@ -274,7 +285,7 @@ Sistemas legados, limitações de hardware e resistência organizacional.
 
 Soberania de dados, privacidade, vigilância e assimetria tecnológica.
 
-\chapter{DISCUSSÃO E ANÁLISE CRÍTICA} % Capitulo 8 - Conclusao
+\chapter{CONCLUSÃO} % Capitulo 8 - Conclusao
 
 \section{Síntese dos Resultados}
 

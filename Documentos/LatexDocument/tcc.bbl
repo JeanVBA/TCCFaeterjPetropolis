@@ -37,6 +37,13 @@ Dispon{\'\i}vel em: \url{https://www.lenovo.com/us/en/glossary/pseudorandom}. Ac
 {MATSUMOTO, M.; NISHIMURA, T. Mersenne twister: A 623-dimensionally equidistributed uniform pseudo-random number generator.
 \emph{ACM Transactions on Modeling and Computer Simulation}, v.~8, n.~1, p. 3--30, 1998.}
 
+\bibitem[Nascimento 2013]{6.2shannonEntropia}
+\abntrefinfo{Nascimento}{NASCIMENTO}{2013}
+{NASCIMENTO, W.~S.
+\emph{Sobre algumas características da entropia de Shannon para sistemas atômicos confinados.}
+Disserta\c{c}\~{a}o (Dissertação (Mestrado em Física)) --- Universidade Federal da Bahia Instituto de Física, Bahia, 2013.
+Dispon{\'\i}vel em: \url{https://repositorio.ufba.br/bitstream/ri/28664/1/disserta\%c3\%a7\%c3\%a3o\_wallas\_final.pdf}. Acesso em: 25 fev. 2026.}
+
 \bibitem[{NETDATA} s.d.]{6.2Entropia}
 \abntrefinfo{{NETDATA}}{{NETDATA}}{s.d.}
 {{NETDATA}. \emph{Understanding Entropy Key To Secure Cryptography \& Randomness}. s.d.
