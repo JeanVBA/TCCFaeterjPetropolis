@@ -1,37 +1,42 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.SecureRandom;
+import java.util.Random;
+
 public class Main {
-    public static void main(String[] args) {
-        long seed = 12345;
-        long a = 1664525;
-        long c = 1013904223;
-        long mod = (long) Math.pow(2, 32);
+public static void main(String[] args) {
+        int tamanhoBytes = 12_500_000;
 
-        LCG lcg = new LCG(seed, a, c, mod);
-
-        for (int i = 0; i < 10; i++) {
-            System.out.println(lcg.next());
-        }
-
+        gerarInseguro("inseguro.bin", tamanhoBytes);
+        gerarSeguro("seguro.bin", tamanhoBytes);
     }
 
-    public static class LCG {
+    public static void gerarInseguro(String nomeArquivo, int tamanho) {
+        Random prng = new Random(); 
+        byte[] buffer = new byte[1024];
 
-        private long a;
-        private long c;
-        private long mod;
-        private long xi;
-
-        public LCG(long seed, long a, long c, long mod) {
-            this.xi = seed;
-            this.a = a;
-            this.c = c;
-            this.mod = mod;
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(nomeArquivo))) {
+            for (int i = 0; i < tamanho; i += buffer.length) {
+                prng.nextBytes(buffer);
+                bos.write(buffer);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
 
-        public long next() {
-            xi = (a * xi + c) % mod;
-            return xi;
+    public static void gerarSeguro(String nomeArquivo, int tamanho) {
+        SecureRandom csprng = new SecureRandom();
+        byte[] buffer = new byte[1024];
+
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(nomeArquivo))) {
+            for (int i = 0; i < tamanho; i += buffer.length) {
+                csprng.nextBytes(buffer);
+                bos.write(buffer);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

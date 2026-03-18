@@ -18,6 +18,11 @@ Disserta\c{c}\~{a}o (Dissertação (Mestrado em Engenharia Eletrônica)) --- Uni
 Disserta\c{c}\~{a}o (Trabalho de Conclusão de Gradução) --- Universidade Federal do Rio Grande do Sul, Porto Alegre, 2022.
 Dispon{\'\i}vel em: \url{https://lume.ufrgs.br/handle/10183/251751}. Acesso em: 18 fev. 2026.}
 
+\bibitem[github s.d.]{6.4NISTGit}
+\abntrefinfo{github}{GITHUB}{s.d.}
+{GITHUB. \emph{NIST}. s.d.
+Dispon{\'\i}vel em: \url{https://github.com/terrillmoore/NIST-Statistical-Test-Suite}. Acesso em: 02 mar. 2026.}
+
 \bibitem[{International Organization for Standardization} 2022]{fichaTecnica}
 \abntrefinfo{{International Organization for Standardization}}{{International Organization for Standardization}}{2022}
 {{International Organization for Standardization}. \emph{ISO/IEC 27001: Information technology - Security techniques}.
@@ -53,5 +58,10 @@ Dispon{\'\i}vel em: \url{https://www.netdata.cloud/blog/understanding-entropy-th
 \abntrefinfo{{Oracle Corporation}}{{Oracle Corporation}}{2023}
 {{Oracle Corporation}. \emph{Class Random: Java Platform SE 17}. 2023.
 Dispon{\'\i}vel em: \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html}. Acesso em: 18 fev. 2026.}
+
+\bibitem[Rukhin 2010]{6.4NistsTP}
+\abntrefinfo{Rukhin}{RUKHIN}{2010}
+{RUKHIN, A. A statistical test suite for random and pseudorandom number generators for cryptographic applications.
+\emph{National Institute of Standards and Technology}, v.~2, n.~1, p. 23--62, 2010.}
 
 \end{thebibliography}

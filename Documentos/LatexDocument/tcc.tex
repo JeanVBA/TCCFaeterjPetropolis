@@ -93,326 +93,412 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
 \chapter{FUNDAMENTOS DA ALEATORIEDADE EM COMPUTAÇÃO} % Capitulo 2
 
-\section{Aleatoriedade Verdadeira vs. Pseudoaleatoriedade}
+    \section{Aleatoriedade Verdadeira vs. Pseudoaleatoriedade}
 
-Definições de  e PRNG (Pseudo-Random Number Generator).
+        Definições de TRNG e PRNG (Pseudo-Random Number Generator).
 
-TRNG é um dispositivo que gera números aleatórios a partir
-de um processo físico, e não por meio de um algoritmo. Tais dispositivos são
-frequentemente baseados em fenômenos microscópicos que geram sinais de "ruído"
-estatisticamente aleatórios de baixo nível, como ruído térmico, efeito fotoelétrico, ou
-fenômenos quânticos. Esses processos estocásticos são, em teoria, completamente
-imprevisíveis enquanto uma equação que governa tais fenômenos for desconhecida
-ou incomputável. Isso contrasta com o paradigma de geração de números pseudo-
-aleatórios comumente implementado através de algoritmos.\cite{6.1DefinicaoTRNG}
+        TRNG é um dispositivo que gera números aleatórios a partir
+        de um processo físico, e não por meio de um algoritmo. Tais dispositivos são
+        frequentemente baseados em fenômenos microscópicos que geram sinais de "ruído"
+        estatisticamente aleatórios de baixo nível, como ruído térmico, efeito fotoelétrico, ou
+        fenômenos quânticos. Esses processos estocásticos são, em teoria, completamente
+        imprevisíveis enquanto uma equação que governa tais fenômenos for desconhecida
+        ou incomputável. Isso contrasta com o paradigma de geração de números pseudo-
+        aleatórios comumente implementado através de algoritmos.\nocite{6.1DefinicaoTRNG}
 
-PRNG refere-se a uma sequência de números ou dados que aparenta ser aleatória, 
-mas é gerada por um algoritmo determinístico.
-E é gerada por algoritmos que utilizam fórmulas matemáticas para produzir resultados aparentemente aleatórios. 
-Embora sequências pseudoaleatórias possam imitar a aleatoriedade até certo ponto, elas são, 
-em última análise, determinísticas e repetíveis.
-Esses algoritmos recebem um valor inicial, chamado semente, 
-e o utilizam para produzir uma sequência de números. 
-Ao aplicar operações matemáticas ao valor da semente, 
-o PRNG produz uma série de números aparentemente aleatórios. 
-O valor da semente pode ser escolhido arbitrariamente, 
-mas afeta significativamente a sequência resultante de números pseudoaleatórios.\cite{6.1DefinicaoPRNG}
+        PRNG refere-se a uma sequência de números ou dados que aparenta ser aleatória, 
+        mas é gerada por um algoritmo determinístico.
+        E é gerada por algoritmos que utilizam fórmulas matemáticas para produzir resultados aparentemente aleatórios. 
+        Embora sequências pseudoaleatórias possam imitar a aleatoriedade até certo ponto, elas são, 
+        em última análise, determinísticas e repetíveis.
+        Esses algoritmos recebem um valor inicial, chamado semente, 
+        e o utilizam para produzir uma sequência de números. 
+        Ao aplicar operações matemáticas ao valor da semente, 
+        o PRNG produz uma série de números aparentemente aleatórios. 
+        O valor da semente pode ser escolhido arbitrariamente, 
+        mas afeta significativamente a sequência resultante de números pseudoaleatórios.\nocite{6.1DefinicaoPRNG}
 
-\section{Entropia e Fontes de Incerteza}
+    \section{Entropia e Fontes de Incerteza}
 
-Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
+        Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
 
-Entropia é uma medida da aleatoriedade ou imprevisibilidade dos dados. 
-No contexto da criptografia, a entropia é usada para gerar 
-números aleatórios ou chaves que são essenciais para a comunicação segura e a criptografia. 
-Sem uma boa fonte de entropia, os protocolos criptográficos podem se tornar vulneráveis a ataques 
-que exploram a previsibilidade das chaves geradas.
+        Entropia é uma medida da aleatoriedade ou imprevisibilidade dos dados. 
+        No contexto da criptografia, a entropia é usada para gerar 
+        números aleatórios ou chaves que são essenciais para a comunicação segura e a criptografia. 
+        Sem uma boa fonte de entropia, os protocolos criptográficos podem se tornar vulneráveis a ataques 
+        que exploram a previsibilidade das chaves geradas.
 
-Na maioria dos sistemas operacionais, 
-a entropia é gerada pela coleta de eventos aleatórios de diversas fontes, 
-como interrupções de hardware, movimentos do mouse, 
-pressionamentos de teclas e atividade do disco. 
-Esses eventos são inseridos em um conjunto de entropia, 
-que é então usado para gerar números aleatórios quando necessário.
+        Na maioria dos sistemas operacionais, 
+        a entropia é gerada pela coleta de eventos aleatórios de diversas fontes, 
+        como interrupções de hardware, movimentos do mouse, 
+        pressionamentos de teclas e atividade do disco. 
+        Esses eventos são inseridos em um conjunto de entropia, 
+        que é então usado para gerar números aleatórios quando necessário.
 
-Protocolos criptográficos, como SSL/TLS, SSH e IPsec, 
-dependem fortemente da entropia para gerar números aleatórios e chaves para criptografia, 
-autenticação e proteção de integridade.
-A aleatoriedade desses números é crucial para a segurança da comunicação. 
-Se um atacante conseguir prever os números aleatórios usados em um protocolo criptográfico, 
-ele poderá comprometer a confidencialidade, a integridade ou a autenticidade da comunicação.
-Se a chave mestra prévia for previsível ou tendenciosa, 
-um atacante poderá interceptar a mensagem criptografada, 
-descriptografá-la e obter acesso às chaves de sessão. 
-Isso permitiria ao atacante espionar a comunicação, 
-modificar os dados ou se passar pelo servidor.\cite{6.2Entropia}
+        Protocolos criptográficos, como SSL/TLS, SSH e IPsec, 
+        dependem fortemente da entropia para gerar números aleatórios e chaves para criptografia, 
+        autenticação e proteção de integridade.
+        A aleatoriedade desses números é crucial para a segurança da comunicação. 
+        Se um atacante conseguir prever os números aleatórios usados em um protocolo criptográfico, 
+        ele poderá comprometer a confidencialidade, a integridade ou a autenticidade da comunicação.
+        Se a chave mestra prévia for previsível ou tendenciosa, 
+        um atacante poderá interceptar a mensagem criptografada, 
+        descriptografá-la e obter acesso às chaves de sessão. 
+        Isso permitiria ao atacante espionar a comunicação, 
+        modificar os dados ou se passar pelo servidor.\nocite{6.2Entropia}
 
-Um tipo de entropia. É a entropia de Shannon. Que utiliza umm tratamento probabilístico
-de uma função logarítmica.\cite{6.2shannonEntropia} Sendo sua formula:
+        Um tipo de entropia. É a entropia de Shannon. Que utiliza umm tratamento probabilístico
+        de uma função logarítmica.\nocite{6.2shannonEntropia} Sendo sua formula:
 
-\begin{equation}
-    H(X) = - \sum_{i=1}^{n} P(x_i) \log_b P(x_i)
-    \label{eq:shannon_entropy}
-\end{equation}
+        \begin{equation}
+            H(X) = - \sum_{i=1}^{n} P(x_i) \log_b P(x_i)
+            \label{eq:shannon_entropy}
+        \end{equation}
 
-Em que:
-\begin{itemize}
-    \item $H(X)$ é a entropia em bits;
-    \item $p_i$ é a probabilidade de ocorrência do resultado $i$;
-    \item $n$ é o número total de resultados possíveis.
-\end{itemize}
+        Em que:
+        \begin{itemize}
+            \item $H(X)$ é a entropia em bits;
+            \item $p_i$ é a probabilidade de ocorrência do resultado $i$;
+            \item $n$ é o número total de resultados possíveis.
+        \end{itemize}
 
-Uma limitação determinística é em cima de um processador de maquina de estados finitos.
-Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado. Onde se um invasor 
-tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
-se faz necessário que o software faça a captação da incerteza do mundo físico.
+        Uma limitação determinística é em cima de um processador de maquina de estados finitos.
+        Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado. Onde se um invasor 
+        tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
+        se faz necessário que o software faça a captação da incerteza do mundo físico.
 
-\subitem[Criptografia Simétrica]
+        \subitem[Criptografia Simétrica]
 
-Se trata da utilização da mesma chave para o processo de encriptação e desencriptacao. Apesar da primitiva de chave simétrica embarcar
-não só encriptadores, como também funções hash de tamanho arbitrário como os MACs (Message Authentication Codex), sistemas de assinatura, sequencias pseudoaleatórias
-e primitivas de identificação.
+        Se trata da utilização da mesma chave para o processo de encriptação e desencriptaçao. Apesar da primitiva de chave simétrica embarcar
+        não só encriptadores, como também funções hash de tamanho arbitrário como os MACs (Message Authentication Codex), sistemas de assinatura, sequencias pseudoaleatórias
+        e primitivas de identificação.
 
-\section{A Semente (Seed) como Elemento Crítico}
+    \section{A Semente (Seed) como Elemento Crítico}
 
-O papel do valor inicial na previsibilidade e segurança de sequências pseudoaleatórias.
+    O papel do valor inicial na previsibilidade e segurança de sequências pseudoaleatórias.
 
-\section{Avaliação Estatística da Aleatoriedade}
+    \section{Avaliação Estatística da Aleatoriedade}
 
-Bateria de testes SP 800-22 do NIST e o conceito de indistinguibilidade estatística.
+        Bateria de testes SP 800-22 do NIST e o conceito de indistinguibilidade estatística.
+
+        O NIST Test Suite consiste em um pacote de 15 testes de estatistas desenvolvidos para avaliar a as sequencias binarias aleatórias (com comprimento arbitrário),
+        gerados por geradores de números aleatórios ou pseudo criptografados, seja de forma em hardware ou software. 
+        les podem ser decompostos em vários subtestes de acordo com a necessidade e o tipo de geração aleatória que podem ter uma sequencia. Os 15 testes são:
+        \begin{enumerate}
+          \item Teste de Frequência (monobit)
+          \item Teste de Frequência dentro de um bloco
+          \item Teste de Sequencias
+          \item Testes para Maior Sequencia de Uns em um bloco
+          \item Testes de Posto de Matriz Binária
+          \item Teste da Transformada Discreta ded Fourier (Espectral)
+          \item Teste de Correspondência ded Modelos não Sobrepostos
+          \item Teste de Correspondência de Modelos Sobrepostos
+          \item Teste "Estatístico Universal" de Maurer
+          \item Teste de Complexidade Linear
+          \item Teste Serial
+          \item Teste de Entropia Aproximada
+          \item Teste de Somas Cumulativas (Cusums)
+          \item Teste de Excursões Aleatórias
+          \item Teste de Variante de Excursões Aleatórias
+        \end{enumerate}\nocite{6.4NistsTP}
+
+        Falar separadamente sobre cada um dos 15 testes. Mostrando um teste local separado. (Seguir documentacao do guthub para execucao local)
+        \cite{6.4NISTGit}
+        
+        \subsection{Bateria de Testes}%PASSO 1 - Explicacao de como vai ser efetuado os Testes
+
+            Os arquivos binários gerados em Java servem como a entrada bruta para o NIST SP 800-22, 
+            que interpreta os bytes como fluxos contínuos de bits para análise estatística. Ao executar o programa, 
+            a ferramenta particiona esses dados em blocos de tamanho fixo, como sequências de $10^{6}$ bits, 
+            aplicando sobre cada um deles quinze testes que buscam padrões não aleatórios, como repetições excessivas ou falta de complexidade linear. 
+            Para cada teste, o sistema calcula um $P\text{-value}$, que quantifica a probabilidade de a sequência ter sido gerada por um processo puramente aleatório. 
+            Ao final, o sucesso do gerador é determinado pela uniformidade desses valores e pela proporção de sequências que mantiveram o $P\text{-value} \geq 0,01$.
+
+            \begin{figure}[htb]
+                \centering
+                \caption{Modelo simples de um PRNG com LCG}
+                \label{fig:model_prng_lcg}
+                \includegraphics[width=0.8\textwidth]{gerador_bits_testes_NIST.png}
+                \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+        %PASSO 1.1 - Modelo de geracao LCG (voce já fez, tem pronto a explicacao)
+        \subsubsection{Random}
+        
+        A funćao java.util.Random faz uso do modelo LCG “Gerador Congruencial Linear”. 
+        Ele é um modelo puramente matemático. 
+        Onde o mesmo é usado para gerar uma sequência de números aleatórios, 
+        calculados por uma equação linear.
+        \begin{equation}
+            x_{i+1} = (A \cdot x_i + C) \pmod{M}
+            \label{eq:lca}
+        \end{equation}
+        Onde o valor inicial “x0” é a seed, 
+        A e C são parâmetros inteiros que podem ter um valor 
+        já pré-definido ou passados diretamente, 
+        M é o espaço dos valores aleatórios possíveis e “mod” é o 
+        restante da divisão inteira.
+        
+        %PASSO 1.3 - Modelo de geracao Seguro usando entropia
+
+        \subsubsection{SegureRandom}
+        A funćao java.security.SegureRandom faz utilizaćao do CSPRNG, que diferente do LCG. Esse tipo de gerador busca caos do hardware.
+        Sendo elas interrupćoes de hardware, pressionar das teclas do teclado, posićao e movimento do mouse,
+        pequenas flutuaćoes de voltagem do processador e/ou o tempo que o disco demora pra fazer a requisićao.
+        Esses eventos imprevisíveis são misturados, usando funćoes hash como SHA-256 para criar uma seed de alta entropia.
+        Mesmo que se conheća o algoritmo, não é possivel recriar o mesmo evento. Justamente pelo fator caos fisico que foi utilizado.
+
+        %PASSO 2 - Explicacao do resultado do (Teste de Frequência (monobit))
+
+        
+
+        %PASSO 3 - Explicacao do resultado do (Teste de Frequência dentro de um bloco)
+        %PASSO 4 - Explicacao do resultado do (Teste de Sequencias)
+        %PASSO 5 - Explicacao do resultado do (Testes para Maior Sequencia de Uns em um bloco)
+        %PASSO 6 - Explicacao do resultado do (Testes de Posto de Matriz Binária)
+        %PASSO 7 - Explicacao do resultado do (Teste da Transformada Discreta ded Fourier (Espectral))
+        %PASSO 8 - Explicacao do resultado do (Teste de Correspondência ded Modelos não Sobrepostos)
+        %PASSO 9 - Explicacao do resultado do (Teste de Correspondência de Modelos Sobrepostos)
+        %PASSO 10 - Explicacao do resultado do (Teste "Estatístico Universal" de Maurer)
+        %PASSO 11 - Explicacao do resultado do (Teste de Complexidade Linear)
+        %PASSO 12 - Explicacao do resultado do (Teste Serial)
+        %PASSO 13 - Explicacao do resultado do (Teste de Entropia Aproximada)
+        %PASSO 14 - Explicacao do resultado do (Teste de Somas Cumulativas (Cusums))
+        %PASSO 15 - Explicacao do resultado do (Teste de Excursões Aleatórias)
+        %PASSO 16 - Explicacao do resultado do (Teste de Variante de Excursões Aleatórias)
+        %PASSO 17 - Explicacao do motivo para que ambos tenham passado nos testes
+        %PASSO 17.1 Explicacao o motivo que leva a falha desses testes
+        %Passo 17.2 Explicacao do porque esse teste é somente uma das etapas pra considerar um gerador seguro e não a fonte da verdade
+
 
 \chapter{Geradores Criptograficamente Seguros} % Capitulo 3
 
-\section{PRNGs vs. CSPRNGs}
+    \section{PRNGs vs. CSPRNGs}
 
-Diferenças arquiteturais e requisitos de segurança.
+        Diferenças arquiteturais e requisitos de segurança.
 
-\section{O Ataque do Próximo Bit}
+    \section{O Ataque do Próximo Bit}
 
-Por que geradores comuns falham em contextos criptográficos.
+        Por que geradores comuns falham em contextos criptográficos.
 
-\subsection{Implementação Prática (Demonstração)}
+    \subsection{Implementação Prática (Demonstração)}
 
-Demonstração do ataque contra java.util.Random, mostrando previsão de saídas futuras com base em observações anteriores — contrasta diretamente com o CSPRNG.
+        Demonstração do ataque contra java.util.Random, mostrando previsão de saídas futuras com base em observações anteriores — contrasta diretamente com o CSPRNG.
 
-\section{Implementação de CSPRNGs em Java}
+    \section{Implementação de CSPRNGs em Java}
 
-Análise da classe java.security.SecureRandom e seus provedores (SHA1PRNG, NativePRNG).
+        Análise da classe java.security.SecureRandom e seus provedores (SHA1PRNG, NativePRNG).
 
-\section{Falhas Históricas de Aleatoriedade}
+    \section{Falhas Históricas de Aleatoriedade}
 
-Casos emblemáticos como o Debian OpenSSL e problemas recorrentes em dispositivos IoT.
+        Casos emblemáticos como o Debian OpenSSL e problemas recorrentes em dispositivos IoT.
 
 \chapter{COMPUTAÇÃO QUÂNTICA E A QUEBRA DO PARADIGMA ATUAL} % Capitulo 4
 
-\section{Conceitos Fundamentais de Computação Quântica}
+    \section{Conceitos Fundamentais de Computação Quântica}
 
-Diferença entre bits clássicos e qubits.
+        Diferença entre bits clássicos e qubits.
 
-\section{Algoritmo de Shor}
+    \section{Algoritmo de Shor}
 
-Fatoração eficiente e o colapso dos sistemas baseados em RSA e ECC.
+        Fatoração eficiente e o colapso dos sistemas baseados em RSA e ECC.
 
-\section{Algoritmo de Grover}
+    \section{Algoritmo de Grover}
 
-Impacto sobre criptografia simétrica e necessidade de aumento no tamanho das chaves.
+        Impacto sobre criptografia simétrica e necessidade de aumento no tamanho das chaves.
 
-\section{Harvest Now, Decrypt Later}
+    \section{Harvest Now, Decrypt Later}
 
-A urgência da migração para algoritmos resistentes a ataques quânticos.
+        A urgência da migração para algoritmos resistentes a ataques quânticos.
 
 \chapter{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)} % Capitulo 5
 
-\section{Definição e Objetivos da PQC}
+    \section{Definição e Objetivos da PQC}
 
-Algoritmos clássicos projetados para resistir a ataques quânticos.
+    Algoritmos clássicos projetados para resistir a ataques quânticos.
 
-\section{Paradigmas Matemáticos da PQC}
+    \section{Paradigmas Matemáticos da PQC}
 
-Reticulados, códigos corretores de erro, funções hash e isogenias.
+    Reticulados, códigos corretores de erro, funções hash e isogenias.
 
-\section{Criptografia Baseada em Reticulados}
+    \section{Criptografia Baseada em Reticulados}
 
-Introdução ao conceito de Lattices como base da nova segurança criptográfica.
+    Introdução ao conceito de Lattices como base da nova segurança criptográfica.
 
-\section{Learning With Errors (LWE)}
+    \section{Learning With Errors (LWE)}
 
-Fundamento matemático da pseudoaleatoriedade pós-quântica.
+    Fundamento matemático da pseudoaleatoriedade pós-quântica.
 
-\subsection{Implementação Didática em Java (Demonstração)}
+    \subsection{Implementação Didática em Java (Demonstração)}
 
-Implementação simplificada do LWE do zero em Java para fins didáticos, mostrando como o erro intencional funciona matematicamente antes de utilizar a biblioteca pronta.
+    Implementação simplificada do LWE do zero em Java para fins didáticos, mostrando como o erro intencional funciona matematicamente antes de utilizar a biblioteca pronta.
 
-\section{Padronização Pós-Quântica}
+    \section{Padronização Pós-Quântica}
 
-O papel do ML-KEM (Kyber) e o processo de padronização conduzido pelo NIST.
+    O papel do ML-KEM (Kyber) e o processo de padronização conduzido pelo NIST.
 
 \chapter{A TRANSIÇÃO PARA PQC NO ECOSSISTEMA JAVA} % Capitulo 6
 
-\section{Suporte à Criptografia Pós-Quântica no Java}
+    \section{Suporte à Criptografia Pós-Quântica no Java}
 
-Evolução do JDK e integração de algoritmos pós-quânticos em versões modernas (Java 21+).
+    Evolução do JDK e integração de algoritmos pós-quânticos em versões modernas (Java 21+).
 
-\section{Crypto-Agility}
+    \section{Crypto-Agility}
 
-Boas práticas para desenvolvimento de sistemas criptográficos flexíveis e preparados para mudanças de algoritmo.
+    Boas práticas para desenvolvimento de sistemas criptográficos flexíveis e preparados para mudanças de algoritmo.
 
-\subsection{Implementação Prática: Demo de Crypto-Agility}
+    \subsection{Implementação Prática: Demo de Crypto-Agility}
 
-Criação de uma interface Java que abstrai o algoritmo de geração de chaves, permitindo trocar de RSA para Kyber alterando apenas a configuração — sem reescrever o código da aplicação.
+    Criação de uma interface Java que abstrai o algoritmo de geração de chaves, permitindo trocar de RSA para Kyber alterando apenas a configuração — sem reescrever o código da aplicação.
 
-\section{Comparativo de Modelos}
+    \section{Comparativo de Modelos}
 
-Geração de chaves e aleatoriedade no modelo clássico versus modelo baseado em reticulados (Module-Lattice).
+    Geração de chaves e aleatoriedade no modelo clássico versus modelo baseado em reticulados (Module-Lattice).
 
-\subsection{Implementação Prática: Benchmark Clássico vs. Kyber}
+    \subsection{Implementação Prática: Benchmark Clássico vs. Kyber}
 
-Benchmark comparativo entre java.security.SecureRandom clássico e ML-KEM (Kyber) via Bouncy Castle, medindo tempo de geração de chaves, uso de memória e throughput. 
-Inclui comparativo de tamanho de chaves entre RSA-2048 e Kyber.
-Nota: Confirmar com o orientador o uso da biblioteca Bouncy Castle como dependência, por ser a opção mais acessível para PQC em Java atualmente.
+    Benchmark comparativo entre java.security.SecureRandom clássico e ML-KEM (Kyber) via Bouncy Castle, medindo tempo de geração de chaves, uso de memória e throughput. 
+    Inclui comparativo de tamanho de chaves entre RSA-2048 e Kyber.
+    Nota: Confirmar com o orientador o uso da biblioteca Bouncy Castle como dependência, por ser a opção mais acessível para PQC em Java atualmente.
 
 \chapter{DISCUSSÃO E ANÁLISE CRÍTICA} % Capitulo 7
 
-\section{Impacto em Desempenho}
+    \section{Impacto em Desempenho}
 
-Custos computacionais, consumo de memória e latência — baseados nos resultados do benchmark da seção 6.3.1.
+    Custos computacionais, consumo de memória e latência — baseados nos resultados do benchmark da seção 6.3.1.
 
-\section{Barreiras de Adoção}
+    \section{Barreiras de Adoção}
 
-Sistemas legados, limitações de hardware e resistência organizacional.
+    Sistemas legados, limitações de hardware e resistência organizacional.
 
-\section{Implicações Sociais e Éticas}
+    \section{Implicações Sociais e Éticas}
 
-Soberania de dados, privacidade, vigilância e assimetria tecnológica.
+    Soberania de dados, privacidade, vigilância e assimetria tecnológica.
 
 \chapter{CONCLUSÃO} % Capitulo 8 - Conclusao
 
-\section{Síntese dos Resultados}
+    \section{Síntese dos Resultados}
 
-A inevitabilidade da transição criptográfica.
+    A inevitabilidade da transição criptográfica.
 
-\section{Resposta ao Problema de Pesquisa}
+    \section{Resposta ao Problema de Pesquisa}
 
-A evolução da pseudoaleatoriedade como pilar da segurança pós-quântica.
+    A evolução da pseudoaleatoriedade como pilar da segurança pós-quântica.
 
-\section{Trabalhos Futuros}
+    \section{Trabalhos Futuros}
 
-Geradores Quânticos de Números Aleatórios (QRNG) e integração híbrida TRNG + PQC.
+    Geradores Quânticos de Números Aleatórios (QRNG) e integração híbrida TRNG + PQC.
 
 \chapter{Bibliografias Uteis}
 
-1. Fundamentos e Estado da Arte (Capítulos 2 e 3)
+    1. Fundamentos e Estado da Arte (Capítulos 2 e 3)
 
-Para falar de aleatoriedade, sementes e o funcionamento dos CSPRNGs atuais:
+    Para falar de aleatoriedade, sementes e o funcionamento dos CSPRNGs atuais:
 
-Livro: The Art of Computer Programming, Vol 2: Seminumerical Algorithms (Donald Knuth).
+    Livro: The Art of Computer Programming, Vol 2: Seminumerical Algorithms (Donald Knuth).
 
-Onde usar: Capítulos 2.1 e 3.1. É a base matemática para entender geradores lineares e por que eles são previsíveis.
+    Onde usar: Capítulos 2.1 e 3.1. É a base matemática para entender geradores lineares e por que eles são previsíveis.
 
-Livro: Handbook of Applied Cryptography (Menezes, van Oorschot e Vanstone).
+    Livro: Handbook of Applied Cryptography (Menezes, van Oorschot e Vanstone).
 
-Onde usar: Capítulo 3.2 e 4.1. Consulte o Capítulo 5 (Pseudorandom Bits and Sequences). Ele define formalmente o "Next Bit Test".
+    Onde usar: Capítulo 3.2 e 4.1. Consulte o Capítulo 5 (Pseudorandom Bits and Sequences). Ele define formalmente o "Next Bit Test".
 
-Norma Técnica: NIST SP 800-22 Rev 1a: A Statistical Test Suite for Random and Pseudorandom Number Generators.
+    Norma Técnica: NIST SP 800-22 Rev 1a: A Statistical Test Suite for Random and Pseudorandom Number Generators.
 
-Onde usar: Capítulo 2.4. É o documento que dita como o mundo testa se um PRNG é bom.
+    Onde usar: Capítulo 2.4. É o documento que dita como o mundo testa se um PRNG é bom.
 
-2. A Ameaça Quântica (Capítulo 4)
+    2. A Ameaça Quântica (Capítulo 4)
 
-Aqui você precisa citar os fundamentos da física quântica aplicados à quebra de códigos:
+    Aqui você precisa citar os fundamentos da física quântica aplicados à quebra de códigos:
 
-Livro: Quantum Computation and Quantum Information (Michael Nielsen e Isaac Chuang).
+    Livro: Quantum Computation and Quantum Information (Michael Nielsen e Isaac Chuang).
 
-        Onde usar: Capítulo 4.1 e 4.2. É a "bíblia" da computação quântica. Essencial para explicar Qubits e o Algoritmo de Shor.
+    Onde usar: Capítulo 4.1 e 4.2. É a "bíblia" da computação quântica. Essencial para explicar Qubits e o Algoritmo de Shor.
 
     Artigo Seminal: Algorithms for quantum computation: discrete logarithms and factoring (Peter Shor, 1994).
 
-        Onde usar: Capítulo 4.2. O artigo que mudou a história da criptografia.
+    Onde usar: Capítulo 4.2. O artigo que mudou a história da criptografia.
 
     Relatório: NIST IR 8105: Report on Post-Quantum Cryptography.
 
-        Onde usar: Capítulo 4.4. Explica o conceito de "Harvest Now, Decrypt Later".
+    Onde usar: Capítulo 4.4. Explica o conceito de "Harvest Now, Decrypt Later".
 
-3. Criptografia Pós-Quântica e Reticulados (Capítulo 5)
+    3. Criptografia Pós-Quântica e Reticulados (Capítulo 5)
 
-Esta é a parte mais densa e moderna do seu trabalho:
+    Esta é a parte mais densa e moderna do seu trabalho:
 
     Artigo de Revisão: A Decade of Lattice Cryptography (Chris Peikert).
-
-        Onde usar: Capítulo 5.3 e 5.4. Peikert é um dos maiores nomes da área. Este artigo resume como a matemática de reticulados (Lattices) se tornou segura.
+    Onde usar: Capítulo 5.3 e 5.4. Peikert é um dos maiores nomes da área. Este artigo resume como a matemática de reticulados (Lattices) se tornou segura.
 
     Artigo Técnico: The Learning with Errors Problem (Oded Regev).
-
-        Onde usar: Capítulo 5.4. Oded Regev criou o conceito de LWE. Este artigo é a fonte primária para a sua fundamentação matemática.
+    Onde usar: Capítulo 5.4. Oded Regev criou o conceito de LWE. Este artigo é a fonte primária para a sua fundamentação matemática.
 
     Documento Oficial (FIPS): FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard.
 
-        Onde usar: Capítulo 5.5. Este é o padrão final do ML-KEM (Kyber). É a referência mais importante para o seu futuro capítulo 6.
+    Onde usar: Capítulo 5.5. Este é o padrão final do ML-KEM (Kyber). É a referência mais importante para o seu futuro capítulo 6.
 
-4. Transição e Ecossistema Java (Capítulo 6)
+    4. Transição e Ecossistema Java (Capítulo 6)
 
-Para a parte teórica sobre Java e Agilidade Criptográfica:
-
+    Para a parte teórica sobre Java e Agilidade Criptográfica:
     Documentação JEP (JDK Enhancement Proposals):
 
-        JEP 466 (Class-File API) e documentos relacionados à implementação do ML-KEM no provedor SunJCE.
+    JEP 466 (Class-File API) e documentos relacionados à implementação do ML-KEM no provedor SunJCE.
 
-        Onde usar: Capítulo 6.1.
+    Onde usar: Capítulo 6.1.
 
     Artigo sobre Crypto-Agility: A Taxonomy of Crypto-Agility (S. Ott et al.).
 
-        Onde usar: Capítulo 6.2. Ajuda a definir por que sistemas modernos não podem ficar "presos" a um único algoritmo.
+    Onde usar: Capítulo 6.2. Ajuda a definir por que sistemas modernos não podem ficar "presos" a um único algoritmo.
 
 \chapter{Coisas possivelmente Uteis em algum momento}
+    PRNG é uma sigla para “Pseudo Random Number Generator” ou “Gerador de Números Pseudo Aleatórios”. 
+    Seu significado é que a sua geração de números não segue uma estrutura aleatória. 
+    Ele utiliza um ponto inicial denominado “seed” para dar início a sua geração de números. 
+    A seed é um valor base para ser utilizado no PRNG. 
+    Utilizando a mesma seed, o resultado final do PRNG será o mesmo.
 
-PRNG é uma sigla para “Pseudo Random Number Generator” ou “Gerador de Números Pseudo Aleatórios”. 
-Seu significado é que a sua geração de números não segue uma estrutura aleatória. 
-Ele utiliza um ponto inicial denominado “seed” para dar início a sua geração de números. 
-A seed é um valor base para ser utilizado no PRNG. 
-Utilizando a mesma seed, o resultado final do PRNG será o mesmo.
+    O PRNG funciona a partir de uma função que recebe a seed por parâmetro. 
+    E através de um cálculo, ele retorna o resultado dessa fórmula. 
+    Uma das fórmulas mais comuns para esse tipo de gerador de pseudo números aleatórios é no modelo LCG “Gerador Congruencial Linear” 
 
-O PRNG funciona a partir de uma função que recebe a seed por parâmetro. 
-E através de um cálculo, ele retorna o resultado dessa fórmula. 
-Uma das fórmulas mais comuns para esse tipo de gerador de pseudo números aleatórios é no modelo LCG “Gerador Congruencial Linear” 
+    \begin{equation}
+        x_{i+1} = (A \cdot x_i + C) \pmod{M}
+        \label{eq:lca}
+    \end{equation}
 
-\begin{equation}
-    x_{i+1} = (A \cdot x_i + C) \pmod{M}
-    \label{eq:lca}
-\end{equation}
-
-Onde o valor inicial “x0” é a seed, A e C são parâmetros inteiros que podem ter um valor já pré-definido ou passados diretamente, M é o espaço dos valores aleatórios possíveis e “mod” é o restante da divisão inteira.
-
-
-\begin{figure}[htb]
-    \centering
-    \caption{Modelo simples de um PRNG com LCG}
-    \label{fig:model_prng_lcg}
-    \includegraphics[width=0.8\textwidth]{model_prng_lcg.png}
-    \legend{Fonte: Elaborado pelo autor (2026)}
-\end{figure}
-
-Mesmo após inúmeras tentativas. Devido a seed permanecer inalterada. 
-O resultado permanece o mesmo em todos os resultados obtidos.
-
-Por mais que tenha se passado um valor fixo na seed no exemplo prático, a seed é definida pelo sistema operacional, esse número é denominado entropia. 
-Que se tem por referência a quantidade de imprecisão de um sistema. 
-Quanto maior o número da entropia, maior é a incerteza. 
-Esse valor de entropia é gerado a partir de certos eventos que ocorrem no momento de sua captura, como por exemplo o movimento do mouse, os inputs no teclado etc. 
-Essas capturas são convertidas em um valor numérico para ser usado na seed.
-
-Esses inputs que o sistema captura podem ser previsíveis, tornando a entropia causada menor. 
-Sendo possível pré-determinar o valor gerado ao final para seed. 
-Apesar das aplicações para o dia a dia ou em pequenos projetos serem o suficiente. 
-Esse método  não é seguro para aplicações de alto risco.
+    Onde o valor inicial “x0” é a seed, A e C são parâmetros inteiros que podem ter um valor já pré-definido ou passados diretamente, M é o espaço dos valores aleatórios possíveis e “mod” é o restante da divisão inteira.
 
 
-\begin{figure}[htb]
-    \centering
-    \caption{Resultado do script LCG}
-    \label{fig:result_prng_lcg}
-    \includegraphics[width=0.8\textwidth]{result_prng_lcg.png}
-    \legend{Fonte: Elaborado pelo autor (2026)}
-\end{figure}
+    \begin{figure}[htb]
+        \centering
+        \caption{Modelo simples de um PRNG com LCG}
+        \label{fig:model_prng_lcg}
+        \includegraphics[width=0.8\textwidth]{model_prng_lcg.png}
+        \legend{Fonte: Elaborado pelo autor (2026)}
+    \end{figure}
+
+    Mesmo após inúmeras tentativas. Devido a seed permanecer inalterada. 
+    O resultado permanece o mesmo em todos os resultados obtidos.
+
+    Por mais que tenha se passado um valor fixo na seed no exemplo prático, a seed é definida pelo sistema operacional, esse número é denominado entropia. 
+    Que se tem por referência a quantidade de imprecisão de um sistema. 
+    Quanto maior o número da entropia, maior é a incerteza. 
+    Esse valor de entropia é gerado a partir de certos eventos que ocorrem no momento de sua captura, como por exemplo o movimento do mouse, os inputs no teclado etc. 
+    Essas capturas são convertidas em um valor numérico para ser usado na seed.
+
+    Esses inputs que o sistema captura podem ser previsíveis, tornando a entropia causada menor. 
+    Sendo possível pré-determinar o valor gerado ao final para seed. 
+    Apesar das aplicações para o dia a dia ou em pequenos projetos serem o suficiente. 
+    Esse método  não é seguro para aplicações de alto risco.
+
+
+    \begin{figure}[htb]
+        \centering
+        \caption{Resultado do script LCG}
+        \label{fig:result_prng_lcg}
+        \includegraphics[width=0.8\textwidth]{result_prng_lcg.png}
+        \legend{Fonte: Elaborado pelo autor (2026)}
+    \end{figure}
 
 \chapter{Conclusão}
 Considerações finais.
@@ -430,6 +516,7 @@ para outros TCC e afins \cite{outrosTcc}
 para fichas tecnicas e documentacao \cite{fichaTecnica}
 % --- ELEMENTOS PÓS-TEXTUAIS ---
 \postextual
-\bibliography{referencias.bib} % Arquivo .bib com suas fontes
+
+\bibliography{referencias} % Arquivo .bib com suas fontes
 
 \end{document}

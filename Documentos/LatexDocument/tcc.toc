@@ -22,52 +22,55 @@
 \contentsline {section}{\numberline {6.2}Entropia e Fontes de Incerteza}{8}{section.6.2}%
 \contentsline {section}{\numberline {6.3}A Semente (Seed) como Elemento Crítico}{9}{section.6.3}%
 \contentsline {section}{\numberline {6.4}Avaliação Estatística da Aleatoriedade}{9}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Bateria de Testes}{10}{subsection.6.4.1}%
+\contentsline {subsubsection}{\numberline {6.4.1.1}Random}{11}{subsubsection.6.4.1.1}%
+\contentsline {subsubsection}{\numberline {6.4.1.2}SegureRandom}{11}{subsubsection.6.4.1.2}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {7}\MakeTextUppercase []{Geradores Criptograficamente Seguros}}{10}{chapter.7}%
-\contentsline {section}{\numberline {7.1}PRNGs vs. CSPRNGs}{10}{section.7.1}%
-\contentsline {section}{\numberline {7.2}O Ataque do Próximo Bit}{10}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}Implementação Prática (Demonstração)}{10}{subsection.7.2.1}%
-\contentsline {section}{\numberline {7.3}Implementação de CSPRNGs em Java}{10}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Falhas Históricas de Aleatoriedade}{10}{section.7.4}%
+\contentsline {chapter}{\chapternumberline {7}\MakeTextUppercase []{Geradores Criptograficamente Seguros}}{13}{chapter.7}%
+\contentsline {section}{\numberline {7.1}PRNGs vs. CSPRNGs}{13}{section.7.1}%
+\contentsline {section}{\numberline {7.2}O Ataque do Próximo Bit}{13}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Implementação Prática (Demonstração)}{13}{subsection.7.2.1}%
+\contentsline {section}{\numberline {7.3}Implementação de CSPRNGs em Java}{13}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Falhas Históricas de Aleatoriedade}{13}{section.7.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {8}\MakeTextUppercase []{COMPUTAÇÃO QUÂNTICA E A QUEBRA DO PARADIGMA ATUAL}}{11}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Conceitos Fundamentais de Computação Quântica}{11}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Algoritmo de Shor}{11}{section.8.2}%
-\contentsline {section}{\numberline {8.3}Algoritmo de Grover}{11}{section.8.3}%
-\contentsline {section}{\numberline {8.4}Harvest Now, Decrypt Later}{11}{section.8.4}%
+\contentsline {chapter}{\chapternumberline {8}\MakeTextUppercase []{COMPUTAÇÃO QUÂNTICA E A QUEBRA DO PARADIGMA ATUAL}}{14}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Conceitos Fundamentais de Computação Quântica}{14}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Algoritmo de Shor}{14}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Algoritmo de Grover}{14}{section.8.3}%
+\contentsline {section}{\numberline {8.4}Harvest Now, Decrypt Later}{14}{section.8.4}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {9}\MakeTextUppercase []{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)}}{12}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Definição e Objetivos da PQC}{12}{section.9.1}%
-\contentsline {section}{\numberline {9.2}Paradigmas Matemáticos da PQC}{12}{section.9.2}%
-\contentsline {section}{\numberline {9.3}Criptografia Baseada em Reticulados}{12}{section.9.3}%
-\contentsline {section}{\numberline {9.4}Learning With Errors (LWE)}{12}{section.9.4}%
-\contentsline {subsection}{\numberline {9.4.1}Implementação Didática em Java (Demonstração)}{12}{subsection.9.4.1}%
-\contentsline {section}{\numberline {9.5}Padronização Pós-Quântica}{12}{section.9.5}%
+\contentsline {chapter}{\chapternumberline {9}\MakeTextUppercase []{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)}}{15}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Definição e Objetivos da PQC}{15}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Paradigmas Matemáticos da PQC}{15}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Criptografia Baseada em Reticulados}{15}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Learning With Errors (LWE)}{15}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Implementação Didática em Java (Demonstração)}{15}{subsection.9.4.1}%
+\contentsline {section}{\numberline {9.5}Padronização Pós-Quântica}{15}{section.9.5}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {10}\MakeTextUppercase []{A TRANSIÇÃO PARA PQC NO ECOSSISTEMA JAVA}}{13}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Suporte à Criptografia Pós-Quântica no Java}{13}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Crypto-Agility}{13}{section.10.2}%
-\contentsline {subsection}{\numberline {10.2.1}Implementação Prática: Demo de Crypto-Agility}{13}{subsection.10.2.1}%
-\contentsline {section}{\numberline {10.3}Comparativo de Modelos}{13}{section.10.3}%
-\contentsline {subsection}{\numberline {10.3.1}Implementação Prática: Benchmark Clássico vs. Kyber}{13}{subsection.10.3.1}%
+\contentsline {chapter}{\chapternumberline {10}\MakeTextUppercase []{A TRANSIÇÃO PARA PQC NO ECOSSISTEMA JAVA}}{16}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Suporte à Criptografia Pós-Quântica no Java}{16}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Crypto-Agility}{16}{section.10.2}%
+\contentsline {subsection}{\numberline {10.2.1}Implementação Prática: Demo de Crypto-Agility}{16}{subsection.10.2.1}%
+\contentsline {section}{\numberline {10.3}Comparativo de Modelos}{16}{section.10.3}%
+\contentsline {subsection}{\numberline {10.3.1}Implementação Prática: Benchmark Clássico vs. Kyber}{16}{subsection.10.3.1}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {11}\MakeTextUppercase []{DISCUSSÃO E ANÁLISE CRÍTICA}}{14}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Impacto em Desempenho}{14}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Barreiras de Adoção}{14}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Implicações Sociais e Éticas}{14}{section.11.3}%
+\contentsline {chapter}{\chapternumberline {11}\MakeTextUppercase []{DISCUSSÃO E ANÁLISE CRÍTICA}}{17}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Impacto em Desempenho}{17}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Barreiras de Adoção}{17}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Implicações Sociais e Éticas}{17}{section.11.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {12}\MakeTextUppercase []{CONCLUSAO}}{15}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Síntese dos Resultados}{15}{section.12.1}%
-\contentsline {section}{\numberline {12.2}Resposta ao Problema de Pesquisa}{15}{section.12.2}%
-\contentsline {section}{\numberline {12.3}Trabalhos Futuros}{15}{section.12.3}%
+\contentsline {chapter}{\chapternumberline {12}\MakeTextUppercase []{CONCLUSÃO}}{18}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Síntese dos Resultados}{18}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Resposta ao Problema de Pesquisa}{18}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Trabalhos Futuros}{18}{section.12.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {13}\MakeTextUppercase []{Bibliografias Uteis}}{16}{chapter.13}%
+\contentsline {chapter}{\chapternumberline {13}\MakeTextUppercase []{Bibliografias Uteis}}{19}{chapter.13}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {14}\MakeTextUppercase []{Coisas possivelmente Uteis em algum momento}}{18}{chapter.14}%
+\contentsline {chapter}{\chapternumberline {14}\MakeTextUppercase []{Coisas possivelmente Uteis em algum momento}}{21}{chapter.14}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {15}\MakeTextUppercase []{Conclusão}}{20}{chapter.15}%
+\contentsline {chapter}{\chapternumberline {15}\MakeTextUppercase []{Conclusão}}{23}{chapter.15}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {16}\MakeTextUppercase []{Exemplos para uso da bibliográfia}}{21}{chapter.16}%
+\contentsline {chapter}{\chapternumberline {16}\MakeTextUppercase []{Exemplos para uso da bibliográfia}}{24}{chapter.16}%
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{22}{section*.5}%
+\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{25}{section*.5}%
