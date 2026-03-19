@@ -24,24 +24,26 @@
 
 \hypersetup{
     colorlinks=false,
-    hidelinks=true,      % Remove bordas, cores e sublinhados
+    hidelinks,      % Remove bordas, cores e sublinhados
     pdfborder={0 0 0}
 }
 
 % --- INFORMAÇÕES DO TCC ---
 \titulo{Pseudo Aleatoriedade e Segurança Criptográfica: Uma Análise da Transição para Algoritmos Pós-Quânticos}
 \autor{Jean Victor Borges de Abreu}
-\local{Petrópolis - Rio de Janeiro}
+\local{Petrópolis -Rio de Janeiro}
 \data{2026}
 \orientador{Nome do Orientador}
 \instituicao{FACULDADE DE EDUCAÇÃO TECNOLÓGICA DO ESTADO DO RIO DE JANEIRO FAETERJ/PETRÓPOLIS}
-\preambulo{Trabalho de Conclusão de Curso apresentado à...}
+\preambulo{Trabalho de Conclusão de Curso apresentado à}
 
 % --- INÍCIO DO DOCUMENTO ---
 \begin{document}
 
-\imprimircapa
-\imprimirfolhaderosto
+\imprimircapa*
+
+\imprimirfolhaderosto*
+
 
 \chapter{Resumo}
 
@@ -51,13 +53,13 @@
 
 \chapter{Lista de Abreviaturas}
 
-\boldmath FAETERJ: Faculdade de Educação Tecnológica do Estado do Rio de Janeiro 
+\boldmath{FAETERJ: Faculdade de Educação Tecnológica do Estado do Rio de Janeiro}
 
-\boldmath{TRNG: True Random Number Generator}
+\boldmath{TRNG True Random Number Generator}
 
 % --- SUMÁRIO ---
 \pdfbookmark[0]{\contentsname}{toc}
-\tableofcontents*
+\tableofcontents
 \cleardoublepage
 % --- ELEMENTOS TEXTUAIS ---
 \textual
@@ -71,11 +73,11 @@ Textos
 
 \section{Justificativa/Problema de Pesquisa}
 
-O conflito entre o determinismo computacional e a necessidade de aleatoriedade em sistemas criptográficos.
+O conflito entre o determinismo computacional e a necessidade de aleatoriedade em~sistemas criptográficos.
 
 \section{Motivação/Hipotese e Ameaca Tecnológica}
 
-O impacto da computação quântica — especialmente por meio do Algoritmo de Shor — sobre os modelos atuais de segurança e pseudoaleatoriedade.
+O impacto da computação quântica --- especialmente por meio do Algoritmo de Shor --- sobre os modelos atuais de segurança e pseudoaleatoriedade.
 
 \section{Objetivos}
 
@@ -99,7 +101,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
         TRNG é um dispositivo que gera números aleatórios a partir
         de um processo físico, e não por meio de um algoritmo. Tais dispositivos são
-        frequentemente baseados em fenômenos microscópicos que geram sinais de "ruído"
+        frequentemente baseados em fenômenos microscópicos que geram sinais de ruído
         estatisticamente aleatórios de baixo nível, como ruído térmico, efeito fotoelétrico, ou
         fenômenos quânticos. Esses processos estocásticos são, em teoria, completamente
         imprevisíveis enquanto uma equação que governa tais fenômenos for desconhecida
@@ -147,7 +149,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
         Isso permitiria ao atacante espionar a comunicação, 
         modificar os dados ou se passar pelo servidor.\nocite{6.2Entropia}
 
-        Um tipo de entropia. É a entropia de Shannon. Que utiliza umm tratamento probabilístico
+        Um tipo de entropia. É a entropia de ``Shannon''. Que utiliza umm tratamento probabilístico
         de uma função logarítmica.\nocite{6.2shannonEntropia} Sendo sua formula:
 
         \begin{equation}
@@ -163,7 +165,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
         \end{itemize}
 
         Uma limitação determinística é em cima de um processador de maquina de estados finitos.
-        Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado. Onde se um invasor 
+        Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado.\@ Onde se um invasor 
         tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
         se faz necessário que o software faça a captação da incerteza do mundo físico.
 
@@ -202,12 +204,11 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
           \item Teste de Variante de Excursões Aleatórias
         \end{enumerate}\nocite{6.4NistsTP}
 
-        Falar separadamente sobre cada um dos 15 testes. Mostrando um teste local separado. (Seguir documentacao do guthub para execucao local)
-        \cite{6.4NISTGit}
+        Falar separadamente sobre cada um dos 15 testes. Mostrando um teste local separado. (Seguir documentacao do guthub para execucao local)\cite{6.4NISTGit}
         
         \subsection{Bateria de Testes}%PASSO 1 - Explicacao de como vai ser efetuado os Testes
 
-            Os arquivos binários gerados em Java servem como a entrada bruta para o NIST SP 800-22, 
+            Os arquivos binários gerados em Java servem como a entrada bruta para o NIST SP 800--22, 
             que interpreta os bytes como fluxos contínuos de bits para análise estatística. Ao executar o programa, 
             a ferramenta particiona esses dados em blocos de tamanho fixo, como sequências de $10^{6}$ bits, 
             aplicando sobre cada um deles quinze testes que buscam padrões não aleatórios, como repetições excessivas ou falta de complexidade linear. 
@@ -216,8 +217,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
             \begin{figure}[htb]
                 \centering
-                \caption{Modelo simples de um PRNG com LCG}
-                \label{fig:model_prng_lcg}
+                \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg}
                 \includegraphics[width=0.8\textwidth]{gerador_bits_testes_NIST.png}
                 \legend{Fonte: Elaborado pelo autor (2026)}
             \end{figure}
@@ -242,15 +242,76 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
         %PASSO 1.3 - Modelo de geracao Seguro usando entropia
 
         \subsubsection{SegureRandom}
-        A funćao java.security.SegureRandom faz utilizaćao do CSPRNG, que diferente do LCG. Esse tipo de gerador busca caos do hardware.
+        A funćao java.security.SegureRandom faz utilizaćao do CSPRNG, que diferente do LCG.\@ Esse tipo de gerador busca caos do hardware.
         Sendo elas interrupćoes de hardware, pressionar das teclas do teclado, posićao e movimento do mouse,
         pequenas flutuaćoes de voltagem do processador e/ou o tempo que o disco demora pra fazer a requisićao.
         Esses eventos imprevisíveis são misturados, usando funćoes hash como SHA-256 para criar uma seed de alta entropia.
         Mesmo que se conheća o algoritmo, não é possivel recriar o mesmo evento. Justamente pelo fator caos fisico que foi utilizado.
 
-        %PASSO 2 - Explicacao do resultado do (Teste de Frequência (monobit))
+        \subsection{Teste de Frequência}%PASSO 2 - Explicacao do resultado do (Teste de Frequência (monobit))
+            \subsubsection{SegureRandom}
+                O teste de frequência (monobit) é o teste mais básico da bateria do NIST.\@
+                É o pilar para a execućão dos demais testes. Se um gerador não for capaz de equilibrar a quantidade de bits '1' e '0' em uma sequência, ele falha nesse teste fundamental, indicando que a sequência não é aleatória o suficiente para aplicações criptográficas.
+                Verificaćão do resultado do teste de frequência (monobit) para ambos os geradores, destacando a falha do java.util.Random e o sucesso do SecureRandom.
 
-        
+                \begin{figure}[htb]
+                        \centering
+                        \caption{Resultado do Teste de Frequência (Monobit) para SecureRandom}\label{fig:test_frequency_nist_result_segure}
+                        \includegraphics[width=0.8\textwidth]{test_frequency_nist_result_segure.png}
+                        \legend{Fonte: Elaborado pelo autor (2026)}
+                \end{figure}
+
+                Cada valor apresentado no resultado do teste de frequência (monobit) representa o $P\text{-value}$ calculado para a sequência de bits gerada. 
+                Ele verifica se a quantidade de bits '1' e '0' está equilibrada, como seria esperado em uma sequência verdadeiramente aleatória.
+
+                $P\text{-value}$ proximo de 1 indica que possui uma distribuição equilibrada, como é o caso do valor 0.985639.
+
+                $P\text{-value}$ proximo de 0 indica que possui uma distribuição desequilibrada, como é o caso do valor 0.022021.
+
+                $P\text{-value}$ menor que 0.01 é considerado uma falha no teste, indicando que a sequência não é aleatória o suficiente, como é o caso do valor 0.000128.
+
+                \begin{figure}[htb]
+                        \centering
+                        \caption{Resultado final do Teste de Frequência (Monobit) para SecureRandom}\label{fig:finalAnaliysisReport_frequency_test_segure}
+                        \includegraphics[width=0.8\textwidth]{finalAnaliysisReport_frequency_test_segure.png}
+                        \legend{Fonte: Elaborado pelo autor (2026)}
+                \end{figure}
+
+                Os numeros apresentados no resultado final do teste de frequência (monobit). Da coluna C1 até a coluna C10 representam a distribuićao das 100 amostras.
+                Que foi dividida em 10 blocos de 10 amostras cada. O valor da coluna P representa a proporção de amostras que passaram no teste, ou seja, que tiveram um $P\text{-value}$ maior ou igual a 0.01. O valor da coluna P' representa o $P\text{-value}$ calculado para a proporção de amostras.
+                Cada amostra tiveram um $P\text{-value}$ entre 0.0 e 1.0.
+
+                Na coluna C1 nos é apresentado que obtivemos 10 amostras com $P\text{-value}$ maior ou igual a 0.01.
+
+                Na coluna C10 nos é apresentado que obtivemos 12 amostras com $P\text{-value}$ entre 0.9 a 1.00.
+
+                O $P\text{-value}$ 0.739918 apresentado é um teste Qui-Quadrado aplicado sobre os números das colunas C1 a C10. Fazendo a medićão da uniformidade e a distribuićao dos resultados.
+                Se este valor for maior ou igual a 0.0001, o teste é considerado bem sucedido, indicando que os resultados estão distribuídos de maneira uniforme.
+                Com o resultado de 0.739918, o SegureRandom passou no teste de frequência (monobit) com uma distribuição de $P\text{-value}$ que é considerada exelente. 
+                Capaz de produzir sequências de bits que se aproximam muito da aleatoriedade ideal, o que é crucial para aplicações criptográficas seguras.
+
+                Com uma proporsão de passagem de 99/100. Significa que 99 amostras obtiveram um $P\text{-value}$ maior ou igual a 0.01. Para uma amostragem de 100, o minimo requisitado para passar no teste é de 96/100.
+
+                \begin{figure}[htb]
+                        \centering
+                        \caption{Resultado do Teste de Frequência (Monobit) para Random}\label{fig:test_frequency_nist_result_insegure}
+                        \includegraphics[width=0.8\textwidth]{test_frequency_nist_result_insegure.png}
+                        \legend{Fonte: Elaborado pelo autor (2026)}
+                \end{figure}
+
+                \begin{figure}[htb]
+                        \centering
+                        \caption{Resultado final do Teste de Frequência (Monobit) para Random}\label{fig:finalAnalysisReport_frequency_test_insegure}
+                        \includegraphics[width=0.8\textwidth]{finalAnalysisReport_frequency_test_insegure.png}
+                        \legend{Fonte: Elaborado pelo autor (2026)}
+                \end{figure}
+
+                Por mais que olhando os valores apresentados no resultado do teste de frequência (monobit) para o Random,
+                seja possível observar que a maioria dos $P\text{-value}$ estão acima de 0.01, o que indicaria uma distribuição equilibrada, 
+                O resultado final do teste de frequência (monobit) para o Random mostra que ele obteve um $P\text{-value}$ de 0.275709 um valor mais proximo ao 0.0001.
+
+                Por mais que seu valor seja inferior ao do SegureRandom, o Random ainda assim passou no teste de frequência (monobit) com uma distribuição de $P\text{-value}$ que é considerada boa.
+                Um falso positivo, devido a maneira como o Random funciona, utilizando o LCG que é matematicamente desenhado para ter uma distribuićao uniforme em complexidades simples.
 
         %PASSO 3 - Explicacao do resultado do (Teste de Frequência dentro de um bloco)
         %PASSO 4 - Explicacao do resultado do (Teste de Sequencias)
@@ -283,7 +344,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
     \subsection{Implementação Prática (Demonstração)}
 
-        Demonstração do ataque contra java.util.Random, mostrando previsão de saídas futuras com base em observações anteriores — contrasta diretamente com o CSPRNG.
+        Demonstração do ataque contra java.util.Random, mostrando previsão de saídas futuras com base em observações anteriores — contrasta diretamente com o CSPRNG.\@
 
     \section{Implementação de CSPRNGs em Java}
 
@@ -301,7 +362,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
     \section{Algoritmo de Shor}
 
-        Fatoração eficiente e o colapso dos sistemas baseados em RSA e ECC.
+        Fatoração eficiente e o colapso dos sistemas baseados em RSA e ECC.\@
 
     \section{Algoritmo de Grover}
 
@@ -433,7 +494,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
     Artigo Técnico: The Learning with Errors Problem (Oded Regev).
     Onde usar: Capítulo 5.4. Oded Regev criou o conceito de LWE. Este artigo é a fonte primária para a sua fundamentação matemática.
 
-    Documento Oficial (FIPS): FIPS 203: Module-Lattice-Based Key-Encapsulation Mechanism Standard.
+    Documento Oficial (FIPS): FIPS 203: Module--Lattice--Based Key--Encapsulation Mechanism Standard.
 
     Onde usar: Capítulo 5.5. Este é o padrão final do ML-KEM (Kyber). É a referência mais importante para o seu futuro capítulo 6.
 
@@ -463,16 +524,15 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
     \begin{equation}
         x_{i+1} = (A \cdot x_i + C) \pmod{M}
-        \label{eq:lca}
+        \label{eq:lca-appendix}
     \end{equation}
 
-    Onde o valor inicial “x0” é a seed, A e C são parâmetros inteiros que podem ter um valor já pré-definido ou passados diretamente, M é o espaço dos valores aleatórios possíveis e “mod” é o restante da divisão inteira.
+``Onde o valor inicial "x0" é a seed, A e C são parâmetros inteiros que podem ter um valor já pré-definido ou passados diretamente, M é o espaço dos valores aleatórios possíveis e "mod" é o restante da divisão inteira.''
 
 
     \begin{figure}[htb]
         \centering
-        \caption{Modelo simples de um PRNG com LCG}
-        \label{fig:model_prng_lcg}
+        \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg_appendix}
         \includegraphics[width=0.8\textwidth]{model_prng_lcg.png}
         \legend{Fonte: Elaborado pelo autor (2026)}
     \end{figure}
@@ -494,8 +554,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
 
     \begin{figure}[htb]
         \centering
-        \caption{Resultado do script LCG}
-        \label{fig:result_prng_lcg}
+        \caption{Resultado do script LCG}\label{fig:result_prng_lcg_appendix}
         \includegraphics[width=0.8\textwidth]{result_prng_lcg.png}
         \legend{Fonte: Elaborado pelo autor (2026)}
     \end{figure}
@@ -505,18 +564,18 @@ Considerações finais.
 
 \chapter{Exemplos para uso da bibliográfia}
 
-para livros \cite{book}
+para livros\cite{book}
 
-para artigos \cite{artigos}
+para artigos\cite{artigos}
 
-para sites e outras fontes \cite{sites}
+para sites e outras fontes\cite{sites}
 
-para outros TCC e afins \cite{outrosTcc}
+para outros TCC e afins\cite{outrosTcc}
 
-para fichas tecnicas e documentacao \cite{fichaTecnica}
+para fichas tecnicas e documentacao\cite{fichaTecnica}
 % --- ELEMENTOS PÓS-TEXTUAIS ---
 \postextual
 
-\bibliography{referencias} % Arquivo .bib com suas fontes
+\bibliography{referencias}% Arquivo .bib com suas fontes
 
 \end{document}
