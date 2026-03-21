@@ -1,16 +1,16 @@
 # Fdb version 4
-["bibtex tcc"] 1773883416.98879 "tcc.aux" "tcc.bbl" "tcc" 1773883944.19139 0
+["bibtex tcc"] 1774051008.47766 "tcc.aux" "tcc.bbl" "tcc" 1774052670.78715 0
   "./referencias.bib" 1773874036.00492 3321 8f60f88bb5cfdb0ed34fca2870027b1f ""
   "/usr/share/texlive/texmf-dist/bibtex/bib/abntex2/abntex2-options.bib" 1357081713 5396 4eb260dac60f150ae608d45252853090 ""
   "/usr/share/texlive/texmf-dist/bibtex/bst/abntex2/abntex2-alf.bst" 1543183680 60064 0819ac8568f9a482510a46e3a8a6f605 ""
-  "tcc.aux" 1773883944.08174 36274 57dfc4f731fcb3843a7671097d05db8b "pdflatex"
+  "tcc.aux" 1774052670.67745 36770 553416a2f08cd9b4943adb518fb4a2d0 "pdflatex"
   (generated)
   "tcc.bbl"
   "tcc.blg"
   (rewritten before read)
-["pdflatex"] 1773883943.3484 "/home/jen/Documentos/Faeterj/TCCFaeterjPetropolis/Documentos/LatexDocument/tcc.tex" "tcc.pdf" "tcc" 1773883944.19158 0
+["pdflatex"] 1774052669.90377 "/home/jen/Documentos/Faeterj/TCCFaeterjPetropolis/Documentos/LatexDocument/tcc.tex" "tcc.pdf" "tcc" 1774052670.78736 0
   "/etc/texmf/web2c/texmf.cnf" 1773874611.21823 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/jen/Documentos/Faeterj/TCCFaeterjPetropolis/Documentos/LatexDocument/tcc.tex" 1773883943.17698 30238 18d3bbc5823ddf7cd330aad30982b567 ""
+  "/home/jen/Documentos/Faeterj/TCCFaeterjPetropolis/Documentos/LatexDocument/tcc.tex" 1774052669.70046 31009 55cb4fa429cd0bafb55621837edfe417 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0600.tfm" 1136768653 3584 291a5713401683441e0a8c8f4417b17b ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/ecrm0800.tfm" 1136768653 3584 49064b465390a8e316a3c8417a050403 ""
@@ -174,15 +174,16 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1773875271 6801912 9edf18ba5320322317f3e59eef984421 ""
   "images/finalAnaliysisReport_frequency_test_segure.png" 1773880053.02433 25881 ec78220e6d88ebcccfbd06de14885c2f ""
   "images/finalAnalysisReport_frequency_test_insegure.png" 1773882762.93887 35958 79e9c306d5df14bdf60ef33a59baef83 ""
+  "images/frequency_within_block_test_segure.png" 1774050554.17738 86582 a2c93389d841fc2c91e4913e3dd4bb11 ""
   "images/gerador_bits_testes_NIST.png" 1773874036.00292 167273 6e45537ea3a5999d080a12edf2843071 ""
   "images/model_prng_lcg.png" 1773874036.00492 111169 206f8e6b136e625da82f50b532d737ea ""
   "images/result_prng_lcg.png" 1773874036.00492 48619 3ca80e64d7ea96960960f19a68264c10 ""
   "images/test_frequency_nist_result_insegure.png" 1773882581.2299 85956 74646d1563922678d44d0fdc76c4d725 ""
   "images/test_frequency_nist_result_segure.png" 1773878980.80789 84856 b3bd5bd41239fb0074dd0afdd2dbae0a ""
-  "tcc.aux" 1773883944.08174 36274 57dfc4f731fcb3843a7671097d05db8b "pdflatex"
-  "tcc.bbl" 1773883417.00839 3606 ce3eb53ff21fcf0d28f4ff25b5b3ae12 "bibtex tcc"
-  "tcc.tex" 1773883943.17698 30238 18d3bbc5823ddf7cd330aad30982b567 ""
-  "tcc.toc" 1773883944.08774 7364 1de062dfa13d5e16dffbf21cce4537d4 "pdflatex"
+  "tcc.aux" 1774052670.67745 36770 553416a2f08cd9b4943adb518fb4a2d0 "pdflatex"
+  "tcc.bbl" 1774051008.49443 3606 ce3eb53ff21fcf0d28f4ff25b5b3ae12 "bibtex tcc"
+  "tcc.tex" 1774052669.70046 31009 55cb4fa429cd0bafb55621837edfe417 ""
+  "tcc.toc" 1774052670.68345 7371 b698e5cc7723f5cf0476912f9be4c163 "pdflatex"
   (generated)
   "tcc.aux"
   "tcc.log"
