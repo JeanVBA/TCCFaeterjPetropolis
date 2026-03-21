@@ -50,6 +50,7 @@
 \chapter{Abstract}
 
 \chapter{Lista de Figuras}
+    \listoffigures
 
 \chapter{Lista de Abreviaturas}
 
@@ -93,247 +94,7 @@ Avaliar a adoção desses conceitos no ecossistema Java
 
 Pesquisa bibliográfica, análise documental de padrões criptográficos e estudo prático no ecossistema Java.
 
-\chapter{FUNDAMENTOS DA ALEATORIEDADE EM COMPUTAÇÃO} % Capitulo 2
-
-    \section{Aleatoriedade Verdadeira vs. Pseudoaleatoriedade}
-
-        Definições de TRNG e PRNG (Pseudo-Random Number Generator).
-
-        TRNG é um dispositivo que gera números aleatórios a partir
-        de um processo físico, e não por meio de um algoritmo. Tais dispositivos são
-        frequentemente baseados em fenômenos microscópicos que geram sinais de ruído
-        estatisticamente aleatórios de baixo nível, como ruído térmico, efeito fotoelétrico, ou
-        fenômenos quânticos. Esses processos estocásticos são, em teoria, completamente
-        imprevisíveis enquanto uma equação que governa tais fenômenos for desconhecida
-        ou incomputável. Isso contrasta com o paradigma de geração de números pseudo-
-        aleatórios comumente implementado através de algoritmos.\nocite{6.1DefinicaoTRNG}
-
-        PRNG refere-se a uma sequência de números ou dados que aparenta ser aleatória, 
-        mas é gerada por um algoritmo determinístico.
-        E é gerada por algoritmos que utilizam fórmulas matemáticas para produzir resultados aparentemente aleatórios. 
-        Embora sequências pseudoaleatórias possam imitar a aleatoriedade até certo ponto, elas são, 
-        em última análise, determinísticas e repetíveis.
-        Esses algoritmos recebem um valor inicial, chamado semente, 
-        e o utilizam para produzir uma sequência de números. 
-        Ao aplicar operações matemáticas ao valor da semente, 
-        o PRNG produz uma série de números aparentemente aleatórios. 
-        O valor da semente pode ser escolhido arbitrariamente, 
-        mas afeta significativamente a sequência resultante de números pseudoaleatórios.\nocite{6.1DefinicaoPRNG}
-
-    \section{Entropia e Fontes de Incerteza}
-
-        Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
-
-        Entropia é uma medida da aleatoriedade ou imprevisibilidade dos dados. 
-        No contexto da criptografia, a entropia é usada para gerar 
-        números aleatórios ou chaves que são essenciais para a comunicação segura e a criptografia. 
-        Sem uma boa fonte de entropia, os protocolos criptográficos podem se tornar vulneráveis a ataques 
-        que exploram a previsibilidade das chaves geradas.
-
-        Na maioria dos sistemas operacionais, 
-        a entropia é gerada pela coleta de eventos aleatórios de diversas fontes, 
-        como interrupções de hardware, movimentos do mouse, 
-        pressionamentos de teclas e atividade do disco. 
-        Esses eventos são inseridos em um conjunto de entropia, 
-        que é então usado para gerar números aleatórios quando necessário.
-
-        Protocolos criptográficos, como SSL/TLS, SSH e IPsec, 
-        dependem fortemente da entropia para gerar números aleatórios e chaves para criptografia, 
-        autenticação e proteção de integridade.
-        A aleatoriedade desses números é crucial para a segurança da comunicação. 
-        Se um atacante conseguir prever os números aleatórios usados em um protocolo criptográfico, 
-        ele poderá comprometer a confidencialidade, a integridade ou a autenticidade da comunicação.
-        Se a chave mestra prévia for previsível ou tendenciosa, 
-        um atacante poderá interceptar a mensagem criptografada, 
-        descriptografá-la e obter acesso às chaves de sessão. 
-        Isso permitiria ao atacante espionar a comunicação, 
-        modificar os dados ou se passar pelo servidor.\nocite{6.2Entropia}
-
-        Um tipo de entropia. É a entropia de ``Shannon''. Que utiliza umm tratamento probabilístico
-        de uma função logarítmica.\nocite{6.2shannonEntropia} Sendo sua formula:
-
-        \begin{equation}
-            H(X) = - \sum_{i=1}^{n} P(x_i) \log_b P(x_i)
-            \label{eq:shannon_entropy}
-        \end{equation}
-
-        Em que:
-        \begin{itemize}
-            \item $H(X)$ é a entropia em bits;
-            \item $p_i$ é a probabilidade de ocorrência do resultado $i$;
-            \item $n$ é o número total de resultados possíveis.
-        \end{itemize}
-
-        Uma limitação determinística é em cima de um processador de maquina de estados finitos.
-        Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado.\@ Onde se um invasor 
-        tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
-        se faz necessário que o software faça a captação da incerteza do mundo físico.
-
-        \subitem[Criptografia Simétrica]
-
-        Se trata da utilização da mesma chave para o processo de encriptação e desencriptação. Apesar da primitiva de chave simétrica embarcar
-        não só encriptadores, como também funções hash de tamanho arbitrário como os MACs (Message Authentication Codex), sistemas de assinatura, sequencias pseudoaleatórias
-        e primitivas de identificação.
-
-    \section{A Semente (Seed) como Elemento Crítico}
-
-    O papel do valor inicial na previsibilidade e segurança de sequências pseudoaleatórias.
-
-    \section{Avaliação Estatística da Aleatoriedade}
-
-        Bateria de testes SP 800-22 do NIST e o conceito de indistinguibilidade estatística.
-
-        O NIST Test Suite consiste em um pacote de 15 testes de estatistas desenvolvidos para avaliar a as sequencias binarias aleatórias (com comprimento arbitrário),
-        gerados por geradores de números aleatórios ou pseudo criptografados, seja de forma em hardware ou software. 
-        les podem ser decompostos em vários subtestes de acordo com a necessidade e o tipo de geração aleatória que podem ter uma sequencia. Os 15 testes são:
-        \begin{enumerate}
-          \item Teste de Frequência (monobit)
-          \item Teste de Frequência dentro de um bloco
-          \item Teste de Sequencias
-          \item Testes para Maior Sequencia de Uns em um bloco
-          \item Testes de Posto de Matriz Binária
-          \item Teste da Transformada Discreta ded Fourier (Espectral)
-          \item Teste de Correspondência ded Modelos não Sobrepostos
-          \item Teste de Correspondência de Modelos Sobrepostos
-          \item Teste "Estatístico Universal" de Maurer
-          \item Teste de Complexidade Linear
-          \item Teste Serial
-          \item Teste de Entropia Aproximada
-          \item Teste de Somas Cumulativas (Cusums)
-          \item Teste de Excursões Aleatórias
-          \item Teste de Variante de Excursões Aleatórias
-        \end{enumerate}\nocite{6.4NistsTP}
-
-        Falar separadamente sobre cada um dos 15 testes. Mostrando um teste local separado. (Seguir documentacao do guthub para execucao local)\cite{6.4NISTGit}
-        
-        \subsection{Bateria de Testes}%PASSO 1 - Explicacao de como vai ser efetuado os Testes
-
-            Os arquivos binários gerados em Java servem como a entrada bruta para o NIST SP 800--22, 
-            que interpreta os bytes como fluxos contínuos de bits para análise estatística. Ao executar o programa, 
-            a ferramenta particiona esses dados em blocos de tamanho fixo, como sequências de $10^{6}$ bits, 
-            aplicando sobre cada um deles quinze testes que buscam padrões não aleatórios, como repetições excessivas ou falta de complexidade linear. 
-            Para cada teste, o sistema calcula um $P\text{-value}$, que quantifica a probabilidade de a sequência ter sido gerada por um processo puramente aleatório. 
-            Ao final, o sucesso do gerador é determinado pela uniformidade desses valores e pela proporção de sequências que mantiveram o $P\text{-value} \geq 0,01$.
-
-            \begin{figure}[htb]
-                \centering
-                \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg}
-                \includegraphics[width=0.8\textwidth]{gerador_bits_testes_NIST.png}
-                \legend{Fonte: Elaborado pelo autor (2026)}
-            \end{figure}
-
-        %PASSO 1.1 - Modelo de geracao LCG (voce já fez, tem pronto a explicacao)
-        \subsubsection{Random}
-        
-        A função java.util.Random faz uso do modelo LCG “Gerador Congruencial Linear”. 
-        Ele é um modelo puramente matemático. 
-        Onde o mesmo é usado para gerar uma sequência de números aleatórios, 
-        calculados por uma equação linear.
-        \begin{equation}
-            x_{i+1} = (A \cdot x_i + C) \pmod{M}
-            \label{eq:lca}
-        \end{equation}
-        Onde o valor inicial “x0” é a seed, 
-        A e C são parâmetros inteiros que podem ter um valor 
-        já pré-definido ou passados diretamente, 
-        M é o espaço dos valores aleatórios possíveis e “mod” é o 
-        restante da divisão inteira.
-        
-        %PASSO 1.3 - Modelo de geracao Seguro usando entropia
-
-        \subsubsection{SegureRandom}
-        A função java.security.SegureRandom faz utilização do CSPRNG, que diferente do LCG.\@ Esse tipo de gerador busca caos do hardware.
-        Sendo elas interrupçoes de hardware, pressionar das teclas do teclado, posição e movimento do mouse,
-        pequenas flutuaçoes de voltagem do processador e/ou o tempo que o disco demora pra fazer a requisição.
-        Esses eventos imprevisíveis são misturados, usando funçoes hash como SHA-256 para criar uma seed de alta entropia.
-        Mesmo que se conheça o algoritmo, não é possivel recriar o mesmo evento. Justamente pelo fator caos fisico que foi utilizado.
-
-        \subsection{Teste de Frequência}%PASSO 1 - Explicacao do resultado do (Teste de Frequência (monobit))
-            O teste de frequência (monobit) é o teste mais básico da bateria do NIST.\@
-            É o pilar para a execução dos demais testes. Se um gerador não for capaz de equilibrar a quantidade de bits '1' e '0' em uma sequência, ele falha nesse teste fundamental, indicando que a sequência não é aleatória o suficiente para aplicações criptográficas.
-            Verificação do resultado do teste de frequência (monobit) para ambos os geradores, destacando a falha do java.util.Random e o sucesso do SecureRandom.
-
-            \begin{figure}[htb]
-                    \centering
-                    \caption{Resultado do Teste de Frequência (Monobit) para SecureRandom}\label{fig:test_frequency_nist_result_segure}
-                    \includegraphics[width=0.8\textwidth]{test_frequency_nist_result_segure.png}
-                    \legend{Fonte: Elaborado pelo autor (2026)}
-            \end{figure}
-
-            Cada valor apresentado no resultado do teste de frequência (monobit) representa o $P\text{-value}$ calculado para a sequência de bits gerada. 
-            Ele verifica se a quantidade de bits '1' e '0' está equilibrada, como seria esperado em uma sequência verdadeiramente aleatória.
-            
-            $P\text{-value}$ proximo de 1 indica que possui uma distribuição equilibrada, como é o caso do valor 0.985639.
-            
-            $P\text{-value}$ proximo de 0 indica que possui uma distribuição desequilibrada, como é o caso do valor 0.022021.
-            
-            $P\text{-value}$ menor que 0.01 é considerado uma falha no teste, indicando que a sequência não é aleatória o suficiente, como é o caso do valor 0.000128.
-
-            \begin{figure}[htb]
-                    \centering
-                    \caption{Resultado final do Teste de Frequência (Monobit) para SecureRandom}\label{fig:finalAnaliysisReport_frequency_test_segure}
-                    \includegraphics[width=0.8\textwidth]{finalAnaliysisReport_frequency_test_segure.png}
-                    \legend{Fonte: Elaborado pelo autor (2026)}
-            \end{figure}
-
-            Os numeros apresentados no resultado final do teste de frequência (monobit). Da coluna C1 até a coluna C10 representam a distribuição das 100 amostras.
-            Que foi dividida em 10 blocos de 10 amostras cada. O valor da coluna P representa a proporção de amostras que passaram no teste, ou seja, que tiveram um $P\text{-value}$ maior ou igual a 0.01. O valor da coluna P' representa o $P\text{-value}$ calculado para a proporção de amostras.
-            Cada amostra tiveram um $P\text{-value}$ entre 0.0 e 1.0.
-            Na coluna C1 nos é apresentado que obtivemos 10 amostras com $P\text{-value}$ maior ou igual a 0.01.
-            Na coluna C10 nos é apresentado que obtivemos 12 amostras com $P\text{-value}$ entre 0.9 a 1.00.
-            O $P\text{-value}$ 0.739918 apresentado é um teste Qui-Quadrado aplicado sobre os números das colunas C1 a C10. Fazendo a medição da uniformidade e a distribuição dos resultados.
-            Se este valor for maior ou igual a 0.0001, o teste é considerado bem sucedido, indicando que os resultados estão distribuídos de maneira uniforme.
-            Com o resultado de 0.739918, o SegureRandom passou no teste de frequência (monobit) com uma distribuição de $P\text{-value}$ que é considerada exelente. 
-            Capaz de produzir sequências de bits que se aproximam muito da aleatoriedade ideal, o que é crucial para aplicações criptográficas seguras.
-            Com uma proporsão de passagem de 99/100. Significa que 99 amostras obtiveram um $P\text{-value}$ maior ou igual a 0.01. 
-            Para uma amostragem de 100, o minimo requisitado para passar no teste é de 96/100.
-
-            \begin{figure}[htb]
-                    \centering
-                    \caption{Resultado do Teste de Frequência (Monobit) para Random}\label{fig:test_frequency_nist_result_insegure}
-                    \includegraphics[width=0.8\textwidth]{test_frequency_nist_result_insegure.png}
-                    \legend{Fonte: Elaborado pelo autor (2026)}
-            \end{figure}
-            \begin{figure}[htb]
-                    \centering
-                    \caption{Resultado final do Teste de Frequência (Monobit) para Random}\label{fig:finalAnalysisReport_frequency_test_insegure}
-                    \includegraphics[width=0.8\textwidth]{finalAnalysisReport_frequency_test_insegure.png}
-                    \legend{Fonte: Elaborado pelo autor (2026)}
-            \end{figure}
-
-            Por mais que olhando os valores apresentados no resultado do teste de frequência (monobit) para o Random,
-            seja possível observar que a maioria dos $P\text{-value}$ estão acima de 0.01, o que indicaria uma distribuição equilibrada, 
-            O resultado final do teste de frequência (monobit) para o Random mostra que ele obteve um $P\text{-value}$ de 0.275709 um valor mais proximo ao 0.0001.
-            Por mais que seu valor seja inferior ao do SegureRandom, o Random ainda assim passou no teste de frequência (monobit) com uma distribuição de $P\text{-value}$ que é considerada boa.
-            Um falso positivo, devido a maneira como o Random funciona, utilizando o LCG que é matematicamente desenhado para ter uma distribuição uniforme em complexidades simples.
-        %PASSO 2 - Explicacao do resultado do (Teste de Frequência dentro de um bloco)
-        \subsection{Teste de Frequência em Bloco}
-            O teste de frequência em bloco é uma extensão do teste de frequência (monobit) que avalia a distribuição de bits '1' e '0' dentro de blocos específicos de uma sequência. Ele divide a sequência em blocos de comprimento M. E tenta determinar se o comprimento M é aproximadamente M/2.
-            Caso o teste possua muitos zeros ou muitos uns, o teste passaria no teste de monibt, mas falharia no teste de frequência em bloco. Pois os blocos isolados estariam desequilibrados.
-            \begin{figure}[htb]
-                    \centering
-                    \caption{Resultado final do Teste de Frequência em Bloco para Random}\label{fig:frequency_within_block_test_segure}
-                    \includegraphics[width=0.8\textwidth]{frequency_within_block_test_segure.png}
-                    \legend{Fonte: Elaborado pelo autor (2026)}
-            \end{figure}
-            
-        %PASSO 3 - Explicacao do resultado do (Teste de Sequencias)
-        %PASSO 4 - Explicacao do resultado do (Testes para Maior Sequencia de Uns em um bloco)
-        %PASSO 5 - Explicacao do resultado do (Testes de Posto de Matriz Binária)
-        %PASSO 6 - Explicacao do resultado do (Teste da Transformada Discreta ded Fourier (Espectral))
-        %PASSO 7 - Explicacao do resultado do (Teste de Correspondência ded Modelos não Sobrepostos)
-        %PASSO 8 - Explicacao do resultado do (Teste de Correspondência de Modelos Sobrepostos)
-        %PASSO 9 - Explicacao do resultado do (Teste "Estatístico Universal" de Maurer)
-        %PASSO 10 - Explicacao do resultado do (Teste de Complexidade Linear)
-        %PASSO 11 - Explicacao do resultado do (Teste Serial)
-        %PASSO 12 - Explicacao do resultado do (Teste de Entropia Aproximada)
-        %PASSO 13 - Explicacao do resultado do (Teste de Somas Cumulativas (Cusums))
-        %PASSO 14 - Explicacao do resultado do (Teste de Excursões Aleatórias)
-        %PASSO 15 - Explicacao do resultado do (Teste de Variante de Excursões Aleatórias)
-        %PASSO 17 - Explicacao do motivo para que ambos tenham passado nos testes
-        %PASSO 17.1 Explicacao o motivo que leva a falha desses testes
-        %Passo 17.2 Explicacao do porque esse teste é somente uma das etapas pra considerar um gerador seguro e não a fonte da verdade
-
+\include{chapters/fundamentosAleatoriedadeEmComputacao}
 
 \chapter{Geradores Criptograficamente Seguros} % Capitulo 3
 
@@ -536,7 +297,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
     \begin{figure}[htb]
         \centering
         \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg_appendix}
-        \includegraphics[width=0.8\textwidth]{model_prng_lcg.png}
+        \includegraphics[width=0.8\textwidth]{Modelos/model_prng_lcg.png}
         \legend{Fonte: Elaborado pelo autor (2026)}
     \end{figure}
 
@@ -558,7 +319,7 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
     \begin{figure}[htb]
         \centering
         \caption{Resultado do script LCG}\label{fig:result_prng_lcg_appendix}
-        \includegraphics[width=0.8\textwidth]{result_prng_lcg.png}
+        \includegraphics[width=0.8\textwidth]{Resultados/result_prng_lcg.png}
         \legend{Fonte: Elaborado pelo autor (2026)}
     \end{figure}
 

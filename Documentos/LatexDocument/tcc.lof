@@ -1,0 +1,60 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Modelo simples de um PRNG com LCG}}{15}{figure.6.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Resultado do Teste de Frequência (Monobit) para SecureRandom}}{16}{figure.6.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Resultado final do Teste de Frequência (Monobit) para SecureRandom}}{16}{figure.6.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Resultado do Teste de Frequência (Monobit) para Random}}{17}{figure.6.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Resultado final do Teste de Frequência (Monobit) para Random}}{17}{figure.6.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Resultado Teste de Frequência em Bloco para SegureRandom}}{18}{figure.6.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Resultado final do Teste de Frequência em Bloco para SegureRandom}}{18}{figure.6.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Resultado Teste de Frequência em Bloco para Random}}{19}{figure.6.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Resultado final do Teste de Frequência em Bloco para Random}}{19}{figure.6.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Resultado Teste de Sequencia SegureRandom}}{19}{figure.6.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Resultado Final do Teste de Sequencia SegureRandom}}{19}{figure.6.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Resultado Teste de Sequencia Random}}{20}{figure.6.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Resultado Final do Teste de Sequencia Random}}{20}{figure.6.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Resultado Testes para Maior Sequencia de Uns em um bloco SegureRandom}}{20}{figure.6.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Resultado Final do Testes para Maior Sequencia de Uns em um bloco SegureRandom}}{20}{figure.6.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Resultado Testes para Maior Sequencia de Uns em um bloco Random}}{21}{figure.6.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Resultado Final do Testes para Maior Sequencia de Uns em um bloco Random}}{21}{figure.6.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Resultado Testes de Posto de Matriz Binária SegureRandom}}{21}{figure.6.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Resultado Final do Testes de Posto de Matriz Binária SegureRandom}}{21}{figure.6.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Resultado Testes de Posto de Matriz Binária Random}}{22}{figure.6.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Resultado Final do Testes de Posto de Matriz Binária Random}}{22}{figure.6.21}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Resultado Teste da Transformada Discreta de Fourier (Espectral) SegureRandom}}{22}{figure.6.22}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Resultado Final do Teste da Transformada Discreta de Fourier (Espectral) SegureRandom}}{23}{figure.6.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Resultado Teste da Transformada Discreta de Fourier (Espectral) Random}}{23}{figure.6.24}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Resultado Final do Teste da Transformada Discreta de Fourier (Espectral) Random}}{23}{figure.6.25}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Resultado Final Teste de Correspondência de Modelos não Sobrepostos SegureRandom}}{26}{figure.6.26}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Resultado Final do Teste de Correspondência de Modelos não Sobrepostos SegureRandom}}{27}{figure.6.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Resultado Final Teste de Correspondência de Modelos não Sobrepostos Random}}{28}{figure.6.28}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Resultado Final do Teste de Correspondência de Modelos não Sobrepostos Random}}{29}{figure.6.29}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Resultado Teste de Correspondência de Modelos Sobrepostos SegureRandom}}{30}{figure.6.30}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Resultado Final do Teste de Correspondência de Modelos Sobrepostos SegureRandom}}{30}{figure.6.31}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Resultado Teste de Correspondência de Modelos Sobrepostos Random}}{30}{figure.6.32}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Resultado Final do Teste de Correspondência de Modelos Sobrepostos Random}}{30}{figure.6.33}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Resultado Teste `Estatístico Universal'' de Maurer SegureRandom}}{31}{figure.6.34}%
+\contentsline {figure}{\numberline {35}{\ignorespaces Resultado Final do Teste `Estatístico Universal'' de Maurer SegureRandom}}{31}{figure.6.35}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Resultado Teste `Estatístico Universal'' de Maurer Random}}{31}{figure.6.36}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Resultado Final do Teste `Estatístico Universal'' de Maurer Random}}{31}{figure.6.37}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Resultado Teste de Complexidade Linear SegureRandom}}{32}{figure.6.38}%
+\contentsline {figure}{\numberline {39}{\ignorespaces Resultado Final do Teste de Complexidade Linear SegureRandom}}{32}{figure.6.39}%
+\contentsline {figure}{\numberline {40}{\ignorespaces Resultado Teste de Complexidade Linear Random}}{32}{figure.6.40}%
+\contentsline {figure}{\numberline {41}{\ignorespaces Resultado Final do Teste de Complexidade Linear Random}}{32}{figure.6.41}%
+\contentsline {figure}{\numberline {42}{\ignorespaces Resultado Teste Serial SegureRandom}}{33}{figure.6.42}%
+\contentsline {figure}{\numberline {43}{\ignorespaces Resultado Final do Teste Serial SegureRandom}}{33}{figure.6.43}%
+\contentsline {figure}{\numberline {44}{\ignorespaces Resultado Teste Serial Random}}{33}{figure.6.44}%
+\contentsline {figure}{\numberline {45}{\ignorespaces Resultado Final do Teste Serial Random}}{34}{figure.6.45}%
+\contentsline {figure}{\numberline {46}{\ignorespaces Resultado Teste de Entropia Aproximada SegureRandom}}{34}{figure.6.46}%
+\contentsline {figure}{\numberline {47}{\ignorespaces Resultado Final do Teste de Entropia Aproximada SegureRandom}}{34}{figure.6.47}%
+\contentsline {figure}{\numberline {48}{\ignorespaces Resultado Teste de Entropia Aproximada Random}}{34}{figure.6.48}%
+\contentsline {figure}{\numberline {49}{\ignorespaces Resultado Final do Teste de Entropia Aproximada Random}}{35}{figure.6.49}%
+\contentsline {figure}{\numberline {50}{\ignorespaces Resultado Teste de Somas Cumulativas (Cusums) SegureRandom}}{35}{figure.6.50}%
+\contentsline {figure}{\numberline {51}{\ignorespaces Resultado Final do Teste de Somas Cumulativas (Cusums) SegureRandom}}{35}{figure.6.51}%
+\contentsline {figure}{\numberline {52}{\ignorespaces Resultado Teste de Somas Cumulativas (Cusums) Random}}{36}{figure.6.52}%
+\contentsline {figure}{\numberline {53}{\ignorespaces Resultado Final do Teste de Somas Cumulativas (Cusums) Random}}{36}{figure.6.53}%
+\contentsline {figure}{\numberline {54}{\ignorespaces Resultado Final do Teste de Excursões Aleatórias SegureRandom}}{36}{figure.6.54}%
+\contentsline {figure}{\numberline {55}{\ignorespaces Resultado Final do Teste de Excursões Aleatórias Random}}{37}{figure.6.55}%
+\contentsline {figure}{\numberline {56}{\ignorespaces Resultado Final do Teste de Variante de Excursões Aleatórias SegureRandom}}{37}{figure.6.56}%
+\contentsline {figure}{\numberline {57}{\ignorespaces Resultado Final do Teste de Variante de Excursões Aleatórias Random}}{38}{figure.6.57}%
+\contentsline {figure}{\numberline {58}{\ignorespaces Modelo simples de um PRNG com LCG}}{47}{figure.14.58}%
+\contentsline {figure}{\numberline {59}{\ignorespaces Resultado do script LCG}}{48}{figure.14.59}%

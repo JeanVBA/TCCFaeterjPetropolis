@@ -1,0 +1,730 @@
+\chapter{FUNDAMENTOS DA ALEATORIEDADE EM COMPUTAÇÃO} % Capitulo 2
+
+    \section{Aleatoriedade Verdadeira vs. Pseudoaleatoriedade}
+
+        Definições de TRNG e PRNG (Pseudo-Random Number Generator).
+
+        TRNG é um dispositivo que gera números aleatórios a partir
+        de um processo físico, e não por meio de um algoritmo. Tais dispositivos são
+        frequentemente baseados em fenômenos microscópicos que geram sinais de ruído
+        estatisticamente aleatórios de baixo nível, como ruído térmico, efeito fotoelétrico, ou
+        fenômenos quânticos. Esses processos estocásticos são, em teoria, completamente
+        imprevisíveis enquanto uma equação que governa tais fenômenos for desconhecida
+        ou incomputável. Isso contrasta com o paradigma de geração de números pseudo-
+        aleatórios comumente implementado através de algoritmos.\nocite{6.1DefinicaoTRNG}
+
+        PRNG refere-se a uma sequência de números ou dados que aparenta ser aleatória, 
+        mas é gerada por um algoritmo determinístico.
+        E é gerada por algoritmos que utilizam fórmulas matemáticas para produzir resultados aparentemente aleatórios. 
+        Embora sequências pseudoaleatórias possam imitar a aleatoriedade até certo ponto, elas são, 
+        em última análise, determinísticas e repetíveis.
+        Esses algoritmos recebem um valor inicial, chamado semente, 
+        e o utilizam para produzir uma sequência de números. 
+        Ao aplicar operações matemáticas ao valor da semente, 
+        o PRNG produz uma série de números aparentemente aleatórios. 
+        O valor da semente pode ser escolhido arbitrariamente, 
+        mas afeta significativamente a sequência resultante de números pseudoaleatórios.\nocite{6.1DefinicaoPRNG}
+
+    \section{Entropia e Fontes de Incerteza}
+
+        Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
+
+        Entropia é uma medida da aleatoriedade ou imprevisibilidade dos dados. 
+        No contexto da criptografia, a entropia é usada para gerar 
+        números aleatórios ou chaves que são essenciais para a comunicação segura e a criptografia. 
+        Sem uma boa fonte de entropia, os protocolos criptográficos podem se tornar vulneráveis a ataques 
+        que exploram a previsibilidade das chaves geradas.
+
+        Na maioria dos sistemas operacionais, 
+        a entropia é gerada pela coleta de eventos aleatórios de diversas fontes, 
+        como interrupções de hardware, movimentos do mouse, 
+        pressionamentos de teclas e atividade do disco. 
+        Esses eventos são inseridos em um conjunto de entropia, 
+        que é então usado para gerar números aleatórios quando necessário.
+
+        Protocolos criptográficos, como SSL/TLS, SSH e IPsec, 
+        dependem fortemente da entropia para gerar números aleatórios e chaves para criptografia, 
+        autenticação e proteção de integridade.
+        A aleatoriedade desses números é crucial para a segurança da comunicação. 
+        Se um atacante conseguir prever os números aleatórios usados em um protocolo criptográfico, 
+        ele poderá comprometer a confidencialidade, a integridade ou a autenticidade da comunicação.
+        Se a chave mestra prévia for previsível ou tendenciosa, 
+        um atacante poderá interceptar a mensagem criptografada, 
+        descriptografá-la e obter acesso às chaves de sessão. 
+        Isso permitiria ao atacante espionar a comunicação, 
+        modificar os dados ou se passar pelo servidor.\nocite{6.2Entropia}
+
+        Um tipo de entropia. É a entropia de ``Shannon''. Que utiliza umm tratamento probabilístico
+        de uma função logarítmica.\nocite{6.2shannonEntropia} Sendo sua formula:
+
+        \begin{equation}
+            H(X) = - \sum_{i=1}^{n} P(x_i) \log_b P(x_i)
+            \label{eq:shannon_entropy}
+        \end{equation}
+
+        Em que:
+        \begin{itemize}
+            \item $H(X)$ é a entropia em bits;
+            \item $p_i$ é a probabilidade de ocorrência do resultado $i$;
+            \item $n$ é o número total de resultados possíveis.
+        \end{itemize}
+
+        Uma limitação determinística é em cima de um processador de maquina de estados finitos.
+        Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado.\@ Onde se um invasor 
+        tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
+        se faz necessário que o software faça a captação da incerteza do mundo físico.
+
+        \subitem[Criptografia Simétrica]
+
+        Se trata da utilização da mesma chave para o processo de encriptação e desencriptação. Apesar da primitiva de chave simétrica embarcar
+        não só encriptadores, como também funções hash de tamanho arbitrário como os MACs (Message Authentication Codex), sistemas de assinatura, sequencias pseudoaleatórias
+        e primitivas de identificação.
+
+    \section{A Semente (Seed) como Elemento Crítico}
+
+    O papel do valor inicial na previsibilidade e segurança de sequências pseudoaleatórias.
+
+    \section{Avaliação Estatística da Aleatoriedade}
+
+        Bateria de testes SP 800--22 do NIST e o conceito de indistinguibilidade estatística.
+
+        O NIST Test Suite consiste em um pacote de 15 testes de estatistas desenvolvidos para avaliar a as sequencias binarias aleatórias (com comprimento arbitrário),
+        gerados por geradores de números aleatórios ou pseudo criptografados, seja de forma em hardware ou software. 
+        les podem ser decompostos em vários subtestes de acordo com a necessidade e o tipo de geração aleatória que podem ter uma sequencia. Os 15 testes são:
+        \begin{enumerate}
+          \item Teste de Frequência (monobit)
+          \item Teste de Frequência dentro de um bloco
+          \item Teste de Sequencias
+          \item Testes para Maior Sequencia de Uns em um bloco
+          \item Testes de Posto de Matriz Binária
+          \item Teste da Transformada Discreta de Fourier (Espectral)
+          \item Teste de Correspondência de Modelos não Sobrepostos
+          \item Teste de Correspondência de Modelos Sobrepostos
+          \item Teste "Estatístico Universal" de Maurer
+          \item Teste de Complexidade Linear
+          \item Teste Serial
+          \item Teste de Entropia Aproximada
+          \item Teste de Somas Cumulativas (Cusums)
+          \item Teste de Excursões Aleatórias
+          \item Teste de Variante de Excursões Aleatórias
+        \end{enumerate}\nocite{6.4NistsTP}
+
+        Falar separadamente sobre cada um dos 15 testes. Mostrando um teste local separado. (Seguir documentacao do guthub para execucao local)\cite{6.4NISTGit}
+        
+        \subsection{Bateria de Testes}%PASSO 1 - Explicacao de como vai ser efetuado os Testes
+
+            Os arquivos binários gerados em Java servem como a entrada bruta para o NIST SP 800--22, 
+            que interpreta os bytes como fluxos contínuos de bits para análise estatística. Ao executar o programa, 
+            a ferramenta particiona esses dados em blocos de tamanho fixo, como sequências de $10^{6}$ bits, 
+            aplicando sobre cada um deles quinze testes que buscam padrões não aleatórios, como repetições excessivas ou falta de complexidade linear. 
+            Para cada teste, o sistema calcula um $P\text{-value}$, que quantifica a probabilidade de a sequência ter sido gerada por um processo puramente aleatório. 
+            Ao final, o sucesso do gerador é determinado pela uniformidade desses valores e pela proporção de sequências que mantiveram o $P\text{-value} \geq 0,01$.
+
+            \begin{figure}[htb]
+                \centering
+                \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg}
+                \includegraphics[width=0.8\textwidth]{NIST/gerador_bits_testes_NIST.png}
+                \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+        %PASSO 1.1 - Modelo de geracao LCG (voce já fez, tem pronto a explicacao)
+        \subsubsection{Random}
+        
+        A função java.util.Random faz uso do modelo LCG “Gerador Congruencial Linear”. 
+        Ele é um modelo puramente matemático. 
+        Onde o mesmo é usado para gerar uma sequência de números aleatórios, 
+        calculados por uma equação linear.
+        \begin{equation}
+            x_{i+1} = (A \cdot x_i + C) \pmod{M}
+            \label{eq:lca}
+        \end{equation}
+        Onde o valor inicial “x0” é a seed, 
+        A e C são parâmetros inteiros que podem ter um valor 
+        já pré-definido ou passados diretamente, 
+        M é o espaço dos valores aleatórios possíveis e “mod” é o 
+        restante da divisão inteira.
+        
+        %PASSO 1.3 - Modelo de geracao Seguro usando entropia
+
+        \subsubsection{SegureRandom}
+        A função java.security.SegureRandom faz utilização do CSPRNG, que diferente do LCG.\@ Esse tipo de gerador busca caos do hardware.
+        Sendo elas interrupçoes de hardware, pressionar das teclas do teclado, posição e movimento do mouse,
+        pequenas flutuaçoes de voltagem do processador e/ou o tempo que o disco demora pra fazer a requisição.
+        Esses eventos imprevisíveis são misturados, usando funçoes hash como SHA-256 para criar uma seed de alta entropia.
+        Mesmo que se conheça o algoritmo, não é possivel recriar o mesmo evento. Justamente pelo fator caos fisico que foi utilizado.
+
+        \subsection{Teste de Frequência}%PASSO 1 - Explicacao do resultado do (Teste de Frequência (monobit))
+            O teste de frequência (monobit) é o teste mais básico da bateria do NIST.\@
+            É o pilar para a execução dos demais testes. Se um gerador não for capaz de equilibrar a quantidade de bits '1' e '0' em uma sequência, ele falha nesse teste fundamental, indicando que a sequência não é aleatória o suficiente para aplicações criptográficas.
+            Verificação do resultado do teste de frequência (monobit) para ambos os geradores, destacando a falha do java.util.Random e o sucesso do SecureRandom.
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado do Teste de Frequência (Monobit) para SecureRandom}\label{fig:01_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/01/01_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Cada valor apresentado no resultado do teste de frequência (monobit) representa o $P\text{-value}$ calculado para a sequência de bits gerada. 
+            Ele verifica se a quantidade de bits '1' e '0' está equilibrada, como seria esperado em uma sequência verdadeiramente aleatória.
+            
+            $P\text{-value}$ proximo de 1 indica que possui uma distribuição equilibrada, como é o caso do valor 0.985639.
+            
+            $P\text{-value}$ proximo de 0 indica que possui uma distribuição desequilibrada, como é o caso do valor 0.022021.
+            
+            $P\text{-value}$ menor que 0.01 é considerado uma falha no teste, indicando que a sequência não é aleatória o suficiente, como é o caso do valor 0.000128.
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado final do Teste de Frequência (Monobit) para SecureRandom}\label{fig:01_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/01/01_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Os numeros apresentados no resultado final do teste de frequência (monobit). Da coluna C1 até a coluna C10 representam a distribuição das 100 amostras.
+            Que foi dividida em 10 blocos de 10 amostras cada. O valor da coluna P representa a proporção de amostras que passaram no teste, ou seja, que tiveram um $P\text{-value}$ maior ou igual a 0.01. O valor da coluna P' representa o $P\text{-value}$ calculado para a proporção de amostras.
+            Cada amostra tiveram um $P\text{-value}$ entre 0.0 e 1.0.
+            Na coluna C1 nos é apresentado que obtivemos 10 amostras com $P\text{-value}$ maior ou igual a 0.01.
+            Na coluna C10 nos é apresentado que obtivemos 12 amostras com $P\text{-value}$ entre 0.9 a 1.00.
+            O $P\text{-value}$ 0.739918 apresentado é um teste Qui-Quadrado aplicado sobre os números das colunas C1 a C10. Fazendo a medição da uniformidade e a distribuição dos resultados.
+            Se este valor for maior ou igual a 0.0001, o teste é considerado bem sucedido, indicando que os resultados estão distribuídos de maneira uniforme.
+            Com o resultado de 0.739918, o SegureRandom passou no teste de frequência (monobit) com uma distribuição de $P\text{-value}$ que é considerada exelente. 
+            Capaz de produzir sequências de bits que se aproximam muito da aleatoriedade ideal, o que é crucial para aplicações criptográficas seguras.
+            Com uma proporsão de passagem de 99/100. Significa que 99 amostras obtiveram um $P\text{-value}$ maior ou igual a 0.01. 
+            Para uma amostragem de 100, o minimo requisitado para passar no teste é de 96/100.
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado do Teste de Frequência (Monobit) para Random}\label{fig:01_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/01/01_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado final do Teste de Frequência (Monobit) para Random}\label{fig:01_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/01/01_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Por mais que olhando os valores apresentados no resultado do teste de frequência (monobit) para o Random,
+            seja possível observar que a maioria dos $P\text{-value}$ estão acima de 0.01, o que indicaria uma distribuição equilibrada, 
+            O resultado final do teste de frequência (monobit) para o Random mostra que ele obteve um $P\text{-value}$ de 0.275709 um valor mais proximo ao 0.0001.
+            Por mais que seu valor seja inferior ao do SegureRandom, o Random ainda assim passou no teste de frequência (monobit) com uma distribuição de $P\text{-value}$ que é considerada boa.
+            Um falso positivo, devido a maneira como o Random funciona, utilizando o LCG que é matematicamente desenhado para ter uma distribuição uniforme em complexidades simples.
+        %PASSO 2 - Explicacao do resultado do (Teste de Frequência dentro de um bloco)
+        \subsection{Teste de Frequência em Bloco}
+            O teste de frequência em bloco é uma extensão do teste de frequência (monobit) que avalia a distribuição de bits '1' e '0' dentro de blocos específicos de uma sequência. Ele divide a sequência em blocos de comprimento M. E tenta determinar se o comprimento M é aproximadamente M/2.
+            Caso o teste possua muitos zeros ou muitos uns, o teste passaria no teste de monibt, mas falharia no teste de frequência em bloco. Pois os blocos isolados estariam desequilibrados.
+            
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Frequência em Bloco para SegureRandom}\label{fig:02_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/02/02_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado final do Teste de Frequência em Bloco para SegureRandom}\label{fig:02_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/02/02_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Frequência em Bloco para Random}\label{fig:02_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/02/02_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado final do Teste de Frequência em Bloco para Random}\label{fig:02_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/02/02_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+            
+        %PASSO 3 - Explicacao do resultado do (Teste de Sequencias)
+        \subsection{Teste de Sequencias}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Sequencia SegureRandom}\label{fig:03_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/03/03_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Sequencia SegureRandom}\label{fig:03_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/03/03_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Sequencia Random}\label{fig:03_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/03/03_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Sequencia Random}\label{fig:03_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/03/03_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+        %PASSO 4 - Explicacao do resultado do (Testes para Maior Sequencia de Uns em um bloco)
+
+        \subsection{Testes para Maior Sequencia de Uns em um bloco}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Testes para Maior Sequencia de Uns em um bloco SegureRandom}\label{fig:04_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/04/04_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Testes para Maior Sequencia de Uns em um bloco SegureRandom}\label{fig:04_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/04/04_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Testes para Maior Sequencia de Uns em um bloco Random}\label{fig:04_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/04/04_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Testes para Maior Sequencia de Uns em um bloco Random}\label{fig:04_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/04/04_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 5 - Explicacao do resultado do (Testes de Posto de Matriz Binária)
+        \subsection{Testes de Posto de Matriz Binária}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Testes de Posto de Matriz Binária SegureRandom}\label{fig:05_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/05/05_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Testes de Posto de Matriz Binária SegureRandom}\label{fig:05_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/05/05_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Testes de Posto de Matriz Binária Random}\label{fig:05_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/05/05_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Testes de Posto de Matriz Binária Random}\label{fig:05_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/05/05_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 6 - Explicacao do resultado do (Teste da Transformada Discreta de Fourier (Espectral))
+        \subsection{Teste da Transformada Discreta de Fourier (Espectral)}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste da Transformada Discreta de Fourier (Espectral) SegureRandom}\label{fig:06_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/06/06_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste da Transformada Discreta de Fourier (Espectral) SegureRandom}\label{fig:06_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/06/06_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste da Transformada Discreta de Fourier (Espectral) Random}\label{fig:06_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/06/06_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste da Transformada Discreta de Fourier (Espectral) Random}\label{fig:06_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/06/06_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 7 - Explicacao do resultado do (Teste de Correspondência de Modelos não Sobrepostos)
+        \subsection{Teste de Correspondência de Modelos não Sobrepostos}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final Teste de Correspondência de Modelos não Sobrepostos SegureRandom}\label{fig:07_final_segure_pt1}
+                    \includegraphics[width=0.8\textwidth]{NIST/07/07_final_segure_pt1.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Correspondência de Modelos não Sobrepostos SegureRandom}\label{fig:07_final_segure_pt2}
+                    \includegraphics[width=0.8\textwidth]{NIST/07/07_final_segure_pt2.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final Teste de Correspondência de Modelos não Sobrepostos Random}\label{fig:07_final_insegure_pt1}
+                    \includegraphics[width=0.8\textwidth]{NIST/07/07_final_insegure_pt1.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Correspondência de Modelos não Sobrepostos Random}\label{fig:07_final_insegure_pt2}
+                    \includegraphics[width=0.8\textwidth]{NIST/07/07_final_insegure_pt2.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 8 - Explicacao do resultado do (Teste de Correspondência de Modelos Sobrepostos)
+        \subsection{Teste de Correspondência de Modelos Sobrepostos}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Correspondência de Modelos Sobrepostos SegureRandom}\label{fig:08_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/08/08_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Correspondência de Modelos Sobrepostos SegureRandom}\label{fig:08_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/08/08_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Correspondência de Modelos Sobrepostos Random}\label{fig:08_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/08/08_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Correspondência de Modelos Sobrepostos Random}\label{fig:08_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/08/08_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 9 - Explicacao do resultado do (Teste "Estatístico Universal" de Maurer)
+        \subsection{Teste `Estatístico Universal'' de Maurer}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste `Estatístico Universal'' de Maurer SegureRandom}\label{fig:09_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/09/09_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste `Estatístico Universal'' de Maurer SegureRandom}\label{fig:09_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/09/09_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste `Estatístico Universal'' de Maurer Random}\label{fig:09_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/09/09_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste `Estatístico Universal'' de Maurer Random}\label{fig:09_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/09/09_final_insegure.png}
+
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            Explicação dos valores:
+        %PASSO 10 - Explicacao do resultado do (Teste de Complexidade Linear)
+        \subsection{Teste de Complexidade Linear}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Complexidade Linear SegureRandom}\label{fig:10_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/10/10_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Complexidade Linear SegureRandom}\label{fig:10_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/10/10_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Complexidade Linear Random}\label{fig:10_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/10/10_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Complexidade Linear Random}\label{fig:10_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/10/10_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 11 - Explicacao do resultado do (Teste Serial)
+        \subsection{Teste Serial}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste Serial SegureRandom}\label{fig:11_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/11/11_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste Serial SegureRandom}\label{fig:11_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/11/11_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste Serial Random}\label{fig:11_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/11/11_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste Serial Random}\label{fig:11_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/11/11_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 12 - Explicacao do resultado do (Teste de Entropia Aproximada)
+        \subsection{Teste de Entropia Aproximada}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Entropia Aproximada SegureRandom}\label{fig:12_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/12/12_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Entropia Aproximada SegureRandom}\label{fig:12_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/12/12_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Entropia Aproximada Random}\label{fig:12_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/12/12_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Entropia Aproximada Random}\label{fig:12_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/12/12_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 13 - Explicacao do resultado do (Teste de Somas Cumulativas (Cusums))
+        \subsection{Teste de Somas Cumulativas (Cusums)}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Somas Cumulativas (Cusums) SegureRandom}\label{fig:13_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/13/13_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Somas Cumulativas (Cusums) SegureRandom}\label{fig:13_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/13/13_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Teste de Somas Cumulativas (Cusums) Random}\label{fig:13_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/13/13_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Somas Cumulativas (Cusums) Random}\label{fig:13_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/13/13_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 14 - Explicacao do resultado do (Teste de Excursões Aleatórias)
+        \subsection{Teste de Excursões Aleatórias}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Excursões Aleatórias SegureRandom}\label{fig:14_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/14/14_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Excursões Aleatórias Random}\label{fig:14_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/14/14_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %PASSO 15 - Explicacao do resultado do (Teste de Variante de Excursões Aleatórias)
+        \subsection{Teste de Variante de Excursões Aleatórias}
+            Muitos textos explicativos
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Variante de Excursões Aleatórias SegureRandom}\label{fig:15_final_segure}
+                    \includegraphics[width=0.8\textwidth]{NIST/15/15_final_segure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+
+
+            \begin{figure}[htb]
+                    \centering
+                    \caption{Resultado Final do Teste de Variante de Excursões Aleatórias Random}\label{fig:15_final_insegure}
+                    \includegraphics[width=0.8\textwidth]{NIST/15/15_final_insegure.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+            Explicação dos valores:
+        %Passo 16 Explicacao do porque esse teste é somente uma das etapas pra considerar um gerador seguro e não a fonte da verdade
