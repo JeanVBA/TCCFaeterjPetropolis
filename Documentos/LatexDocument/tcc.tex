@@ -7,6 +7,8 @@
 	brazil				% O idioma principal do documento
 	]{abntex2}
 
+% chktex 13  % Ignorar aviso sobre espaçamento entre sentenças
+
 % --- PACOTES BÁSICOS ---
 \usepackage[utf8]{inputenc}		% Codificação do documento
 \usepackage[T1]{fontenc}		% Seleção de códigos de fonte
@@ -40,10 +42,9 @@
 % --- INÍCIO DO DOCUMENTO ---
 \begin{document}
 
-\imprimircapa*
+\imprimircapa
 
-\imprimirfolhaderosto*
-
+\imprimirfolhaderosto
 
 \chapter{Resumo}
 
@@ -51,12 +52,24 @@
 
 \chapter{Lista de Figuras}
     \listoffigures
-
+    
 \chapter{Lista de Abreviaturas}
 
-\boldmath{FAETERJ: Faculdade de Educação Tecnológica do Estado do Rio de Janeiro}
-
-\boldmath{TRNG True Random Number Generator}
+\boldmath{ABNT:\@ Associação Brasileira de Normas Técnicas}
+\boldmath{CSPRNG:\@ Cryptographically Secure Pseudo Random Number Generator}
+\boldmath{DRBG:\@ Deterministic Random Bit Generator}
+\boldmath{FAETERJ:\@ Faculdade de Educação Tecnológica do Estado do Rio de Janeiro}
+\boldmath{JEP:\@ JDK Enhancement Proposals}
+\boldmath{KEM:\@ Key Encapsulation Mechanism}
+\boldmath{LCG:\@ Linear Congruential Generator}
+\boldmath{LWE:\@ Learning With Errors}
+\boldmath{ML-KEM:\@ Module-Lattice-Based Key Encapsulation Mechanism}
+\boldmath{NIST:\@ National Institute of Standards and Technology}
+\boldmath{NRBG:\@ Non-deterministic Random Bit Generator}
+\boldmath{PQC:\@ Post-Quantum Cryptography}
+\boldmath{PRNG:\@ Pseudo Random Number Generator}
+\boldmath{QRNG:\@ Quantum Random Number Generator}
+\boldmath{TRNG:\@ True Random Number Generator}
 
 % --- SUMÁRIO ---
 \pdfbookmark[0]{\contentsname}{toc}
@@ -64,77 +77,18 @@
 \cleardoublepage
 % --- ELEMENTOS TEXTUAIS ---
 \textual
-\chapter{Introdução}
 
-A onipresença da criptografia na infraestrutura digital moderna (internet, sistemas bancários, IoT e comunicações seguras).
+\include{chapters/introducao}
 
-\section{Contextualização do Tema}
+\include{chapters/fundamentos_aleatoriedade_em_computacao}
 
-Textos 
+\include{chapters/quebra_de_criptografia}
 
-\section{Justificativa/Problema de Pesquisa}
+\include{chapters/NIST_SP_800-22}
 
-O conflito entre o determinismo computacional e a necessidade de aleatoriedade em~sistemas criptográficos.
+\include{chapters/NIST_IR_7977}
 
-\section{Motivação/Hipotese e Ameaca Tecnológica}
-
-O impacto da computação quântica --- especialmente por meio do Algoritmo de Shor --- sobre os modelos atuais de segurança e pseudoaleatoriedade.
-
-\section{Objetivos}
-
-Objetivo Geral: Analisar a evolução dos geradores pseudoaleatórios criptograficamente seguros frente à transição para a criptografia pós-quântica.
-Objetivos Específicos:
-Estudar PRNGs e CSPRNGs clássicos
-Analisar o impacto dos algoritmos quânticos
-Investigar os novos paradigmas de pseudoaleatoriedade baseados em reticulados
-Avaliar a adoção desses conceitos no ecossistema Java
-
-
-\section{Metodologia}
-
-Pesquisa bibliográfica, análise documental de padrões criptográficos e estudo prático no ecossistema Java.
-
-\include{chapters/fundamentosAleatoriedadeEmComputacao}
-
-\chapter{Geradores Criptograficamente Seguros} % Capitulo 3
-
-    \section{PRNGs vs. CSPRNGs}
-
-        Diferenças arquiteturais e requisitos de segurança.
-
-    \section{O Ataque do Próximo Bit}
-
-        Por que geradores comuns falham em contextos criptográficos.
-
-    \subsection{Implementação Prática (Demonstração)}
-
-        Demonstração do ataque contra java.util.Random, mostrando previsão de saídas futuras com base em observações anteriores — contrasta diretamente com o CSPRNG.\@
-
-    \section{Implementação de CSPRNGs em Java}
-
-        Análise da classe java.security.SecureRandom e seus provedores (SHA1PRNG, NativePRNG).
-
-    \section{Falhas Históricas de Aleatoriedade}
-
-        Casos emblemáticos como o Debian OpenSSL e problemas recorrentes em dispositivos IoT.
-
-\chapter{COMPUTAÇÃO QUÂNTICA E A QUEBRA DO PARADIGMA ATUAL} % Capitulo 4
-
-    \section{Conceitos Fundamentais de Computação Quântica}
-
-        Diferença entre bits clássicos e qubits.
-
-    \section{Algoritmo de Shor}
-
-        Fatoração eficiente e o colapso dos sistemas baseados em RSA e ECC.\@
-
-    \section{Algoritmo de Grover}
-
-        Impacto sobre criptografia simétrica e necessidade de aumento no tamanho das chaves.
-
-    \section{Harvest Now, Decrypt Later}
-
-        A urgência da migração para algoritmos resistentes a ataques quânticos.
+\include{chapters/NIST_IR_8547}
 
 \chapter{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)} % Capitulo 5
 
@@ -274,54 +228,6 @@ Pesquisa bibliográfica, análise documental de padrões criptográficos e estud
     Artigo sobre Crypto-Agility: A Taxonomy of Crypto-Agility (S. Ott et al.).
 
     Onde usar: Capítulo 6.2. Ajuda a definir por que sistemas modernos não podem ficar "presos" a um único algoritmo.
-
-\chapter{Coisas possivelmente Uteis em algum momento}
-    PRNG é uma sigla para “Pseudo Random Number Generator” ou “Gerador de Números Pseudo Aleatórios”. 
-    Seu significado é que a sua geração de números não segue uma estrutura aleatória. 
-    Ele utiliza um ponto inicial denominado “seed” para dar início a sua geração de números. 
-    A seed é um valor base para ser utilizado no PRNG. 
-    Utilizando a mesma seed, o resultado final do PRNG será o mesmo.
-
-    O PRNG funciona a partir de uma função que recebe a seed por parâmetro. 
-    E através de um cálculo, ele retorna o resultado dessa fórmula. 
-    Uma das fórmulas mais comuns para esse tipo de gerador de pseudo números aleatórios é no modelo LCG “Gerador Congruencial Linear” 
-
-    \begin{equation}
-        x_{i+1} = (A \cdot x_i + C) \pmod{M}
-        \label{eq:lca-appendix}
-    \end{equation}
-
-``Onde o valor inicial "x0" é a seed, A e C são parâmetros inteiros que podem ter um valor já pré-definido ou passados diretamente, M é o espaço dos valores aleatórios possíveis e "mod" é o restante da divisão inteira.''
-
-
-    \begin{figure}[htb]
-        \centering
-        \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg_appendix}
-        \includegraphics[width=0.8\textwidth]{Modelos/model_prng_lcg.png}
-        \legend{Fonte: Elaborado pelo autor (2026)}
-    \end{figure}
-
-    Mesmo após inúmeras tentativas. Devido a seed permanecer inalterada. 
-    O resultado permanece o mesmo em todos os resultados obtidos.
-
-    Por mais que tenha se passado um valor fixo na seed no exemplo prático, a seed é definida pelo sistema operacional, esse número é denominado entropia. 
-    Que se tem por referência a quantidade de imprecisão de um sistema. 
-    Quanto maior o número da entropia, maior é a incerteza. 
-    Esse valor de entropia é gerado a partir de certos eventos que ocorrem no momento de sua captura, como por exemplo o movimento do mouse, os inputs no teclado etc. 
-    Essas capturas são convertidas em um valor numérico para ser usado na seed.
-
-    Esses inputs que o sistema captura podem ser previsíveis, tornando a entropia causada menor. 
-    Sendo possível pré-determinar o valor gerado ao final para seed. 
-    Apesar das aplicações para o dia a dia ou em pequenos projetos serem o suficiente. 
-    Esse método  não é seguro para aplicações de alto risco.
-
-
-    \begin{figure}[htb]
-        \centering
-        \caption{Resultado do script LCG}\label{fig:result_prng_lcg_appendix}
-        \includegraphics[width=0.8\textwidth]{Resultados/result_prng_lcg.png}
-        \legend{Fonte: Elaborado pelo autor (2026)}
-    \end{figure}
 
 \chapter{Conclusão}
 Considerações finais.

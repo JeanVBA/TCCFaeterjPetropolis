@@ -1,0 +1,27 @@
+\chapter{Quebra de criptografias}
+    \section{Visão Geral da Quebra de Criptografias}
+
+        A quebra de criptografia refere-se ao processo de comprometer a segurança de um sistema criptográfico, 
+        seja por meio da descoberta de vulnerabilidades, exploração de falhas ou desenvolvimento de técnicas que permitem a recuperação de informações protegidas sem autorização. 
+        A quebra pode ocorrer devido a falhas na implementação, fraquezas nos algoritmos ou avanços tecnológicos que tornam os métodos de ataque mais eficazes. 
+        A evolução da computação, especialmente com o advento da computação quântica, tem levantado preocupações significativas sobre a segurança dos sistemas criptográficos atuais, 
+        destacando a necessidade de desenvolver e adotar algoritmos resistentes a ataques futuros.
+        
+        \section{Falhas Históricas de Aleatoriedade}
+
+        Dual\_EC\_DRBG, um gerador de números pseudoaleatórios que foi suspeito de conter uma backdoor, permitindo que um atacante previsse os números gerados. %https://medium.com/@popdogsec/dual-ec-drbg-a-look-into-a-potential-backdoor-395796e24ee6
+        
+        O Bug do Debian OpenSSL (2008): Um desenvolvedor removeu uma linha de código que gerava entropia porque ela causava avisos no depurador. O resultado foi que apenas 32.768 chaves SSH eram possíveis. 
+        Um ataque de força bruta levava segundos.
+        
+        Ataques em Cartões Inteligentes (Taiwan): Milhares de IDs digitais foram gerados com sementes fracas, permitindo que chaves privadas RSA fossem fatoradas a partir das chaves públicas.
+
+        \section{Vulnerabilidades em Algoritmos Criptográficos}
+
+        Algoritmo de grover. capaz de reduzir a forća das entropias das seed pela metade: https://learn.microsoft.com/es-es/azure/quantum/concepts-grovers
+        Algoritmo de Grover e a Semente: Explique que o ataque de Grover não "quebra" a matemática do AES ou da Seed, mas reduz a busca exaustiva. 
+        Se você usa uma semente de 128 bits, para um computador quântico ela tem o esforço de apenas $2^{64}$. 
+        Por isso, o NIST IR 7977 exige o dobro de bits (256).Algoritmo de Shor: Este é o "assassino" do RSA e da Curva Elíptica. 
+        Enquanto o Grover reduz a força, o Shor aniquila o RSA completamente. É a razão principal da existência da Criptografia Pós-Quântica (PQC).
+        
+        Colisões em SHA-1: Cite o projeto SHAttered (Google), que provou na prática que o SHA-1 é inseguro ao gerar dois arquivos PDF diferentes com o mesmo hash.

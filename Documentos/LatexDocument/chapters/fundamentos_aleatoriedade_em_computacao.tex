@@ -1,0 +1,173 @@
+\chapter{FUNDAMENTOS DA ALEATORIEDADE EM COMPUTAÇÃO} % Capitulo 2
+
+
+    \section{Entropia e Fontes de Incerteza}
+
+        Captação de eventos físicos imprevisíveis como base para sistemas criptográficos seguros.
+
+        Entropia é uma medida da aleatoriedade ou imprevisibilidade dos dados. 
+        No contexto da criptografia, a entropia é usada para gerar 
+        números aleatórios ou chaves que são essenciais para a comunicação segura e a criptografia. 
+        Sem uma boa fonte de entropia, os protocolos criptográficos podem se tornar vulneráveis a ataques 
+        que exploram a previsibilidade das chaves geradas.
+
+        Na maioria dos sistemas operacionais, 
+        a entropia é gerada pela coleta de eventos aleatórios de diversas fontes, 
+        como interrupções de hardware, movimentos do mouse, 
+        pressionamentos de teclas e atividade do disco. 
+        Esses eventos são inseridos em um conjunto de entropia, 
+        que é então usado para gerar números aleatórios quando necessário.
+
+        Protocolos criptográficos, como SSL/TLS, SSH e IPsec, 
+        dependem fortemente da entropia para gerar números aleatórios e chaves para criptografia, 
+        autenticação e proteção de integridade.
+        A aleatoriedade desses números é crucial para a segurança da comunicação. 
+        Se um atacante conseguir prever os números aleatórios usados em um protocolo criptográfico, 
+        ele poderá comprometer a confidencialidade, a integridade ou a autenticidade da comunicação.
+        Se a chave mestra prévia for previsível ou tendenciosa, 
+        um atacante poderá interceptar a mensagem criptografada, 
+        descriptografá-la e obter acesso às chaves de sessão. 
+        Isso permitiria ao atacante espionar a comunicação, 
+        modificar os dados ou se passar pelo servidor.\nocite{6.2Entropia}
+
+        Um tipo de entropia. É a entropia de ``Shannon''. Que utiliza umm tratamento probabilístico
+        de uma função logarítmica.\cite{6.2shannonEntropia} Sendo sua formula:
+
+        \begin{equation}
+            H(X) = - \sum_{i=1}^{n} P(x_i) \log_b P(x_i)
+            \label{eq:shannon_entropy}
+        \end{equation}
+
+        Em que:
+        \begin{itemize}
+            \item $H(X)$ é a entropia em bits;
+            \item $p_i$ é a probabilidade de ocorrência do resultado $i$;
+            \item $n$ é o número total de resultados possíveis.
+        \end{itemize}
+
+        Uma limitação determinística é em cima de um processador de maquina de estados finitos.
+        Se acaso for utilizado as mesmas variáveis, o resultado permanece inalterado.\@ Onde se um invasor 
+        tiver a certeza da seed de origem da criptografia. Ela por si mesma, não é aleatória. Para evitar tais acontecimentos
+        se faz necessário que o software faça a captação da incerteza do mundo físico.
+
+        A entropia deve ter força superior ou igual a segurança do sistema criptográfico. 
+        Entropia adicional poder ser necessária para compensar a perda de entropia durante o processo de geração de chaves, mas não necessariamente adiona mais segurança.
+        Ter mais entropia do que a quantidade avaliada é aceitavel, ter menos do que o recomendado pode ser fatal para a segurança do sistema criptográfico. 
+        O comprimento minimo depende do mecanismo criptográfico específico e do nível de segurança desejado.
+        A entrada de entropia e a seed resultante devem ser consistentes com a segurança dos dados protegidos pelo consumidor. 
+        Em um modelo DRBG a seed e as chaves geradas deevem possuir o mesmo nivel de segurança, pois no modelo DRBG depende da entropia usada, seguindo o critério de segurança critico (CSP).%\nocite{NIST 800-90A, pg 18/19 8.6.3}
+
+
+
+    \section{A Semente (Seed) como Elemento Crítico}
+
+        Falar sobre esse ponto, pois vai ser utilizado na explicação dos protocolos tanto do funcionamento de verificação do NIST 800--22, do NIST IR 8547 e do NIST IR 7977 pos quantico 
+
+        Uma sequência de bits usada como entrada para um gerador de números pseudoaleatórios (DRBG). A semente é a chave inicial, usada internamente para a concepção do DRBG. Sua entropia deve ser suficiente para garantir a segurança do DRBG.
+        A semente é um elemento crítico, pois determina a sequência de números pseudoaleatórios gerados pelo DRBG.\@
+        Se a semente for previsível ou tiver baixa entropia, o DRBG pode ser vulnerável a ataques que exploram essa fraqueza. Portanto, é essencial que a semente seja gerada a partir de uma fonte de entropia confiável.
+
+
+        Uma sequência de bits usada como entrada para um mecanismo DRBG.\@ A semente determinará uma parte do interior estado do DRBG, e sua entropia deve ser suficiente para apoiar a força de segurança do DRBG
+        Para obter uma seed suficientemente aleatória. Deve se submeter a uma estimativa de entropia para as saidas da fonte de ruido, baseada na propria fonte da entropia. Essa estimativa é denominada de $\mathit{H_{\text{submitter}}}$.
+        Depois de possuir uma trilha de estimativas, a estimativa de entropia minima por amostra chamada de $\mathit{H_{\text{original}}}$ é determinada. 
+        Se o tamanho for superior a 256 bits, ele precisara ser reduzido para menor ou igual a 256 bits.
+
+        Se o conjunto de dados não for binário, é necessario uma entropia adicional em bit, denominada de $\mathit{H_{\text{bitstring}}}$ é estimada. O conjunto de dados sequencias possui L amostras, cada uma contendo N bits e é considerado uma cadeia de bits
+        de tamanho $L \times N$. Após os primeiros 1.000.000 bits podem vir a serem desconsiderados entào $\mathit{H_{\text{bitstring}}}$ é calculada. Tendo como amostra estimada como N x H$_{\text{bitstring}}$.
+        A estimativa da entropia inicial da fonte é calculada como $\mathit{H_{\text{initial}}} = \min(\mathit{H_{\text{original}}}, \mathit{H_{\text{bitstring}}})$.
+
+    \section{Definição de Aleatoriedade e Tipos de Geradores Aleatórios}
+        RNG (Random Number Generator) é um dispositivo ou algoritmo que gera uma sequência de números ou símbolos que não possuem nenhum padrão discernível, ou seja, são imprevisíveis.
+        Que utiliza uma fonte de incerteza(ou seja, a fonte de entropia) ao mesmo tempo que faz uso de uma função de processo (processo de destilação) para gerar aleatoriedade.
+        O processo de destilação é uma etapa crucial para exceder qualquer ruptura de segurança na origem da entropia que possa a resultar em uma sequencia não aleatória.
+        Como a geração de longas sucessoes de zeros ou uns, ou mesmo a repetição de um mesmo número, o que pode ser um indicativo de uma fonte de entropia comprometida.
+        Normalmente a fonte de entropia é atraves de um processo físico, como o ruído térmico, circuito eletrico, o movimento do mouse ou a digitação do teclado, ou os efeitos quanticos de um semicondutor%\cite{NIST 800-22, pg 14. 1.1.3 RNGs}.
+        Multiplas fontes podem ser utilizadas para esse processo. As saidas de um RNG podem vir a ser utilizadas para um pseudo gerador de números aleatórios (PRNG). 
+        A saida de um RNG deve seguir certos critérios de aleatoriedade medidos por testes estatísticos, como os definidos pelo NIST 800--22, 
+        para garantir que os números gerados sejam adequadamente aleatórios para uso em criptografia e outras aplicações sensíveis à segurança.
+        Para fins de criptografia, é crucial que os números gerados por um RNG sejam verdadeiramente aleatórios. No entanto, algumas das fontes como data/hora são previsiveis, 
+        que combinados com outras fontes de entropia, podem mitigar a previsibilidade. E que ainda pode se tornar deficiente ao passar pelos testes estastisticos. A produção de RNGs de alta qualidade se tornam um recurso oneroso.
+        Tornando improdutiva quando se faz necessario de multiplas gerações de RNGs. 
+        Por isso, a utilização de PRNGs se torna uma alternativa mais viável, pois eles podem gerar grandes quantidades de números pseudoaleatórios a partir de uma semente inicial.
+
+        PRNG (PSeudo-Random Number Generator) é um tipo de gerador de números aleatórios que utiliza um algoritmo determinístico para produzir uma sequência de números que aparenta ser aleatória.
+        Ele faz uso de uma semente (seed) inicial para gerar uma sequência de números pseudoaleatórios. Em momentos que se faz necessário uso de impreviabilidade, a seed se faz necessaria ser imprevisivel e oriundas e suma de um RNG.\@
+        Por padrão um PRNG requer majoritariamente de um RNG.\@ Como o PRNG é um algoritmo determinístico, por isso ele leva o nome de pseudoaleatório, pois a sequência de números gerada por um PRNG é completamente determinada pela semente inicial.
+        Como a reprodução de um sequencia de números pseudoaleatórios é possível se a semente for conhecida, somente ela se faz necessaria salvar e proteger. 
+        De forma cômica, muitos dos valores gerados por um PRNG aparentam sem mais aleatórios do que os números gerados por um RNG.\@ Se sua concepção for bem desenvolvida, cada geração utiliza o valor da anterior por meio de transformações matemáticas, 
+        que acabam introduzindo uma aleatoriedade adicional. Uma série de de transformações podem eliminar autocorrelações e padrões, entre a entrada e a saida.%\cite{NIST 800-22, pg 14. 1.1.3 RNGs}
+
+        DRBG (Deterministic Random Bit Generator) é um tipo específico de PRNG que é projetado para ser criptograficamente seguro. Ele produz uma sequencia de bits que a partir de uma seed inicial, determina uma sequencia de bits pseudoaleatórios. 
+        A seed para instanciar um DRBG deve ser gerada a partir de uma fonte de entropia confiável, como um RBG (Random Bit Generator), para garantir a segurança do DRBG.\@ Se a seed for protegida e tiver alta entropia, o DRBG pode ser considerado seguro para uso em criptografia.
+        Além da dependência de uma semente de alta entropia, a segurança de um DRBG reside em sua capacidade de manter a Backtracking Resistance e a Prediction Resistance. 
+        Conforme o NIST SP 800-90A, esses mecanismos garantem que o comprometimento temporário do estado interno do gerador não resulte na exposição de chaves criptográficas geradas anteriormente ou no colapso da imprevisibilidade dos bits futuros
+
+        NRBG (Non-deterministic Random Bit Generator) é um tipo de gerador de números aleatórios que se baseia em processos físicos ou eventos imprevisíveis para gerar números aleatórios.
+        Ao contrário dos DRBGs, que são determinísticos e dependem de uma semente para gerar números pseudoaleatórios, os NRBGs não são determinísticos e não dependem de uma semente. 
+        Eles podem usar fontes de entropia, como ruído térmico, fenômenos quânticos ou outros eventos físicos imprevisíveis para gerar números aleatórios.
+
+        TRNG (True Random Number Generator) utiliza da entropia de eventos fisicos imprevisíveis para gerar números aleatórios ao inves da utilização de algoritmos determinísticos. 
+        É normalmente utilizado para gerar chaves criptográficas, Algoritmo de assinatura digital de curva eliptica[ECDSA] ou chaves MAC simetricas, para armazenar e transmitir dados com alta segurança em protocolos criptograficos como o TLS.\@
+        As chaves geradas por um TRNG são altamente resistentes a ataques de força bruta, pois a entropia de um TRNG é geralmente muito alta, tornando difícil para um atacante adivinhar ou reproduzir as chaves geradas.
+
+    \section{Avaliação Estatística da Aleatoriedade}
+        
+        Existem diversos testes estastisticos que podem ser utilzados em uma sequencia para avaliar e comparar com uma sequencia verdadeiramente aleatoria. 
+        A aleatoriedade é uma caracteristica probabilistica, de forma que é possivel descrever em termos de probabilidade. O resultado dos avaliadores estatisticos, quando baseados em uma sequencia de bits verdadeiramente aleatoria, é denominada de \boldmath{priori} %\nocite{NIST SP 800-22, pg 16. 1.1.5 Testing}
+        É capaz de aplicar uma inifinidade de testes estatísticos para avaliar a aleatoriedade de uma sequência de bits. Cada um avaliando um aspecto diferente da aleatoriedade, 
+        sendo a presença ou ausencia de padrões, que sendo identificados seria uma indicação que a sequencia não possui as caracteristicas aleatórias suficientes.
+        Já que existe uma possibilidade de aplicar uma sequencia infinita de testes, nenhum pode ser considerado completo, sendo necessário estabelecer um conjunto de testes estatísticos padronizados para avaliar a aleatoriedade de sequências de bits. E ainda assim devem ser analisados
+        com cuidado para evitar conclusões errôneas sobre a aleatoriedade de uma sequência de bits.
+
+        Uma hipótese nula (H$_0$) é formulada para cada teste estatístico, que geralmente afirma que a sequência de bits é aleatória. 
+        Na outra ponta está a hipótese alternativa (H$_1$), que afirma que a sequência de bits não é aleatória. 
+        O teste estatístico é então aplicado à sequência de bits, e um valor de teste é calculado com base nos resultados do teste. Ao final de cada teste se tem uma decisão a ser tomada, que é se rejeitar ou não a hipótese nula.
+
+        Para cada distribuição teorica em cima da hipotese nula (H$_0$) é determinada por meios matematicos. A partir disso, na distribuição de referencia, 
+        um valor critico é determinado longe o suficiente para que a probabilidade de obter um resultado tão extremo 0.9 quanto o observado seja menor do que um nivel de significancia predefinido 0.01.
+
+        Na realização, se um valor de um teste exceder o valor crítico, a hipótese nula (H$_0$) é rejeitada. Se o pressuposto da aleatoriedade for verdadeira o valor final da estatistica téra um probabilidade muito baixa de exceder o valor critico.
+
+        Só há duas alternativas de decisão, ou a hipótese nula (H$_0$) é rejeitada ou não é rejeitada.\@ Se a hipótese nula for rejeitada, isso sugere que a sequência de bits não é aleatória, e que pode haver padrões ou correlações presentes na sequência. 
+        Se a hipótese nula (H$_0$) não for rejeitada, isso sugere que a sequência de bits é aleatória, mas não prova que a sequência é verdadeiramente aleatória.
+
+        \boldmath{Erro Tipo 1} ocorre quando a hipótese nula (H$_0$) é rejeitada, mesmo que seja verdadeira. Isso ocorre quando o teste estatístico indica que a sequência de bits não é aleatória. A probabilidade de um erro do tipo 1 é chamaada de \boldmath{nivel de significancia} e é denotada por $\alpha$ %\nocite{NIST SP 800-22, pg 16. 1.1.5 Testing}.
+        Na criptografia valores comuns para $\alpha$ são 0.01 ou 0.001, o que significa que há uma probabilidade de 1\% ou 0.1\% de rejeitar a hipótese nula (H$_0$) quando ela é verdadeira. É esperado que 1 a cada 100 sequencias de bits sejam rejeitadas.
+
+        \boldmath{Erro do Tipo 2} ocorre quando a hipótese nula (H$_0$) não é rejeitada, mesmo que seja falsa. Isso ocorre quando o teste estatístico indica que a sequência de bits é aleatória, mesmo que haja padrões ou correlações presentes na sequência. A probabilidade de um erro do tipo 2 é denotada por $\beta$ %\nocite{NIST SP 800-22, pg 16. 1.1.5 Testing}.
+        Não há um valor fixo para $\beta$, pois depende do teste estatístico específico e da natureza dos padrões ou correlações presentes na sequência de bits e que possui uma infinidade ded maneiras de que uma sequencia de bits não seja aleatória.
+    
+        Uma das principais metas da execução de testes estatísticos é minimizar a probabilidade de cometer erros do tipo 2. Diminuindo a probabilidade de ter um gerador ruim aceitar uma sequência de bits como aleatória.
+        O estatístico de teste é usado para calcular um P-value que resume a força da evidência contra a hipótese nula.
+        
+        Se P-value = 1, a sequência parece ter aleatoriedade perfeita.
+        
+        Se P-value = 0, a sequência parece ser completamente não-aleatória.
+        
+        Se P-value $\geq \alpha$, a hipótese nula é aceita (a sequência parece ser aleatória).
+        
+        Se P-value $< \alpha$, a hipótese nula é rejeitada (a sequência não é aleatória).
+
+        O NIST SP 800--22 é um conjunto de testes estatísticos amplamente utilizado para avaliar a aleatoriedade de sequências de bits geradas por geradores de números aleatórios. 
+        Sendo ao todo 15 testes, cada um projetado para detectar diferentes tipos de padrões ou falhas na aleatoriedade. Esses testes incluem:
+         \begin{enumerate}
+          \item Teste de Frequência (monobit)
+          \item Teste de Frequência dentro de um bloco
+          \item Teste de Sequencias
+          \item Testes para Maior Sequencia de Uns em um bloco
+          \item Testes de Posto de Matriz Binária
+          \item Teste da Transformada Discreta de Fourier (Espectral)
+          \item Teste de Correspondência de Modelos não Sobrepostos
+          \item Teste de Correspondência de Modelos Sobrepostos
+          \item Teste "Estatístico Universal" de Maurer
+          \item Teste de Complexidade Linear
+          \item Teste Serial
+          \item Teste de Entropia Aproximada
+          \item Teste de Somas Cumulativas (Cusums)
+          \item Teste de Excursões Aleatórias
+          \item Teste de Variante de Excursões Aleatórias
+        \end{enumerate}%\nocite{NistsTP}
+
+        %\nocite{NIST SP 800-22, pg 16. 1.1.5 Testing}
+        

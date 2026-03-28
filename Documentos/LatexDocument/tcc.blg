@@ -1,7 +1,12 @@
 This is BibTeX, Version 0.99d (TeX Live 2023/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: tcc.aux
-A level-1 auxiliary file: chapters/fundamentosAleatoriedadeEmComputacao.aux
+A level-1 auxiliary file: chapters/introducao.aux
+A level-1 auxiliary file: chapters/fundamentos_aleatoriedade_em_computacao.aux
+A level-1 auxiliary file: chapters/quebra_de_criptografia.aux
+A level-1 auxiliary file: chapters/NIST_SP_800-22.aux
+A level-1 auxiliary file: chapters/NIST_IR_7977.aux
+A level-1 auxiliary file: chapters/NIST_IR_8547.aux
 The style file: abntex2-alf.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -23,44 +28,44 @@ Reallocated glb_str_end (elt_size=4) to 20 items from 10.
 | Em caso de dúvidas ou problemas com este estilo procure |
 | http://www.abntex.net.br/                               |
 +---------------------------------------------------------+
-You've used 12 entries,
+You've used 10 entries,
             6714 wiz_defined-function locations,
-            1272 strings with 11382 characters,
-and the built_in function-call counts, 15609 in all, are:
-= -- 1963
-> -- 170
-< -- 433
-+ -- 528
-- -- 55
-* -- 904
-:= -- 1981
-add.period$ -- 46
-call.type$ -- 12
-change.case$ -- 74
-chr.to.int$ -- 21
-cite$ -- 11
-duplicate$ -- 1604
-empty$ -- 639
-format.name$ -- 254
-if$ -- 3078
+            1264 strings with 11131 characters,
+and the built_in function-call counts, 12671 in all, are:
+= -- 1592
+> -- 140
+< -- 340
++ -- 425
+- -- 45
+* -- 733
+:= -- 1613
+add.period$ -- 36
+call.type$ -- 10
+change.case$ -- 62
+chr.to.int$ -- 19
+cite$ -- 9
+duplicate$ -- 1273
+empty$ -- 535
+format.name$ -- 208
+if$ -- 2520
 int.to.chr$ -- 0
 int.to.str$ -- 0
-missing$ -- 190
-newline$ -- 67
-num.names$ -- 50
-pop$ -- 225
+missing$ -- 158
+newline$ -- 55
+num.names$ -- 40
+pop$ -- 195
 preamble$ -- 1
-purify$ -- 37
+purify$ -- 31
 quote$ -- 0
-skip$ -- 1692
+skip$ -- 1356
 stack$ -- 1
-substring$ -- 713
-swap$ -- 580
-text.length$ -- 13
+substring$ -- 584
+swap$ -- 462
+text.length$ -- 11
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 9
+type$ -- 6
 warning$ -- 0
-while$ -- 75
+while$ -- 61
 width$ -- 0
-write$ -- 183
+write$ -- 150

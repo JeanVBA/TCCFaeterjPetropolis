@@ -1,0 +1,69 @@
+\chapter{NIST SP 800-22: Testes de Aleatoriedade para Geradores de Números Pseudoaleatórios}
+Bateria de testes SP 800--22 do NIST e o conceito de indistinguibilidade estatística.
+
+        O NIST Test Suite consiste em um pacote de 15 testes de estatistas desenvolvidos para avaliar a as sequencias binarias aleatórias (com comprimento arbitrário),
+        gerados por geradores de números aleatórios ou pseudo criptografados, seja de forma em hardware ou software. 
+        les podem ser decompostos em vários subtestes de acordo com a necessidade e o tipo de geração aleatória que podem ter uma sequencia. Os 15 testes são:
+        \begin{enumerate}
+          \item Teste de Frequência (monobit)
+          \item Teste de Frequência dentro de um bloco
+          \item Teste de Sequencias
+          \item Testes para Maior Sequencia de Uns em um bloco
+          \item Testes de Posto de Matriz Binária
+          \item Teste da Transformada Discreta de Fourier (Espectral)
+          \item Teste de Correspondência de Modelos não Sobrepostos
+          \item Teste de Correspondência de Modelos Sobrepostos
+          \item Teste "Estatístico Universal" de Maurer
+          \item Teste de Complexidade Linear
+          \item Teste Serial
+          \item Teste de Entropia Aproximada
+          \item Teste de Somas Cumulativas (Cusums)
+          \item Teste de Excursões Aleatórias
+          \item Teste de Variante de Excursões Aleatórias
+        \end{enumerate}\nocite{NistsTP}
+
+        Falar separadamente sobre cada um dos 15 testes. Mostrando um teste local separado. (Seguir documentacao do guthub para execucao local)\cite{NISTGit}
+        
+        \subsection{Bateria de Testes}%PASSO 1 - Explicacao de como vai ser efetuado os Testes
+
+            Os arquivos binários gerados em Java servem como a entrada bruta para o NIST SP 800--22, 
+            que interpreta os bytes como fluxos contínuos de bits para análise estatística. Ao executar o programa, 
+            a ferramenta particiona esses dados em blocos de tamanho fixo, como sequências de $10^{6}$ bits, 
+            aplicando sobre cada um deles quinze testes que buscam padrões não aleatórios, como repetições excessivas ou falta de complexidade linear. 
+            Para cada teste, o sistema calcula um $P\text{-value}$, que quantifica a probabilidade de a sequência ter sido gerada por um processo puramente aleatório. 
+            Ao final, o sucesso do gerador é determinado pela uniformidade desses valores e pela proporção de sequências que mantiveram o $P\text{-value} \geq 0,01$.
+
+            \begin{figure}[htb]
+                \centering
+                \caption{Modelo simples de um PRNG com LCG}\label{fig:model_prng_lcg}
+                \includegraphics[width=0.8\textwidth]{NIST/gerador_bits_testes_NIST.png}
+                \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+
+        %PASSO 1.1 - Modelo de geracao LCG (voce já fez, tem pronto a explicacao)
+        \subsubsection{Random}
+        
+        A função java.util.Random faz uso do modelo LCG “Gerador Congruencial Linear”. 
+        Ele é um modelo puramente matemático. 
+        Onde o mesmo é usado para gerar uma sequência de números aleatórios, 
+        calculados por uma equação linear.
+        \begin{equation}
+            x_{i+1} = (A \cdot x_i + C) \pmod{M}
+            \label{eq:lca}
+        \end{equation}
+        Onde o valor inicial “x0” é a seed, 
+        A e C são parâmetros inteiros que podem ter um valor 
+        já pré-definido ou passados diretamente, 
+        M é o espaço dos valores aleatórios possíveis e “mod” é o 
+        restante da divisão inteira.
+        
+        %PASSO 1.3 - Modelo de geracao Seguro usando entropia
+
+        \subsubsection{SegureRandom}
+        A função java.security.SegureRandom faz utilização do CSPRNG, que diferente do LCG.\@ Esse tipo de gerador busca caos do hardware.
+        Sendo elas interrupçoes de hardware, pressionar das teclas do teclado, posição e movimento do mouse,
+        pequenas flutuaçoes de voltagem do processador e/ou o tempo que o disco demora pra fazer a requisição.
+        Esses eventos imprevisíveis são misturados, usando funçoes hash como SHA-256 para criar uma seed de alta entropia.
+        Mesmo que se conheça o algoritmo, não é possivel recriar o mesmo evento. Justamente pelo fator caos fisico que foi utilizado.
+
+        

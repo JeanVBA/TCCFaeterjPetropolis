@@ -1,0 +1,4 @@
+Falar sobre ess ponto, poisvai ser utilizado na explicaćão dos protocolos tanto do NIST antigo, do NIST novo e do NISt pos quanticoo  ----  \section{A Semente (Seed) como Elemento Crítico}
+
+
+Aqui mudar e só falar sobre os protocolos em si, não precisa incluir as baterias de testes nem nada. Só comentar que o NISt tem uma lista de critérios a serem atendindos na criptografia ----  \section{Avaliação Estatística da Aleatoriedade}

@@ -11,14 +11,7 @@
 \emph{Análise de Geradores de Números Aleatórios em Sistemas Embarcados}.
 Disserta\c{c}\~{a}o (Dissertação (Mestrado em Engenharia Eletrônica)) --- Universidade Estadual do Rio de Janeiro, Rio de Janeiro, 2025.}
 
-\bibitem[Alves 2022]{6.1DefinicaoTRNG}
-\abntrefinfo{Alves}{ALVES}{2022}
-{ALVES, P.
-\emph{Desenvolvimento de {TRNG} ({True Random Number Generator}) através de células memristoras}.
-Disserta\c{c}\~{a}o (Trabalho de Conclusão de Gradução) --- Universidade Federal do Rio Grande do Sul, Porto Alegre, 2022.
-Dispon{\'\i}vel em: \url{https://lume.ufrgs.br/handle/10183/251751}. Acesso em: 18 fev. 2026.}
-
-\bibitem[github s.d.]{6.4NISTGit}
+\bibitem[github s.d.]{NISTGit}
 \abntrefinfo{github}{GITHUB}{s.d.}
 {GITHUB. \emph{NIST}. s.d.
 Dispon{\'\i}vel em: \url{https://github.com/terrillmoore/NIST-Statistical-Test-Suite}. Acesso em: 02 mar. 2026.}
@@ -31,11 +24,6 @@ Geneva, CH, 2022.}
 \bibitem[Knuth 1997]{book}
 \abntrefinfo{Knuth}{KNUTH}{1997}
 {KNUTH, D.~E. \emph{The Art of Computer Programming: Seminumerical Algorithms}. Reading, MA: Addison-Wesley, 1997. v.~2.}
-
-\bibitem[{Lenovo} s.d.]{6.1DefinicaoPRNG}
-\abntrefinfo{{Lenovo}}{{Lenovo}}{s.d.}
-{{Lenovo}. \emph{Glossary: Pseudorandom}. s.d.
-Dispon{\'\i}vel em: \url{https://www.lenovo.com/us/en/glossary/pseudorandom}. Acesso em: 18 fev. 2026.}
 
 \bibitem[Matsumoto e Nishimura 1998]{artigos}
 \abntrefinfo{Matsumoto e Nishimura}{MATSUMOTO; NISHIMURA}{1998}
@@ -59,7 +47,7 @@ Dispon{\'\i}vel em: \url{https://www.netdata.cloud/blog/understanding-entropy-th
 {{Oracle Corporation}. \emph{Class Random: Java Platform SE 17}. 2023.
 Dispon{\'\i}vel em: \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html}. Acesso em: 18 fev. 2026.}
 
-\bibitem[Rukhin 2010]{6.4NistsTP}
+\bibitem[Rukhin 2010]{NistsTP}
 \abntrefinfo{Rukhin}{RUKHIN}{2010}
 {RUKHIN, A. A statistical test suite for random and pseudorandom number generators for cryptographic applications.
 \emph{National Institute of Standards and Technology}, v.~2, n.~1, p. 23--62, 2010.}
