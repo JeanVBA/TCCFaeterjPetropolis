@@ -1,2 +1,5 @@
 \babel@toc {brazil}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Modelo simples de um PRNG com LCG}}{17}{figure.8.1}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama da Simulação do Backdoor do Dual\_EC\_DRBG}}{19}{figure.7.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Fluxo da Simulação do Backdoor do Dual\_EC\_DRBG}}{20}{figure.7.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Simulação do Ataque de Força Bruta Teste 1}}{21}{figure.7.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Simulação do Ataque de Força Bruta Teste 2}}{22}{figure.7.4}%

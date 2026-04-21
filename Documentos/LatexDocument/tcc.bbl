@@ -1,55 +1,8 @@
 \providecommand{\abntreprintinfo}[1]{%
  \citeonline{#1}}
-\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\begin{thebibliography}{}
 \providecommand{\abntrefinfo}[3]{}
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
-
-\bibitem[Almeida 2025]{outrosTcc}
-\abntrefinfo{Almeida}{ALMEIDA}{2025}
-{ALMEIDA, C.
-\emph{Análise de Geradores de Números Aleatórios em Sistemas Embarcados}.
-Disserta\c{c}\~{a}o (Dissertação (Mestrado em Engenharia Eletrônica)) --- Universidade Estadual do Rio de Janeiro, Rio de Janeiro, 2025.}
-
-\bibitem[github s.d.]{NISTGit}
-\abntrefinfo{github}{GITHUB}{s.d.}
-{GITHUB. \emph{NIST}. s.d.
-Dispon{\'\i}vel em: \url{https://github.com/terrillmoore/NIST-Statistical-Test-Suite}. Acesso em: 02 mar. 2026.}
-
-\bibitem[{International Organization for Standardization} 2022]{fichaTecnica}
-\abntrefinfo{{International Organization for Standardization}}{{International Organization for Standardization}}{2022}
-{{International Organization for Standardization}. \emph{ISO/IEC 27001: Information technology - Security techniques}.
-Geneva, CH, 2022.}
-
-\bibitem[Knuth 1997]{book}
-\abntrefinfo{Knuth}{KNUTH}{1997}
-{KNUTH, D.~E. \emph{The Art of Computer Programming: Seminumerical Algorithms}. Reading, MA: Addison-Wesley, 1997. v.~2.}
-
-\bibitem[Matsumoto e Nishimura 1998]{artigos}
-\abntrefinfo{Matsumoto e Nishimura}{MATSUMOTO; NISHIMURA}{1998}
-{MATSUMOTO, M.; NISHIMURA, T. Mersenne twister: A 623-dimensionally equidistributed uniform pseudo-random number generator.
-\emph{ACM Transactions on Modeling and Computer Simulation}, v.~8, n.~1, p. 3--30, 1998.}
-
-\bibitem[Nascimento 2013]{6.2shannonEntropia}
-\abntrefinfo{Nascimento}{NASCIMENTO}{2013}
-{NASCIMENTO, W.~S.
-\emph{Sobre algumas características da entropia de Shannon para sistemas atômicos confinados.}
-Disserta\c{c}\~{a}o (Dissertação (Mestrado em Física)) --- Universidade Federal da Bahia Instituto de Física, Bahia, 2013.
-Dispon{\'\i}vel em: \url{https://repositorio.ufba.br/bitstream/ri/28664/1/disserta\%c3\%a7\%c3\%a3o\_wallas\_final.pdf}. Acesso em: 25 fev. 2026.}
-
-\bibitem[{NETDATA} s.d.]{6.2Entropia}
-\abntrefinfo{{NETDATA}}{{NETDATA}}{s.d.}
-{{NETDATA}. \emph{Understanding Entropy Key To Secure Cryptography \& Randomness}. s.d.
-Dispon{\'\i}vel em: \url{https://www.netdata.cloud/blog/understanding-entropy-the-key-to-secure-cryptography-and-randomness}. Acesso em: 18 fev. 2026.}
-
-\bibitem[{Oracle Corporation} 2023]{sites}
-\abntrefinfo{{Oracle Corporation}}{{Oracle Corporation}}{2023}
-{{Oracle Corporation}. \emph{Class Random: Java Platform SE 17}. 2023.
-Dispon{\'\i}vel em: \url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Random.html}. Acesso em: 18 fev. 2026.}
-
-\bibitem[Rukhin 2010]{NistsTP}
-\abntrefinfo{Rukhin}{RUKHIN}{2010}
-{RUKHIN, A. A statistical test suite for random and pseudorandom number generators for cryptographic applications.
-\emph{National Institute of Standards and Technology}, v.~2, n.~1, p. 23--62, 2010.}
 
 \end{thebibliography}

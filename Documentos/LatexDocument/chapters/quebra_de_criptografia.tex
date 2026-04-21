@@ -11,6 +11,136 @@
 
         Dual\_EC\_DRBG, um gerador de números pseudoaleatórios que foi suspeito de conter uma backdoor, permitindo que um atacante previsse os números gerados. %https://medium.com/@popdogsec/dual-ec-drbg-a-look-into-a-potential-backdoor-395796e24ee6
         
+        DUAL\_EC\_DRBG (Dual Elliptic Curve Deterministic Random Bit Generator) é um fornecedoor de dados pseudoaleatórios para iniciar e continuar a operação criptográfica. Seu uso começou em meados dos anos 2000.
+        Ele utiliza duas curvas elípticas, P e Q, para gerar números pseudoaleatório, que são difíceis de prever o próximo valor ou os anteriores.
+
+        Curvas elipticas são uma curva algébrica definida por uma equação do tipo $y^2 = x^3 + ax + b$, onde a e b são constantes que satisfazem a condição de que a curva de não singularidade $4a^3 + 27b^2 \neq 0$.%\cite{CurvasElipticas} 
+        Elas são usadas em criptografia devido à sua estrutura matemática que permite operações eficientes e seguras, como a multiplicação de pontos, que é a base para muitos algoritmos criptográficos. 
+        
+        Utilizada em dispositivos moveis ou servirores que lidam com muitas conexões. Sendo corretamente implementada, é considerada segura quanto outras formas de criptografia.
+        Ela é capaz de combinar de melhor eficiencia com segurança permitindo chaves menores do que as usadas em RSA, por exemplo, para um nível de segurança equivalente.
+        Porem o Dual\_EC\_DRBG foi amplamente criticado por sua lentidão.
+
+        O \textbf{Dual\_EC\_DRBG} utiliza dois pontos, $P$ e $Q$, em uma curva elíptica. 
+        Os valores pseudoaleatórios são gerados a partir da aritmética desses pontos; especificamente, ao utilizar o ponto $P$, é possível encontrar o seu dobro, $2P$, 
+        através da intersecção da reta tangente com a curva e posterior reflexão em relação ao eixo $x$. Esse processo de multiplicação escalar é perpetuado até atingir um ponto $nP$.
+
+        O algoritmo funciona utilizando um dado inicial (semente) $s_i$. O fluxo de geração segue os seguintes passos:
+        
+        \begin{itemize}
+            \item \textbf{Atualização de Estado:} O novo estado interno é gerado ao computar o ponto $s_i P$, onde o valor da coordenada $x$ resultante é definido como $s_{i+1} = x(s_i P)$.
+            \item \textbf{Geração de Saída:} Simultaneamente, a saída é gerada através do ponto $Q$ no processo $r_i = x(s_i Q)$. 
+        \end{itemize}
+        
+        Por padrão, são descartados os 16 bits mais significativos de $r_i$ para compor a saída final utilizada na criptografia. Em termos de fluxo, o valor $s_i P$ impõe-se como o valor inicial para o próximo ciclo, 
+        enquanto $x(s_i Q)$ é o valor de saída. Para a segurança do gerador, não deve ser possível reverter $s_i$ a partir da saída, nem que $s_i Q$ revele informações sobre o estado interno $s_i P$.
+        
+        A vulnerabilidade do \textbf{Dual\_EC\_DRBG} reside justamente nos 16 bits truncados, que reduzem o espaço de busca para apenas $2^{16} = 65536$ possibilidades, 
+        tornando viável um ataque de força bruta para recuperar o ponto original. Caso exista uma relação especial entre os pontos tal que $P = zQ$, um atacante que conheça o escalar $z$ pode deduzir, 
+        por meio de propriedades associativas, a seguinte igualdade:
+        
+        \[ z(s_i Q) = s_i (z Q) = s_i P \]
+
+        \subsection{Uma avaliação pratica do Dual\_EC\_DRBG}
+
+            Para a validação prática da vulnerabilidade, 
+            foi desenvolvida uma Prova de Conceito (PoC) em linguagem Java. 
+            A implementação utilizou a biblioteca Bouncy Castle para operações de criptografia de curva elíptica. 
+            O código fonte seguiu a estrutura lógica de implementações de referência disponíveis na comunidade de segurança %\cite{green2013dualec}, 
+            sendo adaptado para demonstrar especificamente a previsibilidade de estados no ambiente Java 21.
+
+            \begin{table}[!htbp]
+                \centering
+                \caption{Dicionário de Variáveis da Classe Main}
+                \label{tab:vars_main}
+                \begin{tabular}{|l|l|p{8cm}|}
+                    \hline
+                    \textbf{Variável} & \textbf{Tipo} & \textbf{Descrição Acadêmica} \\ \hline
+                    \texttt{curve} & X9ECParameters & Contém os parâmetros estruturais da curva elíptica NIST P-256. \\ \hline
+                    \texttt{P} & ECPoint & Ponto gerador base da curva, utilizado para a transição de estados internos ($s_{i+1}$). \\ \hline
+                    \texttt{n} & BigInteger & A ordem da curva elíptica (número total de pontos no corpo finito). \\ \hline
+                    \texttt{d} & BigInteger & O \textit{Backdoor}. Escalar secreto tal que $Q = d \cdot P$. \\ \hline
+                    \texttt{Q} & ECPoint & Ponto público viciado inserido no gerador para permitir a criptoanálise. \\ \hline
+                    \texttt{e} & BigInteger & Inverso multiplicativo de $d$ em relação a $n$ ($d^{-1} \pmod n$). \\ \hline
+                    \texttt{s} & BigInteger & Semente (\textit{seed}) secreta inicial que define a entropia do sistema. \\ \hline
+                    \texttt{r0Capturado} & byte[] & Primeira amostra de saída (240 bits) observada pelo atacante. \\ \hline
+                    \texttt{s1Recuperado} & BigInteger & O segredo interno descoberto após a execução do ataque de força bruta. \\ \hline
+                \end{tabular}
+            \end{table}
+
+            \begin{table}[!htbp]
+                \centering
+                \caption{Dicionário de Métodos e Variáveis da Classe Backdoor}
+                \label{tab:vars_backdoor}
+                \begin{tabular}{|l|l|p{8cm}|}
+                    \hline
+                    \textbf{Identificador} & \textbf{Tipo} & \textbf{Descrição Técnica} \\ \hline
+                    \texttt{executarSimulacao} & Método & Implementa as funções de transição de estado e saída do Dual\_EC\_DRBG. \\ \hline
+                    \texttt{executarAtaque} & Método & Algoritmo de busca exaustiva para recuperação de estado via \textit{backdoor}. \\ \hline
+                    \texttt{s\_state} & BigInteger & Representa o estado interno atual ($s_i$) no ciclo do gerador. \\ \hline
+                    \texttt{totalTentativas} & int & Contador do esforço computacional (máximo de $2^{17}$ operações). \\ \hline
+                    \texttt{xCandidate} & BigInteger & Coordenada $x$ reconstruída combinando bits adivinhados e bits observados. \\ \hline
+                    \texttt{compressionPrefix} & String & Prefixo (02 ou 03) que resolve a ambiguidade da coordenada $y$ na curva. \\ \hline
+                    \texttt{s1\_candidate} & BigInteger & Candidato a estado interno obtido pela aplicação do escalar $e$ sobre o ponto. \\ \hline
+                    \texttt{truncarSaida} & Método & Simula o descarte dos 16 bits mais significativos da coordenada $x$. \\ \hline
+                    \texttt{reconstruirPonto} & Método & Formata a coordenada $x$ para o padrão de decodificação da Bouncy Castle. \\ \hline
+                \end{tabular}
+            \end{table}
+        
+            \begin{figure}[H]
+                    \centering
+                    \caption{Diagrama da Simulação do Backdoor do Dual\_EC\_DRBG}\label{fig:dual_ec_drbg_diagram}
+                    \includegraphics[width=0.8\textwidth]{Modelos/DualEcDRGB/dual_ec_drgb_diagram_code.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+        
+            Diagrama é uma representação visual do processo de simulação do backdoor do Dual\_EC\_DRBG. Ele ilustra as etapas envolvidas na geração de números pseudoaleatórios e na execução do ataque de força bruta para recuperar o estado interno.
+            Esse processo foi dividido entre a Main como orquestrador e a classe Backdoor, que contém a lógica de simulação e ataque, além de funções auxliares.
+            \textbf{Main}: Configura os parâmetros da curva elíptica, pontos P e Q, semente inicial e chama os métodos de simulação e ataque.
+            \textbf{Backdoor}: Contém o método executarSimulacaoDualEC para simular a geração de números pseudoaleatórios e o método executarAtaqueForcaBruta para recuperar o estado interno a partir das saídas observadas. 
+            Ele também inclui funções auxiliares para reconstruir pontos e truncar saídas conforme o padrão NIST.\@\newline
+        
+            \begin{figure}[H]
+                    \centering
+                    \caption{Fluxo da Simulação do Backdoor do Dual\_EC\_DRBG}\label{fig:dual_ec_drgb_process}
+                    \includegraphics[width=0.8\textwidth]{Modelos/DualEcDRGB/dual_ec_drgb_process.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+        
+            Um fluxo de execução é a ordem exata em que as instruções de um programa são processadas pelo computador. Diferente do fluxo original de funcionamento do DUAL\_EC\_DRBG, 
+            e como atacantes utilizam sua fragilidade. Na simulação todas as etapas foram implementadas e gerenciadas ao mesmo tempo, se conversando. Na realidade, essas funções e etapas não se conversam. 
+            O ataque começa com R0 e R1 (os dois outputs observados). 
+            O atacante não olha para R2 durante o processo de quebra — ele prevê R2 de forma independente, 
+            e só ao final compara com o valor real para confirmar que acertou. 
+            Isso é idêntico ao que aconteceria na vida real: o servidor TLS emite R0 num handshake, R1 num pacote seguinte, e R2 em outro pacote posterior — todos trafegam pela rede, e o atacante os captura em sequência. 
+            R2 já chegou pela rede antes mesmo de o atacante terminar o brute-force dos 16 bits.\newline
+        
+            \begin{figure}[H]
+                    \centering
+                    \caption{Simulação do Ataque de Força Bruta Teste 1}\label{fig:dual_ec_drbg_backdoor_attack_n1}
+                    \includegraphics[width=0.7\textwidth]{Modelos/DualEcDRGB/dual_ec_drgb_backdoor_attack_n1.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+        
+            A comprovação prática da vulnerabilidade do Dual\_EC\_DRBG durante essa simulação demonstra de forma clara que após o atacante ter acesso aos dois primeiros outputs (R0 e R1), 
+            ele pode realizar um ataque de força bruta para recuperar o estado interno do gerador. E com isso ele consegue não só prever o R2, mas também todos os outputs futuros, 
+            comprometendo completamente a segurança do sistema que depende desse gerador para suas operações criptográficas.\newline
+        
+            \begin{figure}[H]
+                    \centering
+                    \caption{Simulação do Ataque de Força Bruta Teste 2}\label{fig:dual_ec_drbg_backdoor_attack_n2}
+                    \includegraphics[width=0.8\textwidth]{Modelos/DualEcDRGB/dual_ec_drgb_backdoor_attack_n2.png}
+                    \legend{Fonte: Elaborado pelo autor (2026)}
+            \end{figure}
+        
+            Apesar de o truncamento especificado pelo padrão NIST SP 800-90A remover apenas 16 bits da coordenada $x$, o custo efetivo do ataque de recuperação de estado é da ordem de $2^{17}$ multiplicações escalares.   
+            Isso ocorre porque, para cada candidato reconstruído de $x$, é necessário considerar ambas as possíveis coordenadas $y$, correspondentes às soluções par e ímpar da equação da curva elíptica.
+            Formalmente, o custo total pode ser expresso como:
+            \[
+            2^{16} \times 2 = 2^{17}
+            \]
+            No experimento realizado, observou-se que a sincronização do estado exigiu 104.265 tentativas, valor consistente com o limite teórico máximo de 131.072 operações.
+
         O Bug do Debian OpenSSL (2008): Um desenvolvedor removeu uma linha de código que gerava entropia porque ela causava avisos no depurador. O resultado foi que apenas 32.768 chaves SSH eram possíveis. 
         Um ataque de força bruta levava segundos.
         

@@ -1,6 +1,53 @@
 \chapter{NIST IR 8547}
-    \section{Visão Geral do NIST IR 8547}
-       This report describes NIST’s expected approach to transitioning from quantum-vulnerable cryptographic algorithms to post-quantum digital signature algorithms and key-establishment schemes. 
-       It identifies existing quantum-vulnerable cryptographic standards and the current quantum-resistant standards that will be used in the migration. 
-       This report should inform the efforts and timelines of federal agencies, industry, and standards organizations for migrating information technology products, services, and infrastructure to PQC. 
-       Comments received on this draft will be used to revise this transition plan and feed into other algorithm- and application-specific guidance for the transition to PQC.
+    \section{Urgencia Prática e o Modelo de Ameaça}
+        O modelo de ameaça é uma ferramenta essencial para a segurança cibernética, permitindo que as organizações identifiquem, compreendam e mitiguem ameaças potenciais.
+        Ele ajuda a priorizar os recursos de segurança, focando nas ameaças mais relevantes e perigosas.
+        O modelo de ameaça é fundamental para o desenvolvimento de estratégias eficazes de defesa cibernética, garantindo que as organizações estejam preparadas para enfrentar os desafios atuais e futuros.
+        \subsection{Ameaça Harvest now, Decrypt Later} %capitulo 1 pg 8
+            A ameaça "Harvest now, Decrypt Later" refere-se à prática de coletar dados criptografados agora, com a intenção de descriptografá-los no futuro, quando os recursos computacionais ou as vulnerabilidades de segurança permitirem.
+            Essa ameaça é particularmente preocupante para dados sensíveis que precisam ser protegidos por longos períodos, como informações pessoais, financeiras e de saúde.
+            Para mitigar essa ameaça, é crucial adotar práticas de criptografia robustas e atualizadas, além de monitorar continuamente as vulnerabilidades e avanços tecnológicos que possam impactar a segurança dos dados.
+        \subsection{Teorema de Mosca e a Linha do Tempo} %capitulo 3 pg 14
+            O Teorema de Mosca é um conceito fundamental na segurança cibernética que destaca a importância de considerar o tempo ao avaliar ameaças e vulnerabilidades.
+            Ele sugere que, para proteger adequadamente os sistemas, é necessário entender não apenas as ameaças atuais, mas também as ameaças futuras que podem surgir à medida que a tecnologia evolui.
+            A linha do tempo é uma ferramenta útil para visualizar e planejar a defesa contra ameaças, permitindo que as organizações antecipem e se preparem para possíveis ataques futuros, garantindo uma postura de segurança proativa.
+    \section{Novos Padrões e Categorias de Segurança}
+        A evolução dos padrões de segurança é crucial para enfrentar as ameaças cibernéticas em constante mudança.
+        Novos padrões e categorias de segurança são desenvolvidos para abordar as vulnerabilidades emergentes e garantir a proteção eficaz dos sistemas e dados.
+        A adoção de padrões atualizados é essencial para manter a resiliência contra ataques cibernéticos, promovendo uma abordagem de segurança mais robusta e adaptável às novas ameaças.
+        \subsection{Publicações dos primeiros FIPS PQC} %capitulo 1 pg 8
+            As publicações dos primeiros FIPS (Federal Information Processing Standards) para criptografia pós-quântica (PQC) representam um marco importante na evolução da segurança cibernética.
+            Esses padrões são desenvolvidos para garantir que os sistemas de criptografia sejam resistentes a ataques de computadores quânticos, que têm o potencial de quebrar os métodos de criptografia tradicionais.
+            A adoção desses padrões é crucial para proteger dados sensíveis e garantir a segurança a longo prazo, especialmente à medida que a tecnologia quântica avança e se torna mais acessível.
+        \subsection{Categorias de Segurança Pós-Quântica (1 a 5)} %capitulo 4.1 pg 19
+            As categorias de segurança pós-quântica são classificações que ajudam a identificar e categorizar os diferentes tipos de algoritmos de criptografia que são resistentes a ataques de computadores quânticos.
+            Essas categorias incluem algoritmos baseados em reticulados, códigos, multivariados, hash-based e isogenias, cada um com suas próprias características e níveis de segurança.
+            A compreensão dessas categorias é essencial para escolher os algoritmos mais adequados para proteger dados sensíveis contra ameaças futuras, garantindo uma postura de segurança robusta e resiliente.
+    \section{Cronograma de Descontinuação (Deprecation)}
+        O cronograma de descontinuação é um plano estratégico que define o processo e os prazos para a retirada de sistemas, tecnologias ou práticas de segurança obsoletas.
+        Ele é essencial para garantir uma transição suave e segura para novas soluções, minimizando os riscos associados à manutenção de sistemas vulneráveis ou desatualizados.
+        A implementação de um cronograma de descontinuação eficaz ajuda as organizações a se adaptarem às mudanças tecnológicas e a manterem uma postura de segurança proativa, garantindo a proteção contínua dos dados e sistemas.
+        \subsection{Transição de Assinaturas Digitais (RSA, ECDSA, EdDSA)} %Capítulo 4.1.1, Página 20, Tabela 2.
+            A transição de assinaturas digitais, como RSA, ECDSA e EdDSA, é um processo crucial para garantir a segurança dos sistemas de criptografia à medida que novas ameaças emergem.
+            Com o avanço da tecnologia, especialmente a computação quântica, é necessário migrar para algoritmos de assinatura digital mais robustos e resistentes a ataques futuros.
+            A adoção de novos algoritmos de assinatura digital é essencial para proteger a integridade e autenticidade dos dados, garantindo a segurança a longo prazo em um ambiente cibernético em constante evolução.
+        \subsection{Transição de Estabelecimento de Chaves (DH, MQV, RSA)} %Capítulo 4.1.2, Página 21, Tabela 4.
+            A transição de estabelecimento de chaves, como DH (Diffie-Hellman), MQV (Menezes-Qu-Vanstone) e RSA, é um processo fundamental para garantir a segurança das comunicações criptografadas.
+            Com o avanço da tecnologia, especialmente a computação quântica, é necessário migrar para algoritmos de estabelecimento de chaves mais robustos e resistentes a ataques futuros.
+            A adoção de novos algoritmos de estabelecimento de chaves é essencial para proteger a confidencialidade e integridade das comunicações, garantindo a segurança a longo prazo em um ambiente cibernético em constante evolução.
+    \section{Estratégias de Transição: Protocolos Hibridos}
+        As estratégias de transição, como os protocolos híbridos, são abordagens que combinam algoritmos de criptografia tradicionais com algoritmos pós-quânticos para garantir a segurança durante o processo de migração.
+        Esses protocolos permitem que as organizações mantenham a compatibilidade com sistemas legados enquanto adotam novas soluções de segurança, minimizando os riscos associados à transição.
+        A implementação de protocolos híbridos é uma estratégia eficaz para garantir a proteção contínua dos dados e sistemas durante a evolução da tecnologia, proporcionando uma transição suave e segura para o futuro da segurança cibernética.
+        \subsection{Soluções Hibridas (PQC-Classical)} %Capítulo 3.2, Páginas 15-17.
+            As soluções híbridas, que combinam algoritmos de criptografia pós-quântica (PQC) com algoritmos clássicos, são uma abordagem estratégica para garantir a segurança durante a transição para novas tecnologias de criptografia.
+            Essas soluções permitem que as organizações mantenham a compatibilidade com sistemas legados enquanto adotam novas soluções de segurança, minimizando os riscos associados à migração.
+            A implementação de soluções híbridas é essencial para proteger os dados e sistemas durante a evolução da tecnologia, garantindo uma transição suave e segura para o futuro da segurança cibernética.
+        \subsection{Protocolos Hibridos (TLS, SSH, IPsec)} %Procura em outro lugar
+            Os protocolos híbridos, como TLS (Transport Layer Security), SSH (Secure Shell) e IPsec (Internet Protocol Security), são abordagens que combinam algoritmos de criptografia tradicionais com algoritmos pós-quânticos para garantir a segurança durante a transição para novas tecnologias de criptografia.
+            Esses protocolos permitem que as organizações mantenham a compatibilidade com sistemas legados enquanto adotam novas soluções de segurança, minimizando os riscos associados à migração.
+            A implementação de protocolos híbridos é essencial para proteger os dados e sistemas durante a evolução da tecnologia, garantindo uma transição suave e segura para o futuro da segurança cibernética.
+        \subsection{Agilidade Criptográfica em Camadas de Infraestrutura} %Capítulo 2.2, Páginas 12-13.
+            A agilidade criptográfica em camadas de infraestrutura é uma abordagem que permite a flexibilidade na escolha e implementação de algoritmos de criptografia em diferentes camadas de um sistema.
+            Essa abordagem é crucial para garantir a segurança durante a transição para novas tecnologias de criptografia, permitindo que as organizações adotem soluções híbridas e se adaptem às mudanças nas ameaças cibernéticas.
+            A implementação da agilidade criptográfica em camadas de infraestrutura é essencial para proteger os dados e sistemas durante a evolução da tecnologia, garantindo uma transição suave e segura para o futuro da segurança cibernética.

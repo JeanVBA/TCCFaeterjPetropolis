@@ -1,6 +1,77 @@
-\chapter{NIST IR 7977}
-    \section{Visão Geral do NIST IR 7977}
-
-        This document describes the principles, processes and procedures that drive cryptographic standards and guidelines development efforts at the National Institute of Standards and Technology (NIST). 
-        This document reflects public comments received on two earlier versions, and will serve as the basis to guide NIST’s future cryptographic standards and guidelines development efforts. 
-        It will be reviewed and updated every five years, or more frequently if a need arises, to help ensure that NIST fulfills its role and responsibilities for producing robust, effective cryptographic standards and guidelines.
+\chapter{Revisão dos protocolos e padrões de criptografia}
+    \section{Fundamentação da Autoridade e Tipos de Padrões}
+        The authority for NIST to develop cryptographic standards and guidelines is derived from the Federal Information Security Management Act (FISMA) of 2002, which requires federal agencies to use standards and guidelines developed by NIST.\@
+        NIST develops cryptographic standards and guidelines through a public process that includes soliciting input from stakeholders, conducting research and analysis, and publishing draft documents for public comment. 
+        The types of standards and guidelines developed by NIST include Federal Information Processing Standards (FIPS), Special Publications (SP), and Interagency Reports (IR). 
+        FIPS are mandatory standards that must be followed by federal agencies, while SPs and IRs are voluntary guidelines that provide recommendations for best practices in cryptography.
+        \subsection{FIPS} %capitulo 3 pg 10
+            FIPS are developed through a rigorous process that includes public input, testing, and validation. 
+            They cover a wide range of topics, including encryption algorithms, key management, and digital signatures. 
+            Examples of FIPS include FIPS 140--2, which specifies the security requirements for cryptographic modules, and FIPS 197, which specifies the Advanced Encryption Standard (AES).
+        \subsection{SPs} %capitulo 3 pg 10
+            SPs are developed to provide guidance on specific topics related to cryptography. 
+            They are often developed in response to emerging threats or new technologies, and may cover topics such as secure software development, cryptographic key management, and secure communication protocols. 
+            Examples of SPs include SP 800--57, which provides guidelines for key management, and SP 800--175, which provides guidelines for password-based key derivation.
+        \subsection{IRs}
+            IRs are developed to provide information and analysis on specific topics related to cryptography. 
+            They are often developed in response to specific requests from federal agencies or other stakeholders, and may cover topics such as the state of the art in cryptographic research, emerging threats and vulnerabilities, and the impact of new technologies on cryptography. 
+            Examples of IRs include IR 7977, which provides an overview of NIST's cryptographic standards and guidelines development process, and IR 8105, which provides an analysis of the security of post-quantum cryptographic algorithms.
+        \subsection{ITL} %capitulo 1 pg 06
+            The Information Technology Laboratory (ITL) is responsible for developing and maintaining NIST's cryptographic standards and guidelines. 
+            ITL conducts research and analysis on cryptographic topics, solicits input from stakeholders, and publishes draft documents for public comment. 
+            ITL also provides technical assistance to federal agencies and other stakeholders on the implementation of NIST's cryptographic standards and guidelines.
+        \subsection{CSD} %capitulo 1 pg 06
+            The Computer Security Division (CSD) is a division within ITL that is responsible for developing and maintaining NIST's cryptographic standards and guidelines. 
+            CSD conducts research and analysis on cryptographic topics, solicits input from stakeholders, and publishes draft documents for public comment. 
+            CSD also provides technical assistance to federal agencies and other stakeholders on the implementation of NIST's cryptographic standards and guidelines.
+    \section{Principios ded Segurança}
+        The principles of security that guide NIST's development of cryptographic standards and guidelines include confidentiality, integrity, availability, and non-repudiation. 
+        Confidentiality refers to the protection of information from unauthorized access or disclosure. 
+        Integrity refers to the protection of information from unauthorized modification or destruction. 
+        Availability refers to the protection of information from unauthorized disruption or denial of service. 
+        Non-repudiation refers to the ability to prove that a specific action or event occurred, and that it was performed by a specific individual or entity.
+        \subsection{Mérito Técnico e Provas de Segurança} %capitulo 2 pg 7-8
+            NIST evaluates the technical merit and security of cryptographic algorithms and protocols through a rigorous process that includes public input, testing, and validation. 
+            NIST conducts research and analysis on cryptographic topics, solicits input from stakeholders, and publishes draft documents for public comment. 
+            NIST also conducts testing and validation of cryptographic algorithms and protocols to ensure that they meet the required security standards.
+        \subsection{Integridade e Influência} %capitulo 2 pg 7
+            NIST's cryptographic standards and guidelines are designed to ensure the integrity of information and to influence the development of secure technologies. 
+            NIST's standards and guidelines provide a framework for the development of secure technologies, and they help to ensure that information is protected from unauthorized access, modification, or destruction. 
+            NIST's standards and guidelines also help to promote the adoption of secure technologies by providing a common framework for developers and users.
+    \section{Metodologia de Seleção}
+        NIST's methodology for selecting cryptographic algorithms and protocols is based on a rigorous process that includes public input, testing, and validation. 
+        NIST solicits input from stakeholders, including industry experts, academia, and government agencies, to identify potential candidates for cryptographic algorithms and protocols. 
+        NIST then conducts research and analysis on the candidates to evaluate their technical merit and security. 
+        NIST also conducts testing and validation of the candidates to ensure that they meet the required security standards. 
+        Finally, NIST publishes draft documents for public comment to solicit feedback from stakeholders before finalizing the selection of cryptographic algorithms and protocols.
+        \subsection{Competições de Algoritmos} %capitulo 5 pg 13/ capitulo 7 pg 18
+            NIST has conducted several competitions to select cryptographic algorithms and protocols, including the Advanced Encryption Standard (AES) competition and the Post-Quantum Cryptography (PQC) competition. 
+            The AES competition was held in the late 1990s to select a new encryption algorithm to replace the aging Data Encryption Standard (DES). 
+            The PQC competition is currently underway to select new cryptographic algorithms that are resistant to attacks by quantum computers.
+        \subsection{Fases de Competição} % capitulo 7 pg 24
+            The phases of NIST's competitions for cryptographic algorithms and protocols typically include a call for submissions, an initial evaluation phase, a public comment period, and a final selection phase. 
+            During the call for submissions, NIST solicits input from stakeholders to identify potential candidates for cryptographic algorithms and protocols. 
+            During the initial evaluation phase, NIST conducts research and analysis on the candidates to evaluate their technical merit and security. 
+            During the public comment period, NIST publishes draft documents for public comment to solicit feedback from stakeholders. 
+            Finally, during the final selection phase, NIST evaluates the feedback received during the public comment period and makes a final selection of cryptographic algorithms and protocols.
+        \subsection{Propriedade Intelectual (IP)} %capitulo 7 pg 23
+            NIST's approach to intellectual property (IP) in the context of cryptographic standards and guidelines is to encourage the use of open standards and to avoid the use of proprietary algorithms and protocols. 
+            NIST's standards and guidelines are designed to be freely available and to promote interoperability among different technologies. 
+            NIST also encourages the use of open-source software and hardware implementations of cryptographic algorithms and protocols to promote transparency and security.
+    \section{Manutenção e Substituição de Padrões}
+        NIST's process for maintaining and replacing cryptographic standards and guidelines is based on a continuous review and evaluation process. 
+        NIST regularly reviews its standards and guidelines to ensure that they remain relevant and effective in the face of emerging threats and new technologies. 
+        When necessary, NIST may update or replace its standards and guidelines to address new threats or to take advantage of new technologies. 
+        NIST also provides technical assistance to federal agencies and other stakeholders on the implementation of its standards and guidelines to ensure that they are effectively implemented and maintained over time.
+        \subsection{Ciclo de Vida e Retirada (Withdrawal)} %capitulo 7 pg 26
+            The lifecycle of NIST's cryptographic standards and guidelines typically includes several stages, including development, publication, implementation, maintenance, and withdrawal. 
+            During the development stage, NIST solicits input from stakeholders and conducts research and analysis to develop new standards and guidelines. 
+            During the publication stage, NIST publishes draft documents for public comment and finalizes the standards and guidelines based on feedback received. 
+            During the implementation stage, federal agencies and other stakeholders implement the standards and guidelines in their systems and technologies. 
+            During the maintenance stage, NIST regularly reviews its standards and guidelines to ensure that they remain relevant and effective. 
+            Finally, during the withdrawal stage, NIST may retire or replace standards and guidelines that are no longer effective or relevant.
+        \subsection{Análise de Constantes e Proveniência} %capitulo 7 pg 22
+            NIST's process for analyzing the constants and provenance of cryptographic algorithms and protocols is based on a rigorous evaluation process that includes public input, testing, and validation. 
+            NIST evaluates the constants used in cryptographic algorithms and protocols to ensure that they are secure and do not introduce vulnerabilities. 
+            NIST also evaluates the provenance of cryptographic algorithms and protocols to ensure that they are developed by reputable sources and do not have hidden weaknesses or backdoors.
+    

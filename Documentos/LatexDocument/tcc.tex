@@ -18,11 +18,13 @@
 \usepackage{microtype} 			% Para melhorias na justificação
 \usepackage{amsmath}  % Essencial para fórmulas matemáticas
 \usepackage{amsfonts} % Para símbolos como o de conjuntos (R, N, Z)
-\usepackage{amssymb}  % Símbolos extras
+\usepackage{amssymb}  % Símbolos extras a
+\usepackage{float}
+\usepackage{placeins}
 \graphicspath{{images/}}
 
 % --- CONFIGURAÇÕES DE PACOTES ---
-\usepackage[alf]{abntex2cite}	% Citações padrão ABNT (Autor-data)
+\usepackage{abntex2cite}   	% Citações padrão ABNT (Autor-data)
 
 \hypersetup{
     colorlinks=false,
@@ -31,7 +33,7 @@
 }
 
 % --- INFORMAÇÕES DO TCC ---
-\titulo{Pseudo Aleatoriedade e Segurança Criptográfica: Uma Análise da Transição para Algoritmos Pós-Quânticos}
+\titulo{Análise da Transição para Algorítmos criptográficos Pós-Quânticos nos modelos NIST}
 \autor{Jean Victor Borges de Abreu}
 \local{Petrópolis -Rio de Janeiro}
 \data{2026}
@@ -84,11 +86,15 @@
 
 \include{chapters/quebra_de_criptografia}
 
-\include{chapters/NIST_SP_800-22}
+%\include{chapters/NIST_SP_800-22}
 
 \include{chapters/NIST_IR_7977}
 
+\include{chapters/NIST_IR_8105}
+
 \include{chapters/NIST_IR_8547}
+
+\include{chapters/cristals_kyber}
 
 \chapter{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)} % Capitulo 5
 
@@ -168,84 +174,9 @@
 
     Geradores Quânticos de Números Aleatórios (QRNG) e integração híbrida TRNG + PQC.
 
-\chapter{Bibliografias Uteis}
-
-    1. Fundamentos e Estado da Arte (Capítulos 2 e 3)
-
-    Para falar de aleatoriedade, sementes e o funcionamento dos CSPRNGs atuais:
-
-    Livro: The Art of Computer Programming, Vol 2: Seminumerical Algorithms (Donald Knuth).
-
-    Onde usar: Capítulos 2.1 e 3.1. É a base matemática para entender geradores lineares e por que eles são previsíveis.
-
-    Livro: Handbook of Applied Cryptography (Menezes, van Oorschot e Vanstone).
-
-    Onde usar: Capítulo 3.2 e 4.1. Consulte o Capítulo 5 (Pseudorandom Bits and Sequences). Ele define formalmente o "Next Bit Test".
-
-    Norma Técnica: NIST SP 800-22 Rev 1a: A Statistical Test Suite for Random and Pseudorandom Number Generators.
-
-    Onde usar: Capítulo 2.4. É o documento que dita como o mundo testa se um PRNG é bom.
-
-    2. A Ameaça Quântica (Capítulo 4)
-
-    Aqui você precisa citar os fundamentos da física quântica aplicados à quebra de códigos:
-
-    Livro: Quantum Computation and Quantum Information (Michael Nielsen e Isaac Chuang).
-
-    Onde usar: Capítulo 4.1 e 4.2. É a "bíblia" da computação quântica. Essencial para explicar Qubits e o Algoritmo de Shor.
-
-    Artigo Seminal: Algorithms for quantum computation: discrete logarithms and factoring (Peter Shor, 1994).
-
-    Onde usar: Capítulo 4.2. O artigo que mudou a história da criptografia.
-
-    Relatório: NIST IR 8105: Report on Post-Quantum Cryptography.
-
-    Onde usar: Capítulo 4.4. Explica o conceito de "Harvest Now, Decrypt Later".
-
-    3. Criptografia Pós-Quântica e Reticulados (Capítulo 5)
-
-    Esta é a parte mais densa e moderna do seu trabalho:
-
-    Artigo de Revisão: A Decade of Lattice Cryptography (Chris Peikert).
-    Onde usar: Capítulo 5.3 e 5.4. Peikert é um dos maiores nomes da área. Este artigo resume como a matemática de reticulados (Lattices) se tornou segura.
-
-    Artigo Técnico: The Learning with Errors Problem (Oded Regev).
-    Onde usar: Capítulo 5.4. Oded Regev criou o conceito de LWE. Este artigo é a fonte primária para a sua fundamentação matemática.
-
-    Documento Oficial (FIPS): FIPS 203: Module--Lattice--Based Key--Encapsulation Mechanism Standard.
-
-    Onde usar: Capítulo 5.5. Este é o padrão final do ML-KEM (Kyber). É a referência mais importante para o seu futuro capítulo 6.
-
-    4. Transição e Ecossistema Java (Capítulo 6)
-
-    Para a parte teórica sobre Java e Agilidade Criptográfica:
-    Documentação JEP (JDK Enhancement Proposals):
-
-    JEP 466 (Class-File API) e documentos relacionados à implementação do ML-KEM no provedor SunJCE.
-
-    Onde usar: Capítulo 6.1.
-
-    Artigo sobre Crypto-Agility: A Taxonomy of Crypto-Agility (S. Ott et al.).
-
-    Onde usar: Capítulo 6.2. Ajuda a definir por que sistemas modernos não podem ficar "presos" a um único algoritmo.
-
-\chapter{Conclusão}
-Considerações finais.
-
-\chapter{Exemplos para uso da bibliográfia}
-
-para livros\cite{book}
-
-para artigos\cite{artigos}
-
-para sites e outras fontes\cite{sites}
-
-para outros TCC e afins\cite{outrosTcc}
-
-para fichas tecnicas e documentacao\cite{fichaTecnica}
 % --- ELEMENTOS PÓS-TEXTUAIS ---
 \postextual
-
+%\nocite{*}
 \bibliography{referencias}% Arquivo .bib com suas fontes
 
 \end{document}
