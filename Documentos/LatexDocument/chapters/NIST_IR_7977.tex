@@ -1,77 +1,101 @@
 \chapter{Revisão dos protocolos e padrões de criptografia}
+    O NIST utiliza varios documentos para estabelecer os protocolos e padrões de criptografia, cada um com um propósito específico. Sendo comummente publicados em três categorias principais: FIPS (Federal Information Processing Standards), SPs (Special Publications) e IRs (Interagency Reports). Esses documentos são desenvolvidos para garantir a segurança e a integridade dos sistemas de informação, fornecendo diretrizes claras para a implementação de algoritmos criptográficos e práticas de segurança.
     \section{Fundamentação da Autoridade e Tipos de Padrões}
-        The authority for NIST to develop cryptographic standards and guidelines is derived from the Federal Information Security Management Act (FISMA) of 2002, which requires federal agencies to use standards and guidelines developed by NIST.\@
-        NIST develops cryptographic standards and guidelines through a public process that includes soliciting input from stakeholders, conducting research and analysis, and publishing draft documents for public comment. 
-        The types of standards and guidelines developed by NIST include Federal Information Processing Standards (FIPS), Special Publications (SP), and Interagency Reports (IR). 
-        FIPS are mandatory standards that must be followed by federal agencies, while SPs and IRs are voluntary guidelines that provide recommendations for best practices in cryptography.
+
         \subsection{FIPS} %capitulo 3 pg 10
-            FIPS are developed through a rigorous process that includes public input, testing, and validation. 
-            They cover a wide range of topics, including encryption algorithms, key management, and digital signatures. 
-            Examples of FIPS include FIPS 140--2, which specifies the security requirements for cryptographic modules, and FIPS 197, which specifies the Advanced Encryption Standard (AES).
+        Os documentos FIPS são padrões de processamento de informações federais que estabelecem requisitos específicos para algoritmos criptográficos e práticas de segurança. Eles são desenvolvidos para garantir a interoperabilidade e a segurança dos sistemas de informação utilizados pelo governo dos Estados Unidos. Os FIPS são amplamente adotados por organizações governamentais e privadas como referência para a implementação de criptografia segura. Esses padrões abrangem uma variedade de tópicos, incluindo algoritmos de criptografia simétrica e assimétrica, funções de hash, e protocolos de segurança. %\cite{nistIR7977}
+
+        \subsubsection{FIPS 204}
+            ML-DSA (Module-Lattice-Based Digital Signature Algorithm) é um padrão para assinaturas digitais pós-quânticas. As assinaturas digitais são utilizadas na identificação e autenticação de documentos eletrônicos. Ele se baseia no CRYSTALS-Dilithium, onde se faz uso de problemas reticulados modulares. (Module-LWE e Module-SIS). Para cada nivel de segurança o ML-DSA oferece níveis de proteção diferentes. 
+            Sendo:
+            \begin{itemize}
+                \item{ML-DSA-44: Nivel de Segurança de 128 bits} para recursos limitados
+                \item{ML-DSA-64: Nivel de Segurança de 192 bits} recomendado para a maioria dos casos
+                \item{ML-DSA-84: Nivel de Segurança de 256 bits} longo prazo e alta segurança
+            \end{itemize}
+            %\cite{nistFIPS204}
+
+            O ML-DSA é considerado suficientemente seguro e fortemente infalsificável, mesmo frente a ataques de computadores quânticos. Podendo ser usado para idedntificar modificações sem autorização, garantindo a integridade e autenticidade dos dados. Alem de demonstrar a propriedade de não repúdio, onde o remetente não pode negar a autoria da assinatura digital. Ele foi desenvolvida de forma que mesmo que o atacante conheća ou possua parte da chave privada ou a própria assinatura, ele não consiga forjar uma assinatura adicional ou modificar a assinatura existente sem ser detectado. %\cite{nistFIPS204}
+
+            A segurança se da aos problemas erticulados com erros LWE (Learning With Errors) e SIS (Short Integer Solution), que são considerados difíceis de resolver mesmo para computadores quânticos. 
+            O problema LWE consiste em recuperar um vetor $s \in \mathbb{Z}_q^n$ dado um conjunto de equações lineares ruidosas da forma: \[ As + e = b \] onde $A$ e $b$ são dados e $e$ é um vetor de erro pequeno.
+            O problema SIS, por sua vez, envolve encontrar um vetor inteiro curto $x$ tal que: \[Ax \equiv 0 \mod q
+            \]onde $A$ é uma matriz dada e $q$ é um módulo. Ambos os problemas são considerados difíceis de resolver, mesmo para computadores quânticos, o que torna o ML-DSA uma escolha segura para assinaturas digitais pós-quânticas.
+
+            A transição da versão 3.1 do CRYSTALS-Dilithium para o padrão final \textbf{ML-DSA} (FIPS 204) focou no fortalecimento da segurança contra ataques de colisão e na robustez da implementação. As principais mudanças envolvem:
+
+            \begin{itemize}
+                \item \textbf{Ajuste de Comprimento de Bits:} Para evitar que ataques de colisão no SHAKE256 degradassem o nível de segurança do NIST (especificamente da categoria 5 para a 4), o comprimento do representante da mensagem $\mu$ foi aumentado de $384$ para $512$ bits. Da mesma forma, a semente aleatória privada $\rho'$ foi expandida de $384$ para $512$ bits.
+
+                \item \textbf{Fortalecimento de Variáveis de Hash:} O hash da chave pública $tr$ foi padronizado em $512$ bits. Além disso, o hash do compromisso $\tilde{c}$ agora utiliza $384$ bits para o conjunto \textit{ML-DSA-65} e $512$ bits para o \textit{ML-DSA-87}, sendo que todos os bits de $\tilde{c}$ são agora utilizados na geração do desafio $c$.
+
+                \item \textbf{Segurança de Assinatura e Aleatoriedade:} O ML-DSA introduziu uma variante de assinatura ``protegida'', onde o valor $\pi'$ é derivado de forma pseudorandômica utilizando a chave privada, a mensagem e uma string de aleatoriedade $rnd$ de $256$ bits. Isso mitiga riscos associados ao determinismo puro em ambientes vulneráveis a ataques de canal lateral.
+
+                \item \textbf{Correções de Integridade e Domínio:} Foi restaurada a verificação de entradas malformadas no desempacotamento da dica (\textit{hint}), garantindo que o esquema seja fortemente infalsificável (sEUF-CMA). Para evitar o uso indevido de chaves, foi implementada a separação de domínio tanto na geração de chaves quanto nas assinaturas, distinguindo mensagens assinadas diretamente das versões pré-hash (\textit{HashML-DSA}).
+            \end{itemize}%\cite{nistFIPS204}
+        \subsubsection{FIPS 205}
+            SLH-DSA (Signature-Lattice-Based Digital Signature Algorithm) é um padrão para assinaturas digitais sem estado baseado em hash. O SLH-DSA é baseado no SPHINCS+ (Stateless Practical Hash-based Incredibly Nice Collision-resistant Signatures) uma assinatura digital pos-quantico a base de hash, que gera uma assinatura digital com uma chave privada, a verificação ocorre atraves da chave publica correspondente, não sendo iguais. Cada signatário possui um par de chaves privada e publica. As chaves publicas são de conhecimento publico, sendo utilizada justamente para a verificação da assinatura.
+            
+            A dificuldade do SLH-DSA está na dificuldade de encontrar pre-conditions no hash utilizado e suas varias propriedades relacionais ao hash. Ele foi desenvolvido para suportar ataques em larga escalada, mesmo sendo de origem quantica.  
+            
+            o SLH-DSA utiliza de outros dois esquemas de assiantura sendo eles o FORS (Forest of Random Trees) e o XMSS (Xtended Merkle Signature Scheme) o XMSS é um esquema de assinatura ded uso unico baseada em hash (WOTS+) Winternitz One-Time Signature Plus.
+
+            O SLH-DSA é constituido de uma grupo de chaves em pares FORMS, no padrão adotado o par de chaves é $2^{63}$
+            que são gerados de forma pseudoaleatorica por uma seed inicial. O FORMS assina cada par de chaves uma parte do numero de mensagens. 
+            
+            XMSS é uma assinatura multitemporária usando uma combinação de assinaturas WOTS+ para cada par de chaves, alem de uma assinatura XMSS para o root da arvore. A raiz da arvore é gerada por meio de uma função de hash aplicada a um conjunto de chaves publicas. 
+
+            A segurança ``sem estado'' é alcançada através de uma hiperárvore composta por $d$ camadas de árvores XMSS:
+
+            \begin{itemize}
+                \item \textbf{Camada Superior ($d-1$):} Consiste em uma única árvore XMSS cuja raiz é a chave pública do sistema ($PK.root$).
+                \item \textbf{Camadas Intermediárias:} Cada árvore XMSS assina a raiz da árvore XMSS situada na camada imediatamente inferior.
+                \item \textbf{Camada Inferior (Camada 0):} As chaves WOTS+ desta camada são utilizadas para assinar e autenticar as chaves públicas FORS.
+            \end{itemize}
+
+            Para assinar uma mensagem, o algoritmo executa os seguintes passos:
+
+            \begin{enumerate}
+                \item Calcula um \textit{hash} da mensagem para selecionar uma chave FORS de forma pseudoaleatória.
+                \item Gera a assinatura FORS para a mensagem.
+                \item Cria uma assinatura de hiperárvore, que consiste na sequência de assinaturas XMSS necessárias para ligar a chave FORS utilizada até a raiz pública ($PK.root$).
+            \end{enumerate}
+
+            A assinatura final é a combinação da assinatura FORS com esse caminho de autenticação (assinatura de hiperárvore).
+
+            \begin{itemize}
+                \item \textbf{Chave Pública:} Composta pela raiz da hiperárvore ($PK.root$) e uma semente ($PK.seed$) para separação de domínio.
+                \item \textbf{Chave Privada:} Inclui sementes ($SK.seed$ e $SK.prf$) que permitem regenerar todos os valores secretos e gerar \textit{hashes} aleatórios, garantindo que o sistema seja determinístico e dispense o armazenamento de estado sobre quais chaves já foram utilizadas.
+            \end{itemize}
+            
+            %\cite{nistFIPS205} 
+            
+
+
         \subsection{SPs} %capitulo 3 pg 10
-            SPs are developed to provide guidance on specific topics related to cryptography. 
-            They are often developed in response to emerging threats or new technologies, and may cover topics such as secure software development, cryptographic key management, and secure communication protocols. 
-            Examples of SPs include SP 800--57, which provides guidelines for key management, and SP 800--175, which provides guidelines for password-based key derivation.
+
         \subsection{IRs}
-            IRs are developed to provide information and analysis on specific topics related to cryptography. 
-            They are often developed in response to specific requests from federal agencies or other stakeholders, and may cover topics such as the state of the art in cryptographic research, emerging threats and vulnerabilities, and the impact of new technologies on cryptography. 
-            Examples of IRs include IR 7977, which provides an overview of NIST's cryptographic standards and guidelines development process, and IR 8105, which provides an analysis of the security of post-quantum cryptographic algorithms.
+
         \subsection{ITL} %capitulo 1 pg 06
-            The Information Technology Laboratory (ITL) is responsible for developing and maintaining NIST's cryptographic standards and guidelines. 
-            ITL conducts research and analysis on cryptographic topics, solicits input from stakeholders, and publishes draft documents for public comment. 
-            ITL also provides technical assistance to federal agencies and other stakeholders on the implementation of NIST's cryptographic standards and guidelines.
+
         \subsection{CSD} %capitulo 1 pg 06
-            The Computer Security Division (CSD) is a division within ITL that is responsible for developing and maintaining NIST's cryptographic standards and guidelines. 
-            CSD conducts research and analysis on cryptographic topics, solicits input from stakeholders, and publishes draft documents for public comment. 
-            CSD also provides technical assistance to federal agencies and other stakeholders on the implementation of NIST's cryptographic standards and guidelines.
-    \section{Principios ded Segurança}
-        The principles of security that guide NIST's development of cryptographic standards and guidelines include confidentiality, integrity, availability, and non-repudiation. 
-        Confidentiality refers to the protection of information from unauthorized access or disclosure. 
-        Integrity refers to the protection of information from unauthorized modification or destruction. 
-        Availability refers to the protection of information from unauthorized disruption or denial of service. 
-        Non-repudiation refers to the ability to prove that a specific action or event occurred, and that it was performed by a specific individual or entity.
+
+    \section{Principios de Segurança}
+
         \subsection{Mérito Técnico e Provas de Segurança} %capitulo 2 pg 7-8
-            NIST evaluates the technical merit and security of cryptographic algorithms and protocols through a rigorous process that includes public input, testing, and validation. 
-            NIST conducts research and analysis on cryptographic topics, solicits input from stakeholders, and publishes draft documents for public comment. 
-            NIST also conducts testing and validation of cryptographic algorithms and protocols to ensure that they meet the required security standards.
+
         \subsection{Integridade e Influência} %capitulo 2 pg 7
-            NIST's cryptographic standards and guidelines are designed to ensure the integrity of information and to influence the development of secure technologies. 
-            NIST's standards and guidelines provide a framework for the development of secure technologies, and they help to ensure that information is protected from unauthorized access, modification, or destruction. 
-            NIST's standards and guidelines also help to promote the adoption of secure technologies by providing a common framework for developers and users.
+
     \section{Metodologia de Seleção}
-        NIST's methodology for selecting cryptographic algorithms and protocols is based on a rigorous process that includes public input, testing, and validation. 
-        NIST solicits input from stakeholders, including industry experts, academia, and government agencies, to identify potential candidates for cryptographic algorithms and protocols. 
-        NIST then conducts research and analysis on the candidates to evaluate their technical merit and security. 
-        NIST also conducts testing and validation of the candidates to ensure that they meet the required security standards. 
-        Finally, NIST publishes draft documents for public comment to solicit feedback from stakeholders before finalizing the selection of cryptographic algorithms and protocols.
+
         \subsection{Competições de Algoritmos} %capitulo 5 pg 13/ capitulo 7 pg 18
-            NIST has conducted several competitions to select cryptographic algorithms and protocols, including the Advanced Encryption Standard (AES) competition and the Post-Quantum Cryptography (PQC) competition. 
-            The AES competition was held in the late 1990s to select a new encryption algorithm to replace the aging Data Encryption Standard (DES). 
-            The PQC competition is currently underway to select new cryptographic algorithms that are resistant to attacks by quantum computers.
+
         \subsection{Fases de Competição} % capitulo 7 pg 24
-            The phases of NIST's competitions for cryptographic algorithms and protocols typically include a call for submissions, an initial evaluation phase, a public comment period, and a final selection phase. 
-            During the call for submissions, NIST solicits input from stakeholders to identify potential candidates for cryptographic algorithms and protocols. 
-            During the initial evaluation phase, NIST conducts research and analysis on the candidates to evaluate their technical merit and security. 
-            During the public comment period, NIST publishes draft documents for public comment to solicit feedback from stakeholders. 
-            Finally, during the final selection phase, NIST evaluates the feedback received during the public comment period and makes a final selection of cryptographic algorithms and protocols.
+
         \subsection{Propriedade Intelectual (IP)} %capitulo 7 pg 23
-            NIST's approach to intellectual property (IP) in the context of cryptographic standards and guidelines is to encourage the use of open standards and to avoid the use of proprietary algorithms and protocols. 
-            NIST's standards and guidelines are designed to be freely available and to promote interoperability among different technologies. 
-            NIST also encourages the use of open-source software and hardware implementations of cryptographic algorithms and protocols to promote transparency and security.
+
     \section{Manutenção e Substituição de Padrões}
-        NIST's process for maintaining and replacing cryptographic standards and guidelines is based on a continuous review and evaluation process. 
-        NIST regularly reviews its standards and guidelines to ensure that they remain relevant and effective in the face of emerging threats and new technologies. 
-        When necessary, NIST may update or replace its standards and guidelines to address new threats or to take advantage of new technologies. 
-        NIST also provides technical assistance to federal agencies and other stakeholders on the implementation of its standards and guidelines to ensure that they are effectively implemented and maintained over time.
+
         \subsection{Ciclo de Vida e Retirada (Withdrawal)} %capitulo 7 pg 26
-            The lifecycle of NIST's cryptographic standards and guidelines typically includes several stages, including development, publication, implementation, maintenance, and withdrawal. 
-            During the development stage, NIST solicits input from stakeholders and conducts research and analysis to develop new standards and guidelines. 
-            During the publication stage, NIST publishes draft documents for public comment and finalizes the standards and guidelines based on feedback received. 
-            During the implementation stage, federal agencies and other stakeholders implement the standards and guidelines in their systems and technologies. 
-            During the maintenance stage, NIST regularly reviews its standards and guidelines to ensure that they remain relevant and effective. 
-            Finally, during the withdrawal stage, NIST may retire or replace standards and guidelines that are no longer effective or relevant.
+
         \subsection{Análise de Constantes e Proveniência} %capitulo 7 pg 22
-            NIST's process for analyzing the constants and provenance of cryptographic algorithms and protocols is based on a rigorous evaluation process that includes public input, testing, and validation. 
-            NIST evaluates the constants used in cryptographic algorithms and protocols to ensure that they are secure and do not introduce vulnerabilities. 
-            NIST also evaluates the provenance of cryptographic algorithms and protocols to ensure that they are developed by reputable sources and do not have hidden weaknesses or backdoors.
-    
