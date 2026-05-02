@@ -1,0 +1,135 @@
+\chapter{Revisão dos protocolos e padrões de criptografia}
+    O NIST utiliza varios documentos para estabelecer os protocolos e padrões de criptografia, cada um com um propósito específico. Sendo comummente publicados em três categorias principais: FIPS (Federal Information Processing Standards), SPs (Special Publications) e IRs (Interagency Reports). Esses documentos são desenvolvidos para garantir a segurança e a integridade dos sistemas de informação, fornecendo diretrizes claras para a implementação de algoritmos criptográficos e práticas de segurança.
+    \section{Fundamentação da Autoridade e Tipos de Padrões}
+
+        \subsection{FIPS} %capitulo 3 pg 10
+        Os documentos FIPS são padrões de processamento de informações federais que estabelecem requisitos específicos para algoritmos criptográficos e práticas de segurança. Eles são desenvolvidos para garantir a interoperabilidade e a segurança dos sistemas de informação utilizados pelo governo dos Estados Unidos. Os FIPS são amplamente adotados por organizações governamentais e privadas como referência para a implementação de criptografia segura. Esses padrões abrangem uma variedade de tópicos, incluindo algoritmos de criptografia simétrica e assimétrica, funções de hash, e protocolos de segurança. %\cite{nistIR7977}
+
+            \subsubsection{FIPS 204}
+            ML-DSA (Module-Lattice-Based Digital Signature Algorithm) é um padrão para assinaturas digitais pós-quânticas. As assinaturas digitais são utilizadas na identificação e autenticação de documentos eletrônicos. Ele se baseia no CRYSTALS-Dilithium, onde se faz uso de problemas reticulados modulares. (Module-LWE e Module-SIS). Para cada nivel de segurança o ML-DSA oferece níveis de proteção diferentes. 
+            Sendo:
+            \begin{itemize}
+                \item{ML-DSA-44: Nivel de Segurança de 128 bits} para recursos limitados
+                \item{ML-DSA-64: Nivel de Segurança de 192 bits} recomendado para a maioria dos casos
+                \item{ML-DSA-84: Nivel de Segurança de 256 bits} longo prazo e alta segurança
+            \end{itemize}
+            %\cite{nistFIPS204}
+
+            O ML-DSA é considerado suficientemente seguro e fortemente infalsificável, mesmo frente a ataques de computadores quânticos. Podendo ser usado para idedntificar modificações sem autorização, garantindo a integridade e autenticidade dos dados. Alem de demonstrar a propriedade de não repúdio, onde o remetente não pode negar a autoria da assinatura digital. Ele foi desenvolvida de forma que mesmo que o atacante conheća ou possua parte da chave privada ou a própria assinatura, ele não consiga forjar uma assinatura adicional ou modificar a assinatura existente sem ser detectado. %\cite{nistFIPS204}
+
+            A segurança se da aos problemas erticulados com erros LWE (Learning With Errors) e SIS (Short Integer Solution), que são considerados difíceis de resolver mesmo para computadores quânticos. 
+            O problema LWE consiste em recuperar um vetor $s \in \mathbb{Z}_q^n$ dado um conjunto de equações lineares ruidosas da forma: \[ As + e = b \] onde $A$ e $b$ são dados e $e$ é um vetor de erro pequeno.
+            O problema SIS, por sua vez, envolve encontrar um vetor inteiro curto $x$ tal que: \[Ax \equiv 0 \mod q
+            \]onde $A$ é uma matriz dada e $q$ é um módulo. Ambos os problemas são considerados difíceis de resolver, mesmo para computadores quânticos, o que torna o ML-DSA uma escolha segura para assinaturas digitais pós-quânticas.
+
+            A transição da versão 3.1 do CRYSTALS-Dilithium para o padrão final \textbf{ML-DSA} (FIPS 204) focou no fortalecimento da segurança contra ataques de colisão e na robustez da implementação. As principais mudanças envolvem:
+
+            \begin{itemize}
+                \item \textbf{Ajuste de Comprimento de Bits:} Para evitar que ataques de colisão no SHAKE256 degradassem o nível de segurança do NIST (especificamente da categoria 5 para a 4), o comprimento do representante da mensagem $\mu$ foi aumentado de $384$ para $512$ bits. Da mesma forma, a semente aleatória privada $\rho'$ foi expandida de $384$ para $512$ bits.
+
+                \item \textbf{Fortalecimento de Variáveis de Hash:} O hash da chave pública $tr$ foi padronizado em $512$ bits. Além disso, o hash do compromisso $\tilde{c}$ agora utiliza $384$ bits para o conjunto \textit{ML-DSA-65} e $512$ bits para o \textit{ML-DSA-87}, sendo que todos os bits de $\tilde{c}$ são agora utilizados na geração do desafio $c$.
+
+                \item \textbf{Segurança de Assinatura e Aleatoriedade:} O ML-DSA introduziu uma variante de assinatura ``protegida'', onde o valor $\pi'$ é derivado de forma pseudorandômica utilizando a chave privada, a mensagem e uma string de aleatoriedade $rnd$ de $256$ bits. Isso mitiga riscos associados ao determinismo puro em ambientes vulneráveis a ataques de canal lateral.
+
+                \item \textbf{Correções de Integridade e Domínio:} Foi restaurada a verificação de entradas malformadas no desempacotamento da dica (\textit{hint}), garantindo que o esquema seja fortemente infalsificável (sEUF-CMA). Para evitar o uso indevido de chaves, foi implementada a separação de domínio tanto na geração de chaves quanto nas assinaturas, distinguindo mensagens assinadas diretamente das versões pré-hash (\textit{HashML-DSA}).
+            \end{itemize}%\cite{nistFIPS204}
+
+            \subsubsection{FIPS 205}
+            SLH-DSA (Signature-Lattice-Based Digital Signature Algorithm) é um padrão para assinaturas digitais sem estado baseado em hash. O SLH-DSA é baseado no SPHINCS+ (Stateless Practical Hash-based Incredibly Nice Collision-resistant Signatures) uma assinatura digital pos-quantico a base de hash, que gera uma assinatura digital com uma chave privada, a verificação ocorre atraves da chave publica correspondente, não sendo iguais. Cada signatário possui um par de chaves privada e publica. As chaves publicas são de conhecimento publico, sendo utilizada justamente para a verificação da assinatura.
+            
+            A dificuldade do SLH-DSA está na dificuldade de encontrar pre-conditions no hash utilizado e suas varias propriedades relacionais ao hash. Ele foi desenvolvido para suportar ataques em larga escalada, mesmo sendo de origem quantica.  
+            
+            o SLH-DSA utiliza de outros dois esquemas de assiantura sendo eles o FORS (Forest of Random Trees) e o XMSS (Xtended Merkle Signature Scheme) o XMSS é um esquema de assinatura ded uso unico baseada em hash (WOTS+) Winternitz One-Time Signature Plus.
+
+            O SLH-DSA é constituido de uma grupo de chaves em pares FORMS, no padrão adotado o par de chaves é $2^{63}$
+            que são gerados de forma pseudoaleatorica por uma seed inicial. O FORMS assina cada par de chaves uma parte do numero de mensagens. 
+            
+            XMSS é uma assinatura multitemporária usando uma combinação de assinaturas WOTS+ para cada par de chaves, alem de uma assinatura XMSS para o root da arvore. A raiz da arvore é gerada por meio de uma função de hash aplicada a um conjunto de chaves publicas. 
+
+            A segurança ``sem estado'' é alcançada através de uma hiperárvore composta por $d$ camadas de árvores XMSS:
+
+            \begin{itemize}
+                \item \textbf{Camada Superior ($d-1$):} Consiste em uma única árvore XMSS cuja raiz é a chave pública do sistema ($PK.root$).
+                \item \textbf{Camadas Intermediárias:} Cada árvore XMSS assina a raiz da árvore XMSS situada na camada imediatamente inferior.
+                \item \textbf{Camada Inferior (Camada 0):} As chaves WOTS+ desta camada são utilizadas para assinar e autenticar as chaves públicas FORS.
+            \end{itemize}
+
+            Para assinar uma mensagem, o algoritmo executa os seguintes passos:
+
+            \begin{enumerate}
+                \item Calcula um \textit{hash} da mensagem para selecionar uma chave FORS de forma pseudoaleatória.
+                \item Gera a assinatura FORS para a mensagem.
+                \item Cria uma assinatura de hiperárvore, que consiste na sequência de assinaturas XMSS necessárias para ligar a chave FORS utilizada até a raiz pública ($PK.root$).
+            \end{enumerate}
+
+            A assinatura final é a combinação da assinatura FORS com esse caminho de autenticação (assinatura de hiperárvore).
+
+            \begin{itemize}
+                \item \textbf{Chave Pública:} Composta pela raiz da hiperárvore ($PK.root$) e uma semente ($PK.seed$) para separação de domínio.
+                \item \textbf{Chave Privada:} Inclui sementes ($SK.seed$ e $SK.prf$) que permitem regenerar todos os valores secretos e gerar \textit{hashes} aleatórios, garantindo que o sistema seja determinístico e dispense o armazenamento de estado sobre quais chaves já foram utilizadas.
+            \end{itemize}
+            
+            %\cite{nistFIPS205} 
+            
+        \subsection{SPs} %capitulo 3 pg 10
+        Os documentos SPs são publicações especiais que fornecem diretrizes e recomendações para a implementação de algoritmos criptográficos e práticas de segurança. Eles são desenvolvidos para ajudar as organizações a entender e aplicar os padrões de criptografia de forma eficaz, abordando tópicos como gerenciamento de chaves, avaliação de segurança e melhores práticas para a implementação de algoritmos criptográficos.%\cite{nistIR7977}
+        
+            \subsubsection{FISMA}
+                A FISMA (Federal Information Security Management Act) é uma lei dos Estados Unidos que estabelece um marco para a gestão da segurança da informação em agências federais. Ela exige que as agências implementem um programa de segurança da informação abrangente para proteger os sistemas de informação e os dados contra ameaças cibernéticas. A FISMA é um componente fundamental do quadro regulatório de segurança cibernética dos EUA, e as organizações que lidam com informações governamentais devem cumprir seus requisitos para garantir a proteção adequada dos dados. 
+            
+            \subsubsection{OMB}
+                O OMB (Office of Management and Budget) é uma agência do governo dos Estados Unidos que tem o papel de coordenar e supervisionar a implementação das políticas e programas do governo. Ele é responsável por desenvolver e executar políticas de gestão de recursos humanos, financeiros e de tecnologia da informação.
+
+            \subsubsection{NIST SP 800 53}
+                O NIST SP 800--53 é um documento que fornece um catálogo abrangente de controles de segurança para sistemas de informação federais. Ele é projetado para ajudar as organizações a proteger suas informações e sistemas contra ameaças cibernéticas, fornecendo diretrizes para a implementação de medidas de segurança eficazes baseadas nos requisitos de segurança e privacidade da FISMA, da lei de Privacidade 1974, das politicas do OMB e dos padrões federaias de processamento de informações (FIPS)%\cite{nistSP80053Ch1}
+
+                Este documento trás a informação sobre as diferenças entre controles e requisitos de segurança, onde o requisito se refere a uma necessidade ou condição que deve ser atendendida e que é solicitada por uma das partes interessadas, muitas das fontes podem ser atráves de leis, regulamentos, politicas, padrões ou contratos. Já o controle são como um descritivo de salvaguarda, das quais são implementadas para atender aos requisitos de segurança. O controle é uma medida de segurança que é implementada para mitigar riscos e proteger os ativos de informação. Ele pode ser técnico, administrativo ou físico, e é projetado para reduzir a probabilidade ou o impacto de um incidente de segurança. Os controles são implementados para atender aos requisitos de segurança estabelecidos por leis, regulamentos, políticas, padrões ou contratos. %\cite{nistSP80053Ch1}
+                
+                Este documento organiza em famílias de controle, onde cada família é um agrupamento de controles relacionados a um tema específico. As famílias de controle são organizadas em 20 categorias, incluindo:
+                \begin{itemize}
+                    
+                    \item \textbf{AC (Access Control)}
+                    \item \textbf{AT (Awareness and Training)}
+                    \item \textbf{AU (Audit and Accountability)}
+                    \item \textbf{CA (Security Assessment and Authorization)}
+                    \item \textbf{CM (Configuration Management)}
+                    \item \textbf{CP (Contingency Planning)}
+                    \item \textbf{IA (Identification and Authentication)}
+                    \item \textbf{IR (Incident Response)}
+                    \item \textbf{MA (Maintenance)}
+                    \item \textbf{MP (Media Protection)}
+                    \item \textbf{PE (Physical and Environmental Protection)}
+                    \item \textbf{PL (Planning)}
+                    \item \textbf{PM (Program Management)}
+                    \item \textbf{PS (Personnel Security)}
+                    \item \textbf{PT (PII Processing and Transparency)}
+                    \item \textbf{RA (Risk Assessment)}
+                    \item \textbf{SA (System and Services Acquisition)}
+                    \item \textbf{SC (System and Communications Protection)}
+                    \item \textbf{SI (System and Information Integrity)}
+                    \item \textbf{SR (Supply Chain Risk Management)}
+                \end{itemize}
+                
+
+        \subsection{NIST Internal/Interagency Reports (NISTIR)} %capitulo 3 pg 10
+            Os documentos IRs são relatórios internos ou interagências que fornecem informações detalhadas sobre pesquisas, análises e avaliações relacionadas à criptografia e segurança da informação. Eles são usados para documentar os resultados de estudos e experimentos realizados pelo NIST e por outras agências governamentais, e podem incluir análises de segurança, avaliações de algoritmos criptográficos e recomendações para futuras pesquisas. Os IRs são uma fonte valiosa de informações para pesquisadores e profissionais de segurança da informação, fornecendo insights detalhados sobre os desafios e avanços na área de criptografia. %\cite{nistIR8105}
+            
+    \section{Principios de Segurança}
+
+        \subsection{Mérito Técnico e Provas de Segurança} %capitulo 2 pg 7-8
+
+        \subsection{Integridade e Influência} %capitulo 2 pg 7
+
+    \section{Metodologia de Seleção}
+
+        \subsection{Competições de Algoritmos} %capitulo 5 pg 13/ capitulo 7 pg 18
+
+        \subsection{Fases de Competição} % capitulo 7 pg 24
+
+        \subsection{Propriedade Intelectual (IP)} %capitulo 7 pg 23
+
+    \section{Manutenção e Substituição de Padrões}
+
+        \subsection{Ciclo de Vida e Retirada (Withdrawal)} %capitulo 7 pg 26
+
+        \subsection{Análise de Constantes e Proveniência} %capitulo 7 pg 22

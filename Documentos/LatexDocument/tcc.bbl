@@ -5,4 +5,29 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.7 }
 
+\bibitem{nistIR8413}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2023}
+{{National Institute of Standards and Technology}. \emph{NIST Post-Quantum Cryptography Standardization Process}.
+Gaithersburg, MD, 2023.}
+
+\bibitem{nistIR7977}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2016}
+{{National Institute of Standards and Technology}. \emph{NIST Cryptographic Standards and Guidelines Development Process}.
+Gaithersburg, MD, 2016.}
+
+\bibitem{nistFIPS204}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2024a}
+{{National Institute of Standards and Technology}. \emph{{FIPS PUB 204 Transitioning to Post-Quantum Cryptography}}.
+Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.204.pdf}. Acesso em: 23 abr. 2026.}
+
+\bibitem{nistFIPS205}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2024b}
+{{National Institute of Standards and Technology}. \emph{{FIPS PUB 205 Transitioning to Post-Quantum Cryptography: Implementation and Operational Considerations}}.
+Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.205.pdf}. Acesso em: 23 abr. 2026.}
+
+\bibitem{nistSP80053}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2020}
+{{National Institute of Standards and Technology}. \emph{{NIST Special Publication 800-53 Revision 5}}.
+Gaithersburg, MD, 2020. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf}. Acesso em: 23 abr. 2026.}
+
 \end{thebibliography}
