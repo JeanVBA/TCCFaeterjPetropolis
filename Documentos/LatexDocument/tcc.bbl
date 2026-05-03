@@ -8,7 +8,7 @@
 \bibitem{nistIR8413}
 \abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2023}
 {{National Institute of Standards and Technology}. \emph{NIST Post-Quantum Cryptography Standardization Process}.
-Gaithersburg, MD, 2023.}
+Gaithersburg, MD, 2023. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/ir/2022/NIST.IR.8413-upd1.pdf}.}
 
 \bibitem{nistIR7977}
 \abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2016}
@@ -29,5 +29,10 @@ Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpu
 \abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2020}
 {{National Institute of Standards and Technology}. \emph{{NIST Special Publication 800-53 Revision 5}}.
 Gaithersburg, MD, 2020. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r5.pdf}. Acesso em: 23 abr. 2026.}
+
+\bibitem{nistSP800131}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2019}
+{{National Institute of Standards and Technology}. \emph{NIST Special Publication 800-131A Revision 2}.
+Gaithersburg, MD, 2019. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf}.}
 
 \end{thebibliography}

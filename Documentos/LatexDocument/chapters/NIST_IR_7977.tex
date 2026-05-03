@@ -71,7 +71,14 @@
 
     \section{Manutenção e Substituição de Padrões}
         \subsection{Ciclo de Vida e Retirada (Withdrawal)}
-            Os padrões são revisados regularmente, com os FIPS sendo avaliados pelo menos a cada cinco anos\cite{nistIR7977}. O processo de manutenção inclui a atualização ou a retirada (withdrawal) do padrão, que pode ocorrer via `sunsetting''\cite{nistIR7977}.
+            Os padrões são revisados regularmente, com os FIPS sendo avaliados pelo menos a cada cinco anos\cite{nistIR7977}. O processo de manutenção inclui a atualização ou a retirada do padrão, que pode ocorrer via `sunsetting''\cite{nistIR7977}.
 
-        \subsection{Análise de Constantes e Proveniência}
-            O desenvolvimento inclui a análise do design e das constantes utilizadas na especificação\cite{nistIR7977}. O NIST assegura que novas especificações forneçam a justificativa do design (rationale) e a proveniência das constantes\cite{nistIR7977}.
+            O NIST possui algumas etapadas para a revisão e retirada de padrões, sendo eles:
+            \begin{itemize}
+                \item \textbf{Accepted}: O padrão em questão não possui riscos conhecidos.
+                \item \textbf{Deprecated}: O padrão apresenta riscos conhecidos, mas ainda é considerado seguro para uso.
+                \item \textbf{Legacy use}: O padrão pode somente ser usado em processamento de informações protegidas.
+                \item \textbf{Disallowed}: O padrão não é mais considerado seguro e não deve ser usado.
+            \end{itemize}\cite{nistSP800131}.
+
+            O sunsetting é um processo de retirada planejada, onde o NIST anuncia a descontinuação de um padrão com antecedência, permitindo que as organizações se preparem para a transição\cite{nistSP800131}. Durante esse período, o padrão pode ser marcado como ``deprecated'' ou ``legacy use'', indicando que ele ainda pode ser utilizado, mas com recomendações para migração futura\cite{nistSP800131}.

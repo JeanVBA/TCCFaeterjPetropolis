@@ -1,102 +1,61 @@
-\chapter{NIST IR 8105 Planejamento para a Criptografia Pós-Quântica}
+\chapter{Planejamento para a Criptografia Pós-Quântica (PQC)}
 
-%NIST SP 800-131A documento de transicao fala algo sobree a necessidade de transicao para algoritmos pos-quanticos, mas nao tem um plano detalhado. O NIST IR 8105 é um documento que detalha o plano de transição para a criptografia pós-quântica, incluindo os critérios de seleção, o processo de avaliação e os prazos para a padronização dos algoritmos pós-quânticos. Ele também aborda as estratégias de transição e a importância da agilidade criptográfica para garantir a segurança das informações na era da computação quântica. O documento é uma leitura essencial para entender o processo de padronização da criptografia pós-quântica e os desafios associados à transição para novos algoritmos de segurança. Ele fornece uma visão abrangente do plano do NIST para garantir que as informações estejam protegidas contra ameaças futuras, especialmente aquelas apresentadas pela computação quântica.
+\section{Contextualização e Gestão de Risco}
+Esta seção introduz o problema e explica por que a transição deve ser planejada imediatamente, abordando o cenário de risco sob a ótica organizacional.
 
-    \section{Computação Quantica vs. Criptografia Atual}
-        A computação quântica é um campo emergente que tem o potencial de revolucionar a forma como processamos informações. 
-        No entanto, ela também apresenta desafios significativos para a segurança da informação, especialmente no que diz respeito à criptografia. 
-        A criptografia atual, baseada em algoritmos como RSA e ECC, é vulnerável a ataques de computadores quânticos, que podem quebrar esses sistemas de segurança em um tempo relativamente curto. 
-        A NIST (National Institute of Standards and Technology) reconhece essa ameaça e está trabalhando para desenvolver novos algoritmos de criptografia que sejam resistentes a ataques quânticos. 
-        Esses algoritmos, conhecidos como criptografia pós-quântica, são projetados para garantir a segurança das informações mesmo na era   da computação quântica. 
-        A transição para a criptografia pós-quântica é crucial para proteger dados sensíveis e garantir a segurança das comunicações no futuro.
-        \subsection{Impacto nos Sistemas de Chave Pública (RSA, Diffie-Hellman, ECC)} %capitulo 1 pg 6
-            Os sistemas de chave pública, como RSA, Diffie-Hellman e ECC, são amplamente utilizados para garantir a segurança das comunicações e a proteção de dados. 
-            No entanto, esses sistemas são vulneráveis a ataques de computadores quânticos devido à sua dependência de problemas matemáticos que podem ser resolvidos eficientemente por algoritmos quânticos, como o algoritmo de Shor. 
-            O algoritmo de Shor pode fatorar grandes números inteiros e calcular logaritmos discretos em tempo polinomial, o que torna os sistemas de chave pública atuais inseguros contra ataques quânticos. 
-            Isso significa que, com o avanço da computação quântica, os dados protegidos por esses sistemas podem ser facilmente comprometidos, destacando a necessidade urgente de desenvolver e adotar algoritmos de criptografia pós-quântica para garantir a segurança das informações no futuro.
-        \subsection{Tabela Comparativa de Impacto} %capitulo 1 pg 7
-            \begin{table}[h]
-                \centering
-                \begin{tabular}{|c|c|c|}
-                    \hline
-                    Algoritmo & Vulnerabilidade a Computação Quântica & Tempo para Quebra \\
-                    \hline
-                    RSA & Alta & Minutos a Horas \\
-                    Diffie-Hellman & Alta & Minutos a Horas \\
-                    ECC & Alta & Minutos a Horas \\
-                    Criptografia Pós-Quântica & Baixa & Indefinido (resistente) \\
-                    \hline
-                \end{tabular}
-                \caption{Comparação de Vulnerabilidade dos Algoritmos de Criptografia}
-            \end{table}
-        \subsection{Estimativa ded Janela de Ameaça} %capitulo 1 pg 6/capitulo 4 pg 11
-            A janela de ameaça para a quebra dos sistemas de chave pública atuais devido à computação quântica é estimada em cerca de 10 a 20 anos, dependendo do ritmo de desenvolvimento da tecnologia quântica. 
-            Durante esse período, é crucial que as organizações e governos comecem a planejar a transição para algoritmos de criptografia pós-quântica para garantir a segurança das informações no futuro. 
-            A NIST está liderando esforços para identificar e padronizar algoritmos de criptografia pós-quântica, com o objetivo de fornecer uma base sólida para a segurança da informação na era da computação quântica. 
-            A preparação antecipada é essencial para mitigar os riscos associados à vulnerabilidade dos sistemas de chave pública atuais e garantir a proteção contínua dos dados sensíveis.
-    \section{Familias de Aalgoritmos Pós-Quanticos} %capitulo 2 pg 8-9
-        \subsection{Lattice-Based Cryptography} %procura em outro canto
-            A criptografia baseada em reticulados é uma das famílias mais promissoras de algoritmos pós-quânticos. 
-            Ela se baseia em problemas matemáticos relacionados a reticulados, que são estruturas geométricas formadas por pontos em um espaço multidimensional. 
-            Esses algoritmos são considerados resistentes a ataques de computadores quânticos devido à dificuldade de resolver certos problemas relacionados a reticulados, como o problema do vetor mais curto (SVP) e o problema do vetor mais próximo (CVP). 
-            Exemplos de algoritmos de criptografia baseada em reticulados incluem NTRU e LWE (Learning With Errors). 
-            Esses algoritmos oferecem uma combinação de segurança e eficiência, tornando-os candidatos fortes para a criptografia pós-quântica.
-        \subsection{Code-Based Cryptography}%procura em outro canto
-            A criptografia baseada em códigos é outra família importante de algoritmos pós-quânticos. 
-            Ela se baseia em problemas relacionados a códigos de correção de erros, que são usados para detectar e corrigir erros em dados transmitidos. 
-            Algoritmos como McEliece e Niederreiter são exemplos de criptografia baseada em códigos. 
-            Esses algoritmos são considerados resistentes a ataques quânticos devido à dificuldade de decodificar certos tipos de códigos sem conhecer a chave secreta. 
-            Embora esses algoritmos possam ser menos eficientes em termos de tamanho da chave e desempenho, eles oferecem uma alternativa valiosa para a segurança pós-quântica.
-        \subsection{Multivariate Cryptography}%procura em outro canto
-            A criptografia multivariada é uma família de algoritmos pós-quânticos que se baseia em problemas relacionados a sistemas de equações polinomiais multivariadas. 
-            Esses algoritmos são considerados resistentes a ataques de computadores quânticos devido à dificuldade de resolver sistemas de equações polinomiais multivariadas sem conhecer a chave secreta. 
-            Exemplos de algoritmos de criptografia multivariada incluem Rainbow e HFE (Hidden Field Equations). 
-            Embora esses algoritmos possam ser menos eficientes em termos de desempenho, eles oferecem uma abordagem única para a criptografia pós-quântica e são candidatos valiosos para a segurança da informação no futuro.
-        \subsection{Hash-Based Cryptography}%procura em outro canto
-            A criptografia baseada em hash é uma família de algoritmos pós-quânticos que se baseia em funções de hash criptográficas. 
-            Esses algoritmos são considerados resistentes a ataques de computadores quânticos devido à dificuldade de inverter funções de hash sem conhecer a chave secreta.
-            Exemplos de algoritmos de criptografia baseada em hash incluem Merkle Signature Scheme e XMSS (eXtended Merkle Signature Scheme). 
-            Embora esses algoritmos possam ser menos eficientes em termos de desempenho, eles oferecem uma abordagem robusta para a criptografia pós-quântica, especialmente para assinaturas digitais. 
-            A criptografia baseada em hash é uma opção valiosa para garantir a segurança das informações na era da computação quântica, proporcionando uma camada adicional de proteção contra ataques quânticos.
-        \subsection{Isogeny-Based Cryptography}%procura em outro canto
-            A criptografia baseada em isogenias é uma família de algoritmos pós-quânticos que se baseia em problemas relacionados a isogenias de curvas elípticas. 
-            Esses algoritmos são considerados resistentes a ataques de computadores quânticos devido à dificuldade de resolver certos problemas relacionados a isogenias sem conhecer a chave secreta. 
-            Exemplos de algoritmos de criptografia baseada em isogenias incluem SIDH (Supersingular Isogeny Diffie-Hellman) e SIKE (Supersingular Isogeny Key Encapsulation).
-            Embora esses algoritmos possam ser menos eficientes em termos de desempenho, eles oferecem uma abordagem inovadora para a criptografia pós-quântica e são candidatos valiosos para a segurança da informação no futuro.
-        \section{Estrátegias de Transição e Agilidade Criptográfica}
-            A transição para a criptografia pós-quântica é um processo complexo que requer uma abordagem estratégica e cuidadosa. 
-            Uma das estratégias mais importantes é a "agilidade criptográfica", que se refere à capacidade de um sistema de segurança de se adaptar rapidamente a novas ameaças e tecnologias. 
-            Isso envolve a implementação de sistemas que possam suportar múltiplos algoritmos de criptografia, permitindo uma transição suave para algoritmos pós-quânticos à medida que eles se tornam disponíveis e padronizados. 
-            Além disso, é crucial que as organizações comecem a planejar e testar a implementação de algoritmos de criptografia pós-quântica em seus sistemas atuais
-            para garantir uma transição eficiente e segura. 
-            A NIST está liderando esforços para desenvolver diretrizes e padrões para a transição para a criptografia pós-quântica, incluindo a identificação de algoritmos candidatos e a realização de testes de segurança. 
-            A preparação antecipada é essencial para mitigar os riscos associados à vulnerabilidade dos sistemas de chave pública atuais e garantir a proteção contínua dos dados sensíveis na era da computação quântica.
-            \subsection{Definição de Agilidade Criptográfica (Cripto Agility)} %Resumo/capitulo 4 pg 12
-                A agilidade criptográfica, ou cripto agilidade, é a capacidade de um sistema de segurança de se adaptar rapidamente a novas ameaças e tecnologias. 
-                Isso envolve a implementação de sistemas que possam suportar múltiplos algoritmos de criptografia, permitindo uma transição suave para algoritmos pós-quânticos à medida que eles se tornam disponíveis e padronizados. 
-                A cripto agilidade é crucial para garantir a segurança das informações em um ambiente de ameaças em constante evolução, especialmente com o avanço da computação quântica. 
-                Ao adotar uma abordagem de cripto agilidade, as organizações podem mitigar os riscos associados à vulnerabilidade dos sistemas de chave pública atuais e garantir a proteção contínua dos dados sensíveis no futuro.
-            \subsection{Insuficiencia do Paradigma Bits--of--security} %capitulo 4 pg 11
-                O paradigma "bits-of-security" é uma medida tradicional de segurança que quantifica a força de um algoritmo de criptografia com base no número de bits necessários para quebrá-lo. 
-                No entanto, esse paradigma é insuficiente para avaliar a segurança dos algoritmos pós-quânticos, pois não leva em consideração as ameaças específicas apresentadas pela computação quântica. 
-                A computação quântica pode quebrar algoritmos de chave pública tradicionais, como RSA e ECC, em um tempo relativamente curto, independentemente do número de bits de segurança. 
-                Portanto, é essencial adotar uma abordagem mais abrangente para avaliar a segurança dos algoritmos pós-quânticos, levando em consideração as vulnerabilidades específicas associadas à computação quântica e a necessidade de resistência a ataques quânticos. 
-                A NIST está trabalhando para desenvolver novos critérios de segurança que sejam mais adequados para avaliar os algoritmos de criptografia pós-quântica e garantir a proteção das informações na era da computação quântica.
-        \section{O Plano de Padronização}
-            O plano de padronização para a criptografia pós-quântica é um processo estruturado que visa identificar, avaliar e padronizar algoritmos de criptografia que sejam resistentes a ataques de computadores quânticos. 
-            A NIST está liderando esse esforço, realizando uma série de rodadas de avaliação para selecionar os algoritmos mais promissores para padronização. 
-            O processo envolve a submissão de algoritmos por parte da comunidade de pesquisa, seguida por uma avaliação rigorosa de sua segurança, eficiência e viabilidade prática. 
-            Os algoritmos selecionados passarão por um processo de padronização formal, que inclui a definição de especificações técnicas e diretrizes para sua implementação. 
-            O objetivo final é fornecer uma base sólida para a segurança da informação na era da computação quântica, garantindo que os dados sensíveis estejam protegidos contra ameaças futuras.
-            \subsection{Processo Fora da Competição Traficional} %capitulo 4 pg 12
-                O processo de padronização para a criptografia pós-quântica da NIST é diferente do processo tradicional de competição, onde os algoritmos são avaliados e selecionados com base em critérios específicos. 
-                Em vez disso, a NIST adotou um processo mais colaborativo e iterativo, que envolve a participação ativa da comunidade de pesquisa em todas as etapas do processo. 
-                Isso inclui a submissão de algoritmos, a avaliação de segurança e eficiência, e a definição de especificações técnicas. 
-                O objetivo é criar um ambiente de colaboração que permita a identificação e desenvolvimento dos melhores algoritmos de criptografia pós-quântica, garantindo que eles sejam adequados para uso prático e resistentes a ataques quânticos. 
-                Esse processo fora da competição tradicional é essencial para garantir que os algoritmos selecionados sejam robustos, eficientes e capazes de proteger as informações na era da computação quântica.
-            \subsection{Critérios Iniciais e Prazos} %capitulo 4 pg 12
-                Os critérios iniciais para a avaliação dos algoritmos de criptografia pós-quântica incluem segurança, eficiência, viabilidade prática e resistência a ataques quânticos. 
-                A NIST estabeleceu prazos para cada etapa do processo de padronização, com a expectativa de selecionar os algoritmos finalistas em um período de 3 a 5 anos. 
-                Durante esse tempo, os algoritmos serão submetidos a uma avaliação rigorosa por parte da comunidade de pesquisa, que incluirá testes de segurança e desempenho. 
-                A NIST também planeja realizar rodadas adicionais de avaliação para garantir que os algoritmos selecionados sejam robustos e adequados para uso prático. 
-                O objetivo é garantir que os algoritmos padronizados sejam capazes de proteger as informações contra ameaças futuras, especialmente aquelas apresentadas pela computação quântica.
+\subsection{A Ameaça Quântica e o Paradigma ``Harvest Now, Decrypt Later''}
+\textbf{Conteúdo:} Explicação sobre como adversários já estão coletando tráfego cifrado atual para quebrar a criptografia assim que computadores quânticos criptograficamente relevantes (CRQC) estiverem disponíveis.\\
+\textbf{Documento indicado:} \textit{NIST SP 1800-38A (Executive Summary)}. Fornece o panorama do problema e a urgência da migração sob a perspectiva do NCCoE.
+
+\subsection{Mapeamento do Risco Quântico}
+\textbf{Conteúdo:} Como integrar a ameaça quântica nos processos de gestão de risco cibernético da organização.\\
+\textbf{Documento indicado:} \textit{NIST CSWP 48 (Cybersecurity White Paper)}. Relaciona a migração PQC com as práticas do \textit{NIST Cybersecurity Framework (CSF)}.
+
+\section{Inventário e Descoberta Criptográfica}
+Antes de migrar, uma organização precisa saber o que possui. Esta seção detalha as metodologias para rastrear o uso atual de criptografia.
+
+\subsection{Estratégias de Descoberta em Redes e Sistemas}
+\textbf{Conteúdo:} Métodos e ferramentas para varrer infraestruturas, encontrar chaves embutidas em código, protocolos obsoletos e certificados ocultos.\\
+\textbf{Documento indicado:} \textit{NIST SP 1800-38B (Discovery for PQC Migration)}. Fornece cenários práticos e arquiteturas de referência para a fase de descoberta.
+
+\subsection{Adoção do CBOM (Cryptographic Bill of Materials)}
+\textbf{Conteúdo:} O conceito de catalogar a criptografia de forma padronizada para monitorar vulnerabilidades em cadeias de suprimentos de software.\\
+\textbf{Documento indicado:} \textit{NIST SP 1800-38B}. Aborda diretamente como gerar e manter inventários de ativos criptográficos.
+
+\section{Agilidade Criptográfica e Novos Padrões}
+Aborda o planejamento arquitetural necessário para facilitar atualizações e apresenta as novas ferramentas de proteção.
+
+\subsection{Conceitos de Agilidade e Desafios de Desempenho}
+\textbf{Conteúdo:} O que significa projetar um sistema ágil e quais são os impactos reais na rede (latência, tamanho de chaves, largura de banda) ao trocar os algoritmos.\\
+\textbf{Documento indicado:} \textit{NIST SP 1800-38C (Interoperability and Performance)}. Apresenta casos de uso reais e testes de impacto.
+
+\subsection{Os Padrões Pós-Quânticos Finais}
+\textbf{Conteúdo:} A especificação técnica e a indicação de uso dos algoritmos selecionados.\\
+\textbf{Documentos indicados:}
+\begin{itemize}
+    \item \textbf{FIPS 203 (ML-KEM):} Para troca de chaves criptográficas.
+    \item \textbf{FIPS 204 (ML-DSA) e FIPS 205 (SLH-DSA):} Para assinaturas digitais.
+    \item \textbf{NIST IR 8413:} Para critérios técnicos do Round 3.
+\end{itemize}
+
+\section{Estratégias de Migração e Hibridização}
+Foca na parte prática e operacional da transição.
+
+\subsection{Hibridização (Criptografia Clássica e PQC)}
+\textbf{Conteúdo:} A abordagem recomendada de usar algoritmos clássicos em conjunto com PQC durante o período de transição.\\
+\textbf{Documento indicado:} \textit{NIST SP 1800-38C}. Discute os protocolos que suportam negociação híbrida.
+
+\subsection{Assinaturas Baseadas em Hash para Adoção Imediata}
+\textbf{Conteúdo:} Uso de algoritmos de assinatura que já são considerados seguros contra ataques quânticos, úteis para validar firmware.\\
+\textbf{Documento indicado:} \textit{NIST SP 800-208}. Padrões stateful hash-based (LMS e XMSS).
+
+\section{Roadmap e Manutenção da Base Criptográfica}
+Conclui o planejamento com prazos normativos e a importância de elementos basilares da criptografia.
+
+\subsection{Cronograma e Descontinuação de Algoritmos Atuais}
+\textbf{Conteúdo:} Prazos para que algoritmos de chaves públicas atuais (como RSA-2048) deixem de ser considerados seguros.\\
+\textbf{Documento indicado:} \textit{NIST SP 800-131A Rev. 3}. Estipula o ciclo de vida e os prazos limite.
+
+\subsection{O Papel Contínuo da Entropia}
+\textbf{Conteúdo:} A garantia de que a segurança fundamental ainda depende da geração de números aleatórios de alta qualidade (RNG).\\
+\textbf{Documento indicado:} \textit{NIST SP 800-22}. Conecta os testes de aleatoriedade como pré-requisito indispensável.
