@@ -46,62 +46,62 @@
 \contentsline {section}{\numberline {8.1}Contextualização e Gestão de Risco}{27}{section.8.1}%
 \contentsline {subsection}{\numberline {8.1.1}A Ameaça Quântica e o Paradigma ``Harvest Now, Decrypt Later''}{27}{subsection.8.1.1}%
 \contentsline {subsection}{\numberline {8.1.2}Mapeamento do Risco Quântico}{27}{subsection.8.1.2}%
-\contentsline {section}{\numberline {8.2}Inventário e Descoberta Criptográfica}{27}{section.8.2}%
-\contentsline {subsection}{\numberline {8.2.1}Estratégias de Descoberta em Redes e Sistemas}{27}{subsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.2.2}Adoção do CBOM (Cryptographic Bill of Materials)}{27}{subsection.8.2.2}%
-\contentsline {section}{\numberline {8.3}Agilidade Criptográfica e Novos Padrões}{28}{section.8.3}%
-\contentsline {subsection}{\numberline {8.3.1}Conceitos de Agilidade e Desafios de Desempenho}{28}{subsection.8.3.1}%
-\contentsline {subsection}{\numberline {8.3.2}Os Padrões Pós-Quânticos Finais}{28}{subsection.8.3.2}%
-\contentsline {section}{\numberline {8.4}Estratégias de Migração e Hibridização}{28}{section.8.4}%
-\contentsline {subsection}{\numberline {8.4.1}Hibridização (Criptografia Clássica e PQC)}{28}{subsection.8.4.1}%
-\contentsline {subsection}{\numberline {8.4.2}Assinaturas Baseadas em Hash para Adoção Imediata}{28}{subsection.8.4.2}%
-\contentsline {section}{\numberline {8.5}Roadmap e Manutenção da Base Criptográfica}{29}{section.8.5}%
-\contentsline {subsection}{\numberline {8.5.1}Cronograma e Descontinuação de Algoritmos Atuais}{29}{subsection.8.5.1}%
-\contentsline {subsection}{\numberline {8.5.2}O Papel Contínuo da Entropia}{29}{subsection.8.5.2}%
+\contentsline {section}{\numberline {8.2}Inventário e Descoberta Criptográfica}{30}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Estratégias de Descoberta em Redes e Sistemas}{30}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Adoção do CBOM (Cryptographic Bill of Materials)}{30}{subsection.8.2.2}%
+\contentsline {section}{\numberline {8.3}Agilidade Criptográfica e Novos Padrões}{30}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Conceitos de Agilidade e Desafios de Desempenho}{30}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Os Padrões Pós-Quânticos Finais}{30}{subsection.8.3.2}%
+\contentsline {section}{\numberline {8.4}Estratégias de Migração e Hibridização}{31}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Hibridização (Criptografia Clássica e PQC)}{31}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Assinaturas Baseadas em Hash para Adoção Imediata}{31}{subsection.8.4.2}%
+\contentsline {section}{\numberline {8.5}Roadmap e Manutenção da Base Criptográfica}{31}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}Cronograma e Descontinuação de Algoritmos Atuais}{31}{subsection.8.5.1}%
+\contentsline {subsection}{\numberline {8.5.2}O Papel Contínuo da Entropia}{31}{subsection.8.5.2}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {9}\MakeTextUppercase []{NIST IR 8547 Transição para a Criptografia Pós-Quântica: Estratégias e Considerações}}{30}{chapter.9}%
-\contentsline {section}{\numberline {9.1}Urgencia Prática e o Modelo de Ameaça}{30}{section.9.1}%
-\contentsline {subsection}{\numberline {9.1.1}Ameaça Harvest now, Decrypt Later}{30}{subsection.9.1.1}%
-\contentsline {subsection}{\numberline {9.1.2}Teorema de Mosca e a Linha do Tempo}{30}{subsection.9.1.2}%
-\contentsline {section}{\numberline {9.2}Novos Padrões e Categorias de Segurança}{30}{section.9.2}%
-\contentsline {subsection}{\numberline {9.2.1}Publicações dos primeiros FIPS PQC}{31}{subsection.9.2.1}%
-\contentsline {subsection}{\numberline {9.2.2}Categorias de Segurança Pós-Quântica (1 a 5)}{31}{subsection.9.2.2}%
-\contentsline {section}{\numberline {9.3}Cronograma de Descontinuação (Deprecation)}{31}{section.9.3}%
-\contentsline {subsection}{\numberline {9.3.1}Transição de Assinaturas Digitais (RSA, ECDSA, EdDSA)}{31}{subsection.9.3.1}%
-\contentsline {subsection}{\numberline {9.3.2}Transição de Estabelecimento de Chaves (DH, MQV, RSA)}{32}{subsection.9.3.2}%
-\contentsline {section}{\numberline {9.4}Estratégias de Transição: Protocolos Hibridos}{32}{section.9.4}%
-\contentsline {subsection}{\numberline {9.4.1}Soluções Hibridas (PQC-Classical)}{32}{subsection.9.4.1}%
-\contentsline {subsection}{\numberline {9.4.2}Protocolos Hibridos (TLS, SSH, IPsec)}{32}{subsection.9.4.2}%
-\contentsline {subsection}{\numberline {9.4.3}Agilidade Criptográfica em Camadas de Infraestrutura}{33}{subsection.9.4.3}%
+\contentsline {chapter}{\chapternumberline {9}\MakeTextUppercase []{NIST IR 8547 Transição para a Criptografia Pós-Quântica: Estratégias e Considerações}}{32}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Urgencia Prática e o Modelo de Ameaça}{32}{section.9.1}%
+\contentsline {subsection}{\numberline {9.1.1}Ameaça Harvest now, Decrypt Later}{32}{subsection.9.1.1}%
+\contentsline {subsection}{\numberline {9.1.2}Teorema de Mosca e a Linha do Tempo}{32}{subsection.9.1.2}%
+\contentsline {section}{\numberline {9.2}Novos Padrões e Categorias de Segurança}{32}{section.9.2}%
+\contentsline {subsection}{\numberline {9.2.1}Publicações dos primeiros FIPS PQC}{33}{subsection.9.2.1}%
+\contentsline {subsection}{\numberline {9.2.2}Categorias de Segurança Pós-Quântica (1 a 5)}{33}{subsection.9.2.2}%
+\contentsline {section}{\numberline {9.3}Cronograma de Descontinuação (Deprecation)}{33}{section.9.3}%
+\contentsline {subsection}{\numberline {9.3.1}Transição de Assinaturas Digitais (RSA, ECDSA, EdDSA)}{33}{subsection.9.3.1}%
+\contentsline {subsection}{\numberline {9.3.2}Transição de Estabelecimento de Chaves (DH, MQV, RSA)}{34}{subsection.9.3.2}%
+\contentsline {section}{\numberline {9.4}Estratégias de Transição: Protocolos Hibridos}{34}{section.9.4}%
+\contentsline {subsection}{\numberline {9.4.1}Soluções Hibridas (PQC-Classical)}{34}{subsection.9.4.1}%
+\contentsline {subsection}{\numberline {9.4.2}Protocolos Hibridos (TLS, SSH, IPsec)}{34}{subsection.9.4.2}%
+\contentsline {subsection}{\numberline {9.4.3}Agilidade Criptográfica em Camadas de Infraestrutura}{35}{subsection.9.4.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {10}\MakeTextUppercase []{Cristals Kyber}}{34}{chapter.10}%
-\contentsline {section}{\numberline {10.1}Introdução}{34}{section.10.1}%
-\contentsline {section}{\numberline {10.2}Estrutura do CRYSTALS-Kyber}{34}{section.10.2}%
+\contentsline {chapter}{\chapternumberline {10}\MakeTextUppercase []{Cristals Kyber}}{36}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Introdução}{36}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Estrutura do CRYSTALS-Kyber}{36}{section.10.2}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {11}\MakeTextUppercase []{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)}}{35}{chapter.11}%
-\contentsline {section}{\numberline {11.1}Definição e Objetivos da PQC}{35}{section.11.1}%
-\contentsline {section}{\numberline {11.2}Paradigmas Matemáticos da PQC}{35}{section.11.2}%
-\contentsline {section}{\numberline {11.3}Criptografia Baseada em Reticulados}{35}{section.11.3}%
-\contentsline {section}{\numberline {11.4}Learning With Errors (LWE)}{35}{section.11.4}%
-\contentsline {subsection}{\numberline {11.4.1}Implementação Didática em Java (Demonstração)}{35}{subsection.11.4.1}%
-\contentsline {section}{\numberline {11.5}Padronização Pós-Quântica}{35}{section.11.5}%
+\contentsline {chapter}{\chapternumberline {11}\MakeTextUppercase []{CRIPTOGRAFIA PÓS-QUÂNTICA (PQC)}}{37}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Definição e Objetivos da PQC}{37}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Paradigmas Matemáticos da PQC}{37}{section.11.2}%
+\contentsline {section}{\numberline {11.3}Criptografia Baseada em Reticulados}{37}{section.11.3}%
+\contentsline {section}{\numberline {11.4}Learning With Errors (LWE)}{37}{section.11.4}%
+\contentsline {subsection}{\numberline {11.4.1}Implementação Didática em Java (Demonstração)}{37}{subsection.11.4.1}%
+\contentsline {section}{\numberline {11.5}Padronização Pós-Quântica}{37}{section.11.5}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {12}\MakeTextUppercase []{A TRANSIÇÃO PARA PQC NO ECOSSISTEMA JAVA}}{36}{chapter.12}%
-\contentsline {section}{\numberline {12.1}Suporte à Criptografia Pós-Quântica no Java}{36}{section.12.1}%
-\contentsline {section}{\numberline {12.2}Crypto-Agility}{36}{section.12.2}%
-\contentsline {subsection}{\numberline {12.2.1}Implementação Prática: Demo de Crypto-Agility}{36}{subsection.12.2.1}%
-\contentsline {section}{\numberline {12.3}Comparativo de Modelos}{36}{section.12.3}%
-\contentsline {subsection}{\numberline {12.3.1}Implementação Prática: Benchmark Clássico vs. Kyber}{36}{subsection.12.3.1}%
+\contentsline {chapter}{\chapternumberline {12}\MakeTextUppercase []{A TRANSIÇÃO PARA PQC NO ECOSSISTEMA JAVA}}{38}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Suporte à Criptografia Pós-Quântica no Java}{38}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Crypto-Agility}{38}{section.12.2}%
+\contentsline {subsection}{\numberline {12.2.1}Implementação Prática: Demo de Crypto-Agility}{38}{subsection.12.2.1}%
+\contentsline {section}{\numberline {12.3}Comparativo de Modelos}{38}{section.12.3}%
+\contentsline {subsection}{\numberline {12.3.1}Implementação Prática: Benchmark Clássico vs. Kyber}{38}{subsection.12.3.1}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {13}\MakeTextUppercase []{DISCUSSÃO E ANÁLISE CRÍTICA}}{37}{chapter.13}%
-\contentsline {section}{\numberline {13.1}Impacto em Desempenho}{37}{section.13.1}%
-\contentsline {section}{\numberline {13.2}Barreiras de Adoção}{37}{section.13.2}%
-\contentsline {section}{\numberline {13.3}Implicações Sociais e Éticas}{37}{section.13.3}%
+\contentsline {chapter}{\chapternumberline {13}\MakeTextUppercase []{DISCUSSÃO E ANÁLISE CRÍTICA}}{39}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Impacto em Desempenho}{39}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Barreiras de Adoção}{39}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Implicações Sociais e Éticas}{39}{section.13.3}%
 \setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
-\contentsline {chapter}{\chapternumberline {14}\MakeTextUppercase []{CONCLUSÃO}}{38}{chapter.14}%
-\contentsline {section}{\numberline {14.1}Síntese dos Resultados}{38}{section.14.1}%
-\contentsline {section}{\numberline {14.2}Resposta ao Problema de Pesquisa}{38}{section.14.2}%
-\contentsline {section}{\numberline {14.3}Trabalhos Futuros}{38}{section.14.3}%
+\contentsline {chapter}{\chapternumberline {14}\MakeTextUppercase []{CONCLUSÃO}}{40}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Síntese dos Resultados}{40}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Resposta ao Problema de Pesquisa}{40}{section.14.2}%
+\contentsline {section}{\numberline {14.3}Trabalhos Futuros}{40}{section.14.3}%
 \vspace {\cftbeforechapterskip }
 \setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
-\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{39}{section*.5}%
+\contentsline {chapter}{\MakeTextUppercase []{Refer\^encias}}{41}{section*.5}%

@@ -7,9 +7,62 @@ Esta seção introduz o problema e explica por que a transição deve ser planej
 \textbf{Conteúdo:} Explicação sobre como adversários já estão coletando tráfego cifrado atual para quebrar a criptografia assim que computadores quânticos criptograficamente relevantes (CRQC) estiverem disponíveis.\\
 \textbf{Documento indicado:} \textit{NIST SP 1800-38A (Executive Summary)}. Fornece o panorama do problema e a urgência da migração sob a perspectiva do NCCoE.
 
+Os avanços na computação quântica podem comprometer muitos dos algoritmos criptográficos atualmente amplamente utilizados para proteger informações digitais, tornando necessária a substituição dos algoritmos existentes por outros resistentes à computação quântica.\cite{nistSP180038A} Para auxiliar nesses esforços o NCCoE (National Cybersecurity Center of Excellence) está integrado com colcaboradores do setor público e privado e organizações federais para desenvolver a migração, cenários de uso e arquiteturas de referência para a transição para a criptografia pós-quântica (PQC).
+
+Muitos dos produtos, protocolos e serviços criptográficos usados atualmente, em particular aqueles que usam algoritmos de chave pública como o algoritmo Rivest-Shamir-Adleman (RSA), o algoritmo Diffie-Hellman de Curva Elíptica (ECDH) e o algoritmo de assinatura digital de curva elíptica (ECDSA), precisam ser atualizados, substituídos ou significativamente alterados18 para usar algoritmos resistentes à computação quântica. Muitos algoritmos de chave pública e os protocolos que os utilizam serão vulneráveis a ataques. A maioria dos sistemas de tecnologia da informação e comunicação atuais não foi projetada para suportar adaptações rápidas de novos algoritmos criptográficos sem fazer alterações significativas nos componentes dos sistemas.\cite{nistSP180038A}
+
+
 \subsection{Mapeamento do Risco Quântico}
 \textbf{Conteúdo:} Como integrar a ameaça quântica nos processos de gestão de risco cibernético da organização.\\
 \textbf{Documento indicado:} \textit{NIST CSWP 48 (Cybersecurity White Paper)}. Relaciona a migração PQC com as práticas do \textit{NIST Cybersecurity Framework (CSF)}.
+
+A migração para algoritmos resistentes a ataques baseados em computação quântica é tratada como um componente essencial para manter a confidencialidade e integridade dos sistemas digitais. O NIST destaca que a implementação responsável dessas novas capacidades depende da adesão a controles de segurança já estabelecidos em frameworks de risco, como o NIST CSF 2.0 e o NIST SP 800-53\cite{nistCSWP48}
+
+Para que o mapeamento de risco seja eficaz, o documento estabelece que a organização deve visualizar a migração através de componentes de arquitetura lógica divididos em duas frentes principais:
+
+\begin{itemize}
+    \item \textbf{Descoberta e Inventário:} Incluem ferramentas de coleta de dados criptográficos, ferramentas de inventário, ferramentas analíticas e gestão de ciclo de vida de certificados
+    \item \textbf{Agilidade Criptográfica e Novos Padrões:} Envolvem implementações de algoritmos quantum-ready, serviços criptográficos, plugins de integração, autoridades certificadoras e Módulos de Segurança de Hardware (HSMs).
+\end{itemize}\cite{nistCSWP48}
+
+A integração da ameaça quântica nos processos de gestão de risco não é apenas uma substituição de algoritmos, mas uma relação funcional de suporte mútuo definida por:
+
+\begin{itemize}
+    \item \textbf{Supports}: O componente PQC auxilia na obtenção de um resultado de segurança ou controle específico.
+    \item \textbf{Is Supported By}: O componente PQC depende de controles existentes para operar de forma confiável.
+\end{itemize}\cite{nistCSWP48}
+
+Estas interações podem ser classificadas como:
+
+\begin{itemize}
+    \item \textbf{Partially Supports}: O componente PQC contribui para alcançar o resultado de segurança desejado, mas não é suficiente por si só.
+    \item \textbf{Depends On}: O componente PQC tem uma dependência crítica em um controle específico para funcionar corretamente.
+\end{itemize}\cite{nistCSWP48}
+
+\begin{itemize}
+    \item \textbf{Example of}: Onde o conceito de suporte exemplificado alcança parcialmente o resultado de segurança desejado.
+    \item \textbf{Integral to}: O componente PQC é fundamental para alcançar o resultado de segurança desejado.
+    \item \textbf{Precedes}: O componente PQC deve ser implementado antes de outros componentes para garantir a segurança.
+\end{itemize}\cite{nistCSWP48}
+
+O mapeamento demonstra como as capacidades PQC sustentam os resultados do CSF:\@
+
+\begin{itemize}
+\item \textbf{Gerenciamento de Ativos (ID.AM):} As ferramentas de coleta de dados são pré-requisitos (Precedes) para manter inventários de hardware (ID.AM-01), software (ID.AM-02) e dados (ID.AM-07), pois o inventário criptográfico é necessário para entender a adequação contínua dos serviços de segurança.
+\item \textbf{Avaliação de Risco (ID.RA):} Ferramentas analíticas identificam fraquezas e lacunas de conformidade quântica, servindo como exemplo (Example of) para a identificação e registro de vulnerabilidades em ativos (ID.RA-01).
+\item \textbf{Segurança de Dados (PR.DS):} A implementação de algoritmos e HSMs quantum-ready protege a confidencialidade e integridade de dados em repouso (PR.DS-01) e em trânsito (PR.DS-02) contra a ameaça de descriptografia futura.
+\end{itemize}\cite{nistCSWP48}
+
+Para uma gestão detalhada, o risco quântico deve ser mapeado em controles específicos de segurança e privacidade:
+
+\begin{itemize}
+    \item \textbf{CM-8 (Inventário de Componentes):} A descoberta criptográfica é integral para identificar componentes em subsistemas complexos, especialmente onde a criptografia está embutida em bibliotecas ou processos de execução.
+    \item \textbf{SC-12 (Estabelecimento e Gestão de Chaves):} O uso de ferramentas analíticas permite identificar casos onde algoritmos vulneráveis de transporte e estabelecimento de chaves ainda estão em uso ou podem ser selecionados por erro de configuração.
+    \item \textbf{CP-2 (Plano de Contingência):} O inventário de ativos criptográficos críticos é um passo necessário para informar o desenvolvimento de planos de contingência, permitindo a priorização da substituição de componentes legados.
+    \item \textbf{SA-4 (Processo de Aquisição):} A migração exige que requisitos funcionais de segurança pós-quântica e força de mecanismo sejam incluídos em contratos de aquisição de novos sistemas e serviços.
+\end{itemize}\cite{nistCSWP48}
+
+A integração do risco quântico permite que a organização utilize suas políticas de risco existentes (GV.PO-01) para constranger e guiar a seleção de bibliotecas e algoritmos.\cite{nistCSWP48} Isso transforma a migração PQC de um desafio puramente técnico em uma atividade de conformidade e governança, assegurando que os novos sistemas sejam implementados de acordo com a estratégia de segurança organizacional.
 
 \section{Inventário e Descoberta Criptográfica}
 Antes de migrar, uma organização precisa saber o que possui. Esta seção detalha as metodologias para rastrear o uso atual de criptografia.

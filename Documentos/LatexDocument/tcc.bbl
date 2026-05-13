@@ -35,4 +35,14 @@ Gaithersburg, MD, 2020. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpu
 {{National Institute of Standards and Technology}. \emph{NIST Special Publication 800-131A Revision 2}.
 Gaithersburg, MD, 2019. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-131Ar2.pdf}.}
 
+\bibitem{nistSP180038A}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2024a}
+{{National Institute of Standards and Technology}. \emph{NIST SP 1800-38A: Post-Quantum Cryptography Migration}.
+Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication1800-38a.pdf}.}
+
+\bibitem{nistCSWP48}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2024b}
+{{National Institute of Standards and Technology}. \emph{NIST Cybersecurity White Paper 48: Post-Quantum Cryptography}.
+Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.48.ipd.pdf}.}
+
 \end{thebibliography}
