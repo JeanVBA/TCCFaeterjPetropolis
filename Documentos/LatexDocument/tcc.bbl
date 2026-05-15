@@ -45,4 +45,9 @@ Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpu
 {{National Institute of Standards and Technology}. \emph{NIST Cybersecurity White Paper 48: Post-Quantum Cryptography}.
 Gaithersburg, MD, 2024. Dispon{\'\i}vel em: \url{https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.48.ipd.pdf}.}
 
+\bibitem{nistSP180038B}
+\abntrefinfo{{National Institute of Standards and Technology}}{{National Institute of Standards and Technology}}{2023}
+{{National Institute of Standards and Technology}. \emph{NIST SP 1800-38B: PMigration to Post-Quantum Cryptography Quantum Readiness: Cryptographic Discovery}.
+Gaithersburg, MD, 2023. Dispon{\'\i}vel em: \url{https://www.nccoe.nist.gov/sites/default/files/2023-12/pqc-migration-nist-sp-1800-38b-preliminary-draft.pdf}.}
+
 \end{thebibliography}
